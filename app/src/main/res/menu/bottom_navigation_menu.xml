@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/run_Fragment"
+        android:title="@string/history"
+        android:orderInCategory="1"
+        android:icon="@drawable/ic_launcher_foreground"/>
+
+    <item android:id="@+id/statistics_Fragment"
+        android:title="@string/main"
+        app:showAsAction="ifRoom"
+        android:orderInCategory="2"
+        android:icon="@drawable/ic_launcher_foreground"/>
+
+    <item android:id="@+id/settings_Fragment"
+        android:title="@string/settings"
+        app:showAsAction="always"
+        android:orderInCategory="3"
+        android:icon="@drawable/ic_launcher_foreground"/>
+
+</menu>
