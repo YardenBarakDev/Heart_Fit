@@ -11,5 +11,8 @@
         <item>Weekly</item>
         <item>Monthly</item>
     </string-array>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="equipment">Equipment</string>
+    <string name="which_equipment_do_you_have_at_home">Which equipment do you have at home?</string>
 
 </resources>

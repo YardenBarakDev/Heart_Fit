@@ -5,12 +5,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
+
+
     <FrameLayout
         android:id="@+id/mainActivity_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/mainActivity_bottomNavigation"
-        />
+        >
+
+
+    </FrameLayout>
+
+
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
