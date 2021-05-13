@@ -1,4 +1,4 @@
-package com.idan_koren_israeli.heartfit.fragments
+package com.idan_koren_israeli.heartfit.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
