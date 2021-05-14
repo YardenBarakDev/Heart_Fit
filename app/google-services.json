@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "549946480929",
+    "firebase_url": "https://heartfit-9284a-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "heartfit-9284a",
+    "storage_bucket": "heartfit-9284a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:549946480929:android:8e69d2a6d75628b47c4660",
+        "android_client_info": {
+          "package_name": "com.idan_koren_israeli.heartfit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "549946480929-2bvl8oga80kgdejelge8suoc8p08q3jt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.idan_koren_israeli.heartfit",
+            "certificate_hash": "daed54b7605b7c2d48e82c3702e7322d6138fe2c"
+          }
+        },
+        {
+          "client_id": "549946480929-r29e8oapgl4djfol9farrv8tv44cgtic.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwpwbg4eVOWtbk74hRv2G-3U2-g3i0olI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "549946480929-r29e8oapgl4djfol9farrv8tv44cgtic.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
