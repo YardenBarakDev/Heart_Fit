@@ -14,10 +14,10 @@ import com.idan_koren_israeli.heartfit.recycler.adapter.EquipmentSelectAdapter
 
 /**
  * A simple [Fragment] subclass.
- * Use the [EquipmentSelectFragment.newInstance] factory method to
+ * Use the [FragmentEquipmentSelect.newInstance] factory method to
  * create an instance of this fragment.
  */
-class EquipmentSelectFragment : Fragment() {
+class FragmentEquipmentSelect : Fragment() {
 
     lateinit var parent: View
     lateinit var equipmentRecycler: RecyclerView
@@ -72,7 +72,7 @@ class EquipmentSelectFragment : Fragment() {
          */
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-                EquipmentSelectFragment().apply {
+                FragmentEquipmentSelect().apply {
                     arguments = Bundle().apply {
                     }
                 }
