@@ -15,9 +15,14 @@ import java.util.*
 
 object AuthManager {
 
-    fun initHandler(activity:FragmentActivity){
-        val auth = FirebaseAuth.getInstance()
-        if (auth.currentUser != null) {
+    private lateinit var auth : FirebaseAuth
+
+    fun initAuth(){
+        auth = FirebaseAuth.getInstance()
+    }
+
+    fun authScreenShow(activity:FragmentActivity){
+        if (auth!!.currentUser != null) {
             // already signed in
         } else {
             activity.startActivityForResult(
@@ -34,7 +39,7 @@ object AuthManager {
         }
     }
 
-    fun resultHandler(requestCode: Int, resultCode: Int, data: Intent?){
+    fun authScreenResult(requestCode: Int, resultCode: Int, data: Intent?){
         if(requestCode == MainActivity.RC_SIGN_IN){
             val response: IdpResponse? = IdpResponse.fromResultIntent(data)
 
@@ -48,6 +53,13 @@ object AuthManager {
                 }
             }
         }
+    }
+
+    fun getCurrentUserName():String?{
+        if(auth.currentUser==null)
+            return null
+        return auth.currentUser!!.displayName
+
     }
 
 }
