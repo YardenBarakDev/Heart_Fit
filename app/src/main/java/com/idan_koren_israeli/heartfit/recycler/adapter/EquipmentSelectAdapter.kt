@@ -22,20 +22,22 @@ class EquipmentSelectAdapter(context: Context, equipmentData: ArrayList<Equipmen
     }
 
 
+    private fun onEquipmentClick(equipment:Equipment){
+        if(equipment in selectedEquipment) {
+            selectedEquipment.remove(equipment)
+            Log.i("pttt", "REMOVED SELECTION " + equipment.name)
+        }
+        else {
+            selectedEquipment.add(equipment)
+            Log.i("pttt", "ADDED SELECTION " + equipment.name)
+        }
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EquipmentSelectHolder {
         val view:View = mInflater!!.inflate(R.layout.holder_equipment_select,parent, false)
 
-        return EquipmentSelectHolder(view ,{ equipment ->
-            if(equipment in selectedEquipment) {
-                selectedEquipment.remove(equipment)
-                Log.i("pttt", "REMOVED SELECTION " + equipment.name)
-            }
-            else {
-                selectedEquipment.add(equipment)
-                Log.i("pttt", "ADDED SELECTION " + equipment.name)
-            }
-        })
+        return EquipmentSelectHolder(view ,{equipment -> onEquipmentClick(equipment)})
     }
 
     override fun onBindViewHolder(holder: EquipmentSelectHolder, position: Int) {

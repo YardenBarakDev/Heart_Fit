@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.component.BottomNavigationManager
 import com.idan_koren_israeli.heartfit.firebase.auth.AuthManager
-import com.idan_koren_israeli.heartfit.fragment.EquipmentSelectFragment
+import com.idan_koren_israeli.heartfit.fragment.FragmentHome
 
 
 class MainActivity : AppCompatActivity() {
@@ -28,9 +28,9 @@ class MainActivity : AppCompatActivity() {
         //DatabaseManager.testRealtimeDatabase()
 
 
-        val equipmentSelect = EquipmentSelectFragment()
+        val homeFragment = FragmentHome()
         supportFragmentManager.beginTransaction()
-            .replace(R.id.mainActivity_fragment, equipmentSelect).commit()
+            .replace(R.id.mainActivity_fragment, homeFragment).commit()
 
 
     }
