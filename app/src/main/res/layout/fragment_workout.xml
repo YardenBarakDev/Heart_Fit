@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.FragmentWorkout">
 
     <!-- TODO: Update blank fragment layout -->
@@ -19,5 +20,21 @@
         android:id="@+id/workout_BTN_back"
         />
 
+
+    <com.hamzaahmedkhan.circulartimerview.CircularTimerView
+        android:id="@+id/progress_circular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:progressColor="#000"
+        app:backgroundColor="#e76130"
+        app:progressBackgroundColor="#eee"
+        app:backgroundWidth="8"
+        app:textSize="18sp"
+        app:prefix="Time Left "
+        app:suffix=" sec"
+        app:progressText="Time Remaining..."
+        app:maxValue="100"
+        app:startingPoint="bottom"
+        app:progressTextColor="#eee"/>
 
 </RelativeLayout>

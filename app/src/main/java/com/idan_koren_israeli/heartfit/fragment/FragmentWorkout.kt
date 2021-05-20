@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.idan_koren_israeli.heartfit.R
+import com.idan_koren_israeli.heartfit.model.Workout
 
 
 /**
@@ -15,8 +16,7 @@ import com.idan_koren_israeli.heartfit.R
 
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val WORKOUT_KEY = "workout"
 
 /**
  * A simple [Fragment] subclass.
@@ -25,14 +25,13 @@ private const val ARG_PARAM2 = "param2"
  */
 class FragmentWorkout : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var workout: Workout
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            workout = it.getSerializable(WORKOUT_KEY) as Workout
         }
     }
 
@@ -49,17 +48,13 @@ class FragmentWorkout : Fragment() {
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
          * @return A new instance of fragment FragmentWorkout.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(workout: Workout) =
             FragmentWorkout().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putSerializable(WORKOUT_KEY, workout)
                 }
             }
     }

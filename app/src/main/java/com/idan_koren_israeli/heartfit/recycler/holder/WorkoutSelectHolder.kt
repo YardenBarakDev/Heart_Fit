@@ -33,16 +33,32 @@ class WorkoutSelectHolder(itemView: View, private val onClick: (workout: Workout
                 leftWorkout.visibility = View.GONE
                 centerWorkout.visibility = View.VISIBLE
                 rightWorkout.visibility = View.GONE
+                attachWorkoutToButton(workouts[0],centerWorkout)
             }
             2 -> {
                 leftWorkout.visibility = View.VISIBLE
                 centerWorkout.visibility = View.GONE
                 rightWorkout.visibility = View.VISIBLE
+
+                attachWorkoutToButton(workouts[0],leftWorkout)
+                attachWorkoutToButton(workouts[1],rightWorkout)
             }
             3 -> {
                 leftWorkout.visibility = View.VISIBLE
                 centerWorkout.visibility = View.VISIBLE
                 rightWorkout.visibility = View.VISIBLE
+
+                attachWorkoutToButton(workouts[0],leftWorkout)
+                attachWorkoutToButton(workouts[1],centerWorkout)
+                attachWorkoutToButton(workouts[2],rightWorkout)
+            }
+        }
+    }
+
+    private fun attachWorkoutToButton(workout: Workout, button: ImageButton) {
+        button.setOnClickListener {
+            run {
+                Log.i("pttt","Workout Clicked: " + workout.name)
             }
         }
     }

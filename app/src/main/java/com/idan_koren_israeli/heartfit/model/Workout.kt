@@ -2,8 +2,9 @@ package com.idan_koren_israeli.heartfit.model
 
 import com.idan_koren_israeli.heartfit.model.exercise.Exercise
 import com.idan_koren_israeli.heartfit.model.exercise.WorkoutAction
+import java.io.Serializable
 
-class Workout(val id:Int? = null, val name:String? = null, val actions: List<WorkoutAction>? = null) {
+class Workout(val id:Int? = null, val name:String? = null, private val actions: List<WorkoutAction>? = null) : Serializable {
 
 
     fun totalLength():Int{
