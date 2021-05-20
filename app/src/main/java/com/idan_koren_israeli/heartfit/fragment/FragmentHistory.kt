@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.idan_koren_israeli.heartfit.R
 
 
-object FragmentHistory : Fragment() {
+class FragmentHistory : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

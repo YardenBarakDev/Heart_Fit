@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.EquipmentSelectFragment">
+    tools:context=".fragment.FragmentEquipmentSelect">
 
     <TextView
         android:layout_width="match_parent"
@@ -20,8 +20,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/equipment_select_RCV_recycler"
-
         android:layout_below="@id/equipment_select_LBL_title"
         />
-
 </RelativeLayout>

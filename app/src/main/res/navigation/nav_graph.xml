@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/fragmentLoginAndRegister">
+
+    <fragment
+        android:id="@+id/fragmentEquipmentSelect"
+        android:name="com.idan_koren_israeli.heartfit.fragment.FragmentEquipmentSelect"
+        android:label="FragmentEquipmentSelect" >
+        <action
+            android:id="@+id/action_fragmentEquipmentSelect_to_fragmentHome"
+            app:destination="@id/fragmentHome" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentHistory"
+        android:name="com.idan_koren_israeli.heartfit.fragment.FragmentHistory"
+        android:label="FragmentHistory" />
+    <fragment
+        android:id="@+id/fragmentHome"
+        android:name="com.idan_koren_israeli.heartfit.fragment.FragmentHome"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_fragmentHome_to_fragmentWorkout"
+            app:destination="@id/fragmentWorkout" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentWorkout"
+        android:name="com.idan_koren_israeli.heartfit.fragment.FragmentWorkout"
+        android:label="fragment_workout"
+        tools:layout="@layout/fragment_workout" >
+        <action
+            android:id="@+id/action_fragmentWorkout_to_fragmentWorkoutFinished"
+            app:destination="@id/fragmentWorkoutFinished" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentWorkoutFinished"
+        android:name="com.idan_koren_israeli.heartfit.fragment.FragmentWorkoutFinished"
+        android:label="fragment_workout_finished"
+        tools:layout="@layout/fragment_workout_finished" />
+    <fragment
+        android:id="@+id/fragmentLoginAndRegister"
+        android:name="com.idan_koren_israeli.heartfit.fragment.FragmentLoginAndRegister"
+        android:label="fragment_login_and_register"
+        tools:layout="@layout/fragment_login_and_register" >
+        <action
+            android:id="@+id/action_fragmentLoginAndRegister_to_fragmentEquipmentSelect"
+            app:destination="@id/fragmentEquipmentSelect" />
+        <action
+            android:id="@+id/action_fragmentLoginAndRegister_to_fragmentHome"
+            app:destination="@id/fragmentHome" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentSettings"
+        android:name="com.idan_koren_israeli.heartfit.fragment.FragmentSettings"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_fragmentSettings_to_fragmentHome"
+            app:destination="@id/fragmentHome" />
+    </fragment>
+</navigation>
