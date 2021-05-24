@@ -60,7 +60,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.firebaseui:firebase-ui-auth:7.1.1'
     implementation platform('com.google.firebase:firebase-bom:28.0.0')
-
+    
 
     implementation 'com.github.Idan503:MySettingsScreen:v1.0.01'
 

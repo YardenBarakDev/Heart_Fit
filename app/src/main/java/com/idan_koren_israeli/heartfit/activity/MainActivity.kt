@@ -12,6 +12,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.component.BottomNavigationManager
 import com.idan_koren_israeli.heartfit.firebase.auth.AuthManager
+import com.idan_koren_israeli.heartfit.fragment.FragmentWorkout
+import com.idan_koren_israeli.heartfit.model.Workout
+import com.idan_koren_israeli.heartfit.model.exercise.Exercise
+import com.idan_koren_israeli.heartfit.model.exercise.RepsAction
 
 
 class MainActivity : AppCompatActivity() {
@@ -28,13 +32,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //set navigation
-        mainActivity_bottomNavigation = findViewById(R.id.mainActivity_bottomNavigation)
-        navHostFragment = supportFragmentManager.findFragmentById(R.id.mainActivity_fragment) as NavHostFragment
-        mainActivity_bottomNavigation.setupWithNavController(navHostFragment.findNavController())
+        //initNavigation()
 
-        //prevent the user to click on the same fragment twice
-        mainActivity_bottomNavigation.setOnNavigationItemReselectedListener {  /*no op*/ }
+
+
+        supportFragmentManager.beginTransaction().replace(R.id.mainActivity_fragment,
+            FragmentWorkout.newInstance(Workout(1,"Workout Name", listOf(RepsAction(Exercise(123),10))))
+        ).commit()
 
         //control when the bottomNavigation will be visible according to the fragment presented
        // navHostFragment.findNavController().addOnDestinationChangedListener { _, destination, _ ->
@@ -45,6 +49,20 @@ class MainActivity : AppCompatActivity() {
        // }
     }
 
+    private fun initNavigation(){
+        //set navigation
+        mainActivity_bottomNavigation = findViewById(R.id.mainActivity_bottomNavigation)
+        navHostFragment = supportFragmentManager.findFragmentById(R.id.mainActivity_fragment) as NavHostFragment
+        mainActivity_bottomNavigation.setupWithNavController(navHostFragment.findNavController())
+
+
+
+
+
+        //prevent the user to click on the same fragment twice
+        mainActivity_bottomNavigation.setOnNavigationItemReselectedListener {  /*no op*/ }
+
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

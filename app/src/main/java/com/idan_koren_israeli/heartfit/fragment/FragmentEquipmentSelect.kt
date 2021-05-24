@@ -52,8 +52,8 @@ class FragmentEquipmentSelect : Fragment() {
         data.add(Equipment(4,"Dumbbells 4", R.drawable.ic_dumbbell))
 
 
-        equipmentAdapter = EquipmentSelectAdapter(context!!, data)
-        equipmentRecycler.layoutManager = GridLayoutManager(context!!, 3)
+        equipmentAdapter = EquipmentSelectAdapter(requireContext(), data)
+        equipmentRecycler.layoutManager = GridLayoutManager(requireContext(), 3)
 
         equipmentRecycler.adapter = equipmentAdapter
 

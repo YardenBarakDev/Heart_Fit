@@ -10,6 +10,7 @@ import android.os.CountDownTimer;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -58,13 +59,14 @@ public class CircularTimerView extends View {
     private Boolean isClockwise = true;
     private int startingAngle = 270;
 
+
     /**
      * The Def style attr.
      */
     int defStyleAttr;
 
     private CircularTimerListener circularTimerListener;
-    private CountDownTimer countDownTimer;
+    private CountDownTimerWithPause countDownTimer;
 
     /**
      * Instantiates a new Circular timer view.
@@ -523,14 +525,15 @@ public class CircularTimerView extends View {
             countDownTimer.cancel();
         }
 
+
         final long maxTime = timeInMillis;
-        countDownTimer = new CountDownTimer(maxTime, intervalDuration) {
+        countDownTimer = new CountDownTimerWithPause(maxTime, intervalDuration,true) {
             @Override
             public void onTick(long l) {
-
                 double percentTimeCompleted = ((maxTime - l) / (double) maxTime);
                 drawUpto = (float) (maxValue * percentTimeCompleted);
                 text = circularTimerListener.updateDataOnTick(l);
+                Log.i("pttt" , "TICK1");
                 invalidate();
             }
 
@@ -543,6 +546,13 @@ public class CircularTimerView extends View {
             }
         };
 
+    }
+
+    public void togglePauseResume(){
+        if(countDownTimer.isPaused())
+            countDownTimer.resume();
+        else
+            countDownTimer.pause();
     }
 
 
@@ -584,13 +594,13 @@ public class CircularTimerView extends View {
 
         final long maxTime = timeInMillis;
 
-        countDownTimer = new CountDownTimer(maxTime, timeinterval) {
+        countDownTimer = new CountDownTimerWithPause(maxTime, timeinterval, true) {
             @Override
             public void onTick(long l) {
-
                 double percentTimeCompleted = ((maxTime - l) / (double) maxTime);
                 drawUpto = (float) (maxValue * percentTimeCompleted);
                 text = circularTimerListener.updateDataOnTick(l);
+                Log.i("pttt" , "TICK2");
                 invalidate();
             }
 
@@ -616,7 +626,7 @@ public class CircularTimerView extends View {
         if (countDownTimer == null) {
             return false;
         } else {
-            countDownTimer.start();
+            countDownTimer.create();
             return true;
         }
     }
