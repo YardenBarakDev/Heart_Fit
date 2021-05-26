@@ -1,7 +1,7 @@
 package com.idan_koren_israeli.heartfit.callback
 
-import com.idan_koren_israeli.heartfit.model.Equipment
+import com.idan_koren_israeli.heartfit.model.EquipmentSelect
 
 interface OnEquipmentClick{
-    fun onEquipmentClick(equipment: Equipment)
+    fun onEquipmentClick(equipmentSelect: EquipmentSelect)
 }

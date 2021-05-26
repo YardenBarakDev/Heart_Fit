@@ -7,7 +7,7 @@ package com.idan_koren_israeli.heartfit.model
  *
  * An exercise might have a needed equipment.
  */
-class Equipment(val id:Int? = null, val name:String? = null, val imageId:Int?) {
+class EquipmentSelect(val id:Int? = null, val name:String? = null, val imageId:Int?) {
 
 
 }

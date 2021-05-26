@@ -6,10 +6,9 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.idan_koren_israeli.heartfit.R
-import com.idan_koren_israeli.heartfit.callback.OnEquipmentClick
-import com.idan_koren_israeli.heartfit.model.Equipment
+import com.idan_koren_israeli.heartfit.model.EquipmentSelect
 
-class EquipmentSelectHolder(itemView: View, private val onClick: (equipment:Equipment) -> Unit, private var selected:Boolean = false):RecyclerView.ViewHolder(itemView){
+class EquipmentSelectHolder(itemView: View, private val onClick: (equipmentSelect:EquipmentSelect) -> Unit, private var selected:Boolean = false):RecyclerView.ViewHolder(itemView){
 
     private lateinit var label: TextView
     private lateinit var image: ImageView
@@ -28,12 +27,12 @@ class EquipmentSelectHolder(itemView: View, private val onClick: (equipment:Equi
     }
 
 
-    fun setEquipment(equipment: Equipment){
-        label.text = equipment.name
-        image.setImageDrawable(ContextCompat.getDrawable(itemView.context,equipment.imageId!!))
+    fun setEquipment(equipmentSelect: EquipmentSelect){
+        label.text = equipmentSelect.name
+        image.setImageDrawable(ContextCompat.getDrawable(itemView.context,equipmentSelect.imageId!!))
 
         itemView.setOnClickListener {
-            onClick.invoke(equipment)
+            onClick.invoke(equipmentSelect)
 
             selected = !selected
             updateCardView()

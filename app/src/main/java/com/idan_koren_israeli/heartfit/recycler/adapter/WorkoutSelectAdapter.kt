@@ -7,9 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.idan_koren_israeli.heartfit.R
-import com.idan_koren_israeli.heartfit.model.Equipment
 import com.idan_koren_israeli.heartfit.model.Workout
-import com.idan_koren_israeli.heartfit.recycler.holder.EquipmentSelectHolder
 import com.idan_koren_israeli.heartfit.recycler.holder.WorkoutSelectHolder
 
 class WorkoutSelectAdapter(context: Context, var workouts: ArrayList<ArrayList<Workout>>) :

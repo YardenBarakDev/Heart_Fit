@@ -7,29 +7,29 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.idan_koren_israeli.heartfit.R
-import com.idan_koren_israeli.heartfit.model.Equipment
+import com.idan_koren_israeli.heartfit.model.EquipmentSelect
 import com.idan_koren_israeli.heartfit.recycler.holder.EquipmentSelectHolder
 
-class EquipmentSelectAdapter(context: Context, equipmentData: ArrayList<Equipment>): RecyclerView.Adapter<EquipmentSelectHolder>() {
-    var data:ArrayList<Equipment> = arrayListOf()
+class EquipmentSelectAdapter(context: Context, equipmentSelectData: ArrayList<EquipmentSelect>): RecyclerView.Adapter<EquipmentSelectHolder>() {
+    var data:ArrayList<EquipmentSelect> = arrayListOf()
     var mInflater:LayoutInflater? = null
 
-    private var selectedEquipment: MutableSet<Equipment> = mutableSetOf()
+    private var selectedEquipmentSelect: MutableSet<EquipmentSelect> = mutableSetOf()
 
     init{
         mInflater = LayoutInflater.from(context)
-        data.addAll(equipmentData)
+        data.addAll(equipmentSelectData)
     }
 
 
-    private fun onEquipmentClick(equipment:Equipment){
-        if(equipment in selectedEquipment) {
-            selectedEquipment.remove(equipment)
-            Log.i("pttt", "REMOVED SELECTION " + equipment.name)
+    private fun onEquipmentClick(equipmentSelect:EquipmentSelect){
+        if(equipmentSelect in selectedEquipmentSelect) {
+            selectedEquipmentSelect.remove(equipmentSelect)
+            Log.i("pttt", "REMOVED SELECTION " + equipmentSelect.name)
         }
         else {
-            selectedEquipment.add(equipment)
-            Log.i("pttt", "ADDED SELECTION " + equipment.name)
+            selectedEquipmentSelect.add(equipmentSelect)
+            Log.i("pttt", "ADDED SELECTION " + equipmentSelect.name)
         }
     }
 
@@ -52,8 +52,8 @@ class EquipmentSelectAdapter(context: Context, equipmentData: ArrayList<Equipmen
      * This function will return all the equipment that is currently selected from the list
      * This is the output of the recyclerview
      */
-    fun getSelectedEquipment():Set<Equipment>{
-        return selectedEquipment
+    fun getSelectedEquipment():Set<EquipmentSelect>{
+        return selectedEquipmentSelect
     }
 
 }

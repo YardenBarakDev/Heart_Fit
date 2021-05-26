@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.idan_koren_israeli.heartfit.R
-import com.idan_koren_israeli.heartfit.model.Equipment
+import com.idan_koren_israeli.heartfit.model.EquipmentSelect
 import com.idan_koren_israeli.heartfit.recycler.adapter.EquipmentSelectAdapter
 
 
@@ -41,15 +41,19 @@ class FragmentEquipmentSelect : Fragment() {
     }
 
     private fun initRecycler(){
-        val data = arrayListOf<Equipment>()
+        val data = arrayListOf<EquipmentSelect>()
 
         // This data should be loaded from device.
         // There is a type of class in kotlin called 'data class'
         // it might be usable here.
-        data.add(Equipment(1,"Dumbbells 1", R.drawable.ic_dumbbell))
-        data.add(Equipment(2,"Dumbbells 2", R.drawable.ic_dumbbell))
-        data.add(Equipment(3,"Dumbbells 3", R.drawable.ic_dumbbell))
-        data.add(Equipment(4,"Dumbbells 4", R.drawable.ic_dumbbell))
+        //DUBELES_LIGHT
+        //"Dumbbells Light"
+
+        data.add(EquipmentSelect(1,"Dumbbells 1", R.drawable.ic_dumbbell))
+        data.add(EquipmentSelect(2,"Dumbbells 2", R.drawable.ic_dumbbell))
+        data.add(EquipmentSelect(3,"Dumbbells 3", R.drawable.ic_dumbbell))
+        data.add(EquipmentSelect(4,"Dumbbells 4", R.drawable.ic_dumbbell))
+        data.add(EquipmentSelect(4,"Rope 4", R.drawable.ic_dumbbell))
 
 
         equipmentAdapter = EquipmentSelectAdapter(requireContext(), data)

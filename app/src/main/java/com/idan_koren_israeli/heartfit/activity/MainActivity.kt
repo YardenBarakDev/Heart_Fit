@@ -2,6 +2,7 @@ package com.idan_koren_israeli.heartfit.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
@@ -12,10 +13,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.component.BottomNavigationManager
 import com.idan_koren_israeli.heartfit.firebase.auth.AuthManager
+import com.idan_koren_israeli.heartfit.fragment.FragmentEquipmentSelect
+import com.idan_koren_israeli.heartfit.fragment.FragmentHome
+import com.idan_koren_israeli.heartfit.fragment.FragmentSplash
 import com.idan_koren_israeli.heartfit.fragment.FragmentWorkout
 import com.idan_koren_israeli.heartfit.model.Workout
 import com.idan_koren_israeli.heartfit.model.exercise.Exercise
 import com.idan_koren_israeli.heartfit.model.exercise.RepsAction
+import com.idan_koren_israeli.heartfit.model.exercise.TimeAction
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,10 +39,11 @@ class MainActivity : AppCompatActivity() {
 
         //initNavigation()
 
-
+        val splashFragment : FragmentSplash = FragmentSplash.newInstance(R.mipmap.ic_launcher)
+        splashFragment.setOnAnimationFinishListener {  Log.i("pttt","App Start") }
 
         supportFragmentManager.beginTransaction().replace(R.id.mainActivity_fragment,
-            FragmentWorkout.newInstance(Workout(1,"Workout Name", listOf(RepsAction(Exercise(123),10))))
+            splashFragment
         ).commit()
 
         //control when the bottomNavigation will be visible according to the fragment presented
