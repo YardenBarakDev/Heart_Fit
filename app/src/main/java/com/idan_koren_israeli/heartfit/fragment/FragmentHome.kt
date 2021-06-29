@@ -23,8 +23,9 @@ class FragmentHome : Fragment() {
     private lateinit var workoutsRecycler : RecyclerView
     private lateinit var workoutsAdapter: WorkoutSelectAdapter
 
+    private lateinit var topBar: FragmentTopBar
+
     private companion object{
-        const val MAX_WORKOUTS_ROW = 5
 
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
@@ -40,6 +41,11 @@ class FragmentHome : Fragment() {
 
     }
 
+    private fun initTopBarFragment(){
+        topBar = FragmentTopBar.newInstance()
+        requireActivity().supportFragmentManager.beginTransaction().replace(R.id.home_FRAG_top_bar, topBar).commit()
+    }
+
     private fun findViews(parent: View){
         workoutsRecycler = parent.findViewById(R.id.home_RYC_workouts)
     }
@@ -51,6 +57,7 @@ class FragmentHome : Fragment() {
         // Inflate the layout for this fragment
         val parent = inflater.inflate(R.layout.fragment_home, container, false)
         findViews(parent)
+        initTopBarFragment()
         initRecycler()
         return parent
     }
@@ -62,15 +69,15 @@ class FragmentHome : Fragment() {
         val levelC = arrayListOf<Workout>()
         val levelD = arrayListOf<Workout>()
         val levelE = arrayListOf<Workout>()
-        levelA.add(Workout(1,"Workouts A"))
-        levelB.add(Workout(2,"Workouts B1"))
-        levelB.add(Workout(3,"Workouts B2"))
-        levelC.add(Workout(4,"Workouts C1"))
-        levelC.add(Workout(5,"Workouts C2"))
-        levelC.add(Workout(6,"Workouts C3"))
-        levelD.add(Workout(7,"Workouts D1"))
-        levelE.add(Workout(8,"Workouts E1"))
-        levelE.add(Workout(9,"Workouts E2"))
+        levelA.add(Workout(1,"Workouts A",heartsValue = 1, heartsToUnlock = 1))
+        levelB.add(Workout(2,"Workouts B1",heartsValue = 1, heartsToUnlock = 1))
+        levelB.add(Workout(3,"Workouts B2",heartsValue = 1, heartsToUnlock = 1))
+        levelC.add(Workout(4,"Workouts C1",heartsValue = 1, heartsToUnlock = 1))
+        levelC.add(Workout(5,"Workouts C2",heartsValue = 1, heartsToUnlock = 1))
+        levelC.add(Workout(6,"Workouts C3",heartsValue = 1, heartsToUnlock = 1))
+        levelD.add(Workout(7,"Workouts D1",heartsValue = 1, heartsToUnlock = 1))
+        levelE.add(Workout(8,"Workouts E1",heartsValue = 1, heartsToUnlock = 1))
+        levelE.add(Workout(9,"Workouts E2",heartsValue = 1, heartsToUnlock = 1))
 
         val workouts : ArrayList<ArrayList<Workout>> = arrayListOf()
         workouts.add(levelA)
@@ -95,12 +102,12 @@ class FragmentHome : Fragment() {
         workouts.add(levelE)
 
 
-        workoutsAdapter = WorkoutSelectAdapter(context!!, workouts)
+        workoutsAdapter = WorkoutSelectAdapter(requireContext(), workouts)
 
         workoutsRecycler.adapter = workoutsAdapter
 
 
-        val layoutManager = GridLayoutManager(context!!, 1)
+        val layoutManager = GridLayoutManager(requireContext(), 1)
 
         workoutsRecycler.layoutManager = layoutManager
     }

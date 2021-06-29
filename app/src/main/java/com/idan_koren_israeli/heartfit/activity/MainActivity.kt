@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.replace
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
@@ -40,7 +41,9 @@ class MainActivity : AppCompatActivity() {
         //initNavigation()
 
         val splashFragment : FragmentSplash = FragmentSplash.newInstance(R.mipmap.ic_launcher)
-        splashFragment.setOnAnimationFinishListener {  Log.i("pttt","App Start") }
+        splashFragment.setOnAnimationFinishListener {
+            supportFragmentManager.beginTransaction().replace(R.id.mainActivity_fragment, FragmentHome()).commit()
+        }
 
         supportFragmentManager.beginTransaction().replace(R.id.mainActivity_fragment,
             splashFragment
@@ -73,6 +76,5 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         AuthManager.authScreenResult(requestCode, resultCode, data)
-
     }
 }

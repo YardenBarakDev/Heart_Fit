@@ -1,15 +1,17 @@
 package com.idan_koren_israeli.heartfit.common
 
 import android.app.Application
+import android.content.ContextWrapper
 import android.util.Log
-import android.widget.Toast
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.firebase.auth.AuthManager
 import com.idankorenisraeli.mysettingsscreen.MySettingsScreen
-import com.idankorenisraeli.mysettingsscreen.enums.ToggleType
-import com.idankorenisraeli.mysettingsscreen.tile_data.essential.*
+import com.idankorenisraeli.mysettingsscreen.tile_data.essential.ButtonTileData
+import com.idankorenisraeli.mysettingsscreen.tile_data.essential.DividerTileData
+import com.idankorenisraeli.mysettingsscreen.tile_data.essential.SettingsTileData
+import com.idankorenisraeli.mysettingsscreen.tile_data.essential.TitleTileData
 import com.idankorenisraeli.mysettingsscreen.tile_data.view.SeekbarTileData
-import com.idankorenisraeli.mysettingsscreen.tile_data.view.ToggleTileData
+import com.pixplicity.easyprefs.library.Prefs
 
 
 class MyApp : Application(){
@@ -19,7 +21,18 @@ class MyApp : Application(){
 
         AuthManager.initAuth()
         initSettingsScreen()
+        initSharedPrefs()
 
+
+    }
+
+    private fun initSharedPrefs(){
+        Prefs.Builder()
+            .setContext(this)
+            .setMode(ContextWrapper.MODE_PRIVATE)
+            .setPrefsName(packageName)
+            .setUseDefaultSharedPreference(true)
+            .build()
     }
 
     private fun initSettingsScreen(){

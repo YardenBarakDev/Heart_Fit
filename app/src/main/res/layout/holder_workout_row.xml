@@ -16,7 +16,7 @@
     <ImageButton
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:background="@android:color/background_light"
+        android:background="@android:color/holo_green_dark"
         android:layout_weight="3"
         android:id="@+id/workouts_row_BTN_left"
         android:layout_margin="5dp"

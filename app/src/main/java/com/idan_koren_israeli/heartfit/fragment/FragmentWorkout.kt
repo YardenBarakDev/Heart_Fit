@@ -37,6 +37,8 @@ class FragmentWorkout : Fragment() {
     private lateinit var timerView : CircularTimerView
     private lateinit var pauseResumeButton : Button
 
+    private var currentExercise:Int = 0
+
     private var paused : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,6 +67,16 @@ class FragmentWorkout : Fragment() {
     }
 
     private fun initTimer(){
+        startTimerForNextExercise()
+        pauseResumeButton.setOnClickListener { timerView.togglePauseResume() }
+
+    }
+
+
+    private fun startTimerForNextExercise(){
+        if(currentExercise == workout.actions.size){
+            workoutDone()
+        }
 
 
         timerView.setCircularTimerListener(object : CircularTimerListener{
@@ -73,34 +85,19 @@ class FragmentWorkout : Fragment() {
             }
 
             override fun onTimerFinished() {
-                Log.i("pttt", "Timer: Finish")
-            }
-        }, workout.totalLength().toLong(), TimeFormatEnum.SECONDS,30)
+                currentExercise++
+                startTimerForNextExercise()
 
+                // Next timer of next exercise will start
+            }
+        }, workout.actions[currentExercise].totalTime().toLong(), TimeFormatEnum.SECONDS,30)
 
         timerView.startTimer()
 
-
-        pauseResumeButton.setOnClickListener(object: View.OnClickListener{
-            override fun onClick(v: View?) {
-                timerView.togglePauseResume()
-            }
-        })
-
-
-
-
-
-
     }
 
-
-    private fun pauseTimer(){
-        paused = true
-    }
-
-    private fun resumeTimer(){
-        paused = false
+    private fun workoutDone(){
+        Log.i("pttt", "Finished")
     }
 
     companion object {
