@@ -13,6 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.firebase.auth.AuthManager
+import com.idan_koren_israeli.heartfit.firebase.database.DatabaseManager
 import com.idan_koren_israeli.heartfit.fragment.FragmentHome
 import com.idan_koren_israeli.heartfit.fragment.FragmentSplash
 
@@ -46,6 +47,7 @@ class MainActivity : AppCompatActivity() {
 
         AuthManager.handleSignIn(this)
 
+        DatabaseManager.testRealtimeDatabase()
 
         //control when the bottomNavigation will be visible according to the fragment presented
        // navHostFragment.findNavController().addOnDestinationChangedListener { _, destination, _ ->

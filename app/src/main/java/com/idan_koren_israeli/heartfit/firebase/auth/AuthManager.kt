@@ -8,6 +8,9 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 import com.idan_koren_israeli.heartfit.activity.MainActivity
+import com.idan_koren_israeli.heartfit.common.CommonUtils
+import com.idan_koren_israeli.heartfit.firebase.database.DatabaseManager
+import com.idan_koren_israeli.heartfit.model.User
 import java.util.*
 
 //This way we can create a singleton in kotlin
@@ -44,13 +47,14 @@ object AuthManager {
             val response: IdpResponse? = IdpResponse.fromResultIntent(data)
 
             if(resultCode == AppCompatActivity.RESULT_OK){
-                //
-                Log.i("pttt", "Auth Successful")
+                CommonUtils.getInstance().showToast(auth.currentUser!!.displayName + " Authenticated")
+
+                DatabaseManager.storeUser(User(uid = auth.currentUser!!.uid,hearts = 0))
 
             }
             else{
                 if(response==null) {
-                    Log.i("pttt", "Auth Cancelled")
+                    CommonUtils.getInstance().showToast("Authenticated Cancelled")
                 }
             }
         }

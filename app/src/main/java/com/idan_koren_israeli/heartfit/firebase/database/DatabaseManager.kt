@@ -14,31 +14,24 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.idan_koren_israeli.heartfit.activity.MainActivity
+import com.idan_koren_israeli.heartfit.model.User
 import java.util.*
+
+
 
 //RealtimeDatabase
 object DatabaseManager {
     private lateinit var db: DatabaseReference
 
-    fun testRealtimeDatabase(){
+    fun initDatabase(){
         db = Firebase.database.reference
-        db.child("test_root").setValue("test_value")
+    }
+
+    private val KEY_USERS = "users"
 
 
-        val postListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // Get Post object and use the values to update the UI
-                val value: String? = dataSnapshot.getValue(String::class.java)
-                Log.i("pttt", value!!)
-
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
-                Log.w("pttt", "loadPost:onCancelled", databaseError.toException())
-            }
-        }
-        db.child("test_root").addValueEventListener(postListener)
+    fun storeUser(user: User){
+        db.child(KEY_USERS).child(user.uid!!).setValue(user)
 
     }
 
