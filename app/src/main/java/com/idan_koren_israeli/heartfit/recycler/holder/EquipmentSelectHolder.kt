@@ -28,7 +28,7 @@ class EquipmentSelectHolder(itemView: View, private val onClick: (equipmentSelec
 
 
     fun setEquipment(equipmentSelect: EquipmentSelect){
-        label.text = equipmentSelect.name
+        label.text = equipmentSelect.displayName
         image.setImageDrawable(ContextCompat.getDrawable(itemView.context,equipmentSelect.imageId!!))
 
         itemView.setOnClickListener {
@@ -43,10 +43,10 @@ class EquipmentSelectHolder(itemView: View, private val onClick: (equipmentSelec
     // This will update how the card is shown based on if it is selected
     private fun updateCardView(){
         if(selected){
-            label.setBackgroundColor(ContextCompat.getColor(itemView.context!!, android.R.color.holo_green_dark))
+            label.setBackgroundColor(ContextCompat.getColor(itemView.context!!, R.color.equip_selected))
         }
         else{
-            label.setBackgroundColor(ContextCompat.getColor(itemView.context!!, android.R.color.holo_red_dark))
+            label.setBackgroundColor(ContextCompat.getColor(itemView.context!!, R.color.equip_non_selected))
         }
     }
 }

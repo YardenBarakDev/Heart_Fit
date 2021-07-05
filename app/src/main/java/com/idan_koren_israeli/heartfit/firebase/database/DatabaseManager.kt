@@ -29,10 +29,8 @@ object DatabaseManager {
 
     private val KEY_USERS = "users"
 
-
     fun storeUser(user: User){
         db.child(KEY_USERS).child(user.uid!!).setValue(user)
-
     }
 
 }

@@ -25,11 +25,11 @@ class EquipmentSelectAdapter(context: Context, equipmentSelectData: ArrayList<Eq
     private fun onEquipmentClick(equipmentSelect:EquipmentSelect){
         if(equipmentSelect in selectedEquipmentSelect) {
             selectedEquipmentSelect.remove(equipmentSelect)
-            Log.i("pttt", "REMOVED SELECTION " + equipmentSelect.name)
+            Log.i("pttt", "REMOVED SELECTION " + equipmentSelect.displayName)
         }
         else {
             selectedEquipmentSelect.add(equipmentSelect)
-            Log.i("pttt", "ADDED SELECTION " + equipmentSelect.name)
+            Log.i("pttt", "ADDED SELECTION " + equipmentSelect.displayName)
         }
     }
 

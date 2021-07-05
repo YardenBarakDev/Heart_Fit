@@ -12,10 +12,13 @@ import com.firebase.ui.auth.AuthUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.idan_koren_israeli.heartfit.R
+import com.idan_koren_israeli.heartfit.common.CommonUtils
 import com.idan_koren_israeli.heartfit.firebase.auth.AuthManager
 import com.idan_koren_israeli.heartfit.firebase.database.DatabaseManager
+import com.idan_koren_israeli.heartfit.fragment.FragmentEquipmentSelect
 import com.idan_koren_israeli.heartfit.fragment.FragmentHome
 import com.idan_koren_israeli.heartfit.fragment.FragmentSplash
+import com.idan_koren_israeli.heartfit.model.EquipmentSelect
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,10 +26,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var navHostFragment: NavHostFragment
     lateinit var mainActivity_bottomNavigation: BottomNavigationView
 
-
-    companion object{
-        const val RC_SIGN_IN:Int = 123
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -38,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
         val splashFragment : FragmentSplash = FragmentSplash.newInstance(R.mipmap.ic_launcher)
         splashFragment.setOnAnimationFinishListener {
-            supportFragmentManager.beginTransaction().replace(R.id.mainActivity_fragment, FragmentHome()).commitAllowingStateLoss()
+            supportFragmentManager.beginTransaction().replace(R.id.mainActivity_fragment, createEquipmentSelectFragment()).commitAllowingStateLoss()
         }
 
         supportFragmentManager.beginTransaction().replace(R.id.mainActivity_fragment,
@@ -47,7 +46,6 @@ class MainActivity : AppCompatActivity() {
 
         AuthManager.handleSignIn(this)
 
-        DatabaseManager.testRealtimeDatabase()
 
         //control when the bottomNavigation will be visible according to the fragment presented
        // navHostFragment.findNavController().addOnDestinationChangedListener { _, destination, _ ->
@@ -56,6 +54,18 @@ class MainActivity : AppCompatActivity() {
        //         else -> mainActivity_bottomNavigation.visibility = View.GONE
        //     }
        // }
+    }
+
+    // This is for debugging usage
+    private fun createEquipmentSelectFragment() : FragmentEquipmentSelect{
+        val fragment = FragmentEquipmentSelect()
+        fragment.onSelectionDone = { equipmentSelectedList ->
+            val equipmentNames : MutableSet<String> = mutableSetOf()
+            equipmentSelectedList.forEach { eqSelected -> equipmentNames.add(eqSelected.displayName!!) }
+            CommonUtils.getInstance().showToast(equipmentNames.toString())
+
+        }
+        return fragment
     }
 
     private fun initNavigation(){

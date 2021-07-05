@@ -20,6 +20,8 @@ object AuthManager {
 
     private lateinit var auth : FirebaseAuth
 
+    const val RC_SIGN_IN:Int = 123
+
     fun initAuth(){
         auth = FirebaseAuth.getInstance()
     }
@@ -37,13 +39,13 @@ object AuthManager {
                         )
                     )
                     .build(),
-                MainActivity.RC_SIGN_IN
+                RC_SIGN_IN
             )
         }
     }
 
     fun authScreenResult(requestCode: Int, resultCode: Int, data: Intent?){
-        if(requestCode == MainActivity.RC_SIGN_IN){
+        if(requestCode == RC_SIGN_IN){
             val response: IdpResponse? = IdpResponse.fromResultIntent(data)
 
             if(resultCode == AppCompatActivity.RESULT_OK){

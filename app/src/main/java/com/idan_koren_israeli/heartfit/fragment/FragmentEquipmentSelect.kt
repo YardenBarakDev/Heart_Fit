@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.idan_koren_israeli.heartfit.R
@@ -22,6 +23,8 @@ class FragmentEquipmentSelect : Fragment() {
     lateinit var parent: View
     lateinit var equipmentRecycler: RecyclerView
     lateinit var equipmentAdapter: EquipmentSelectAdapter
+    private lateinit var finishButton: ImageButton
+    lateinit var onSelectionDone: (equipmentSelected:Set<EquipmentSelect>) -> Unit
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,11 +36,21 @@ class FragmentEquipmentSelect : Fragment() {
         parent = inflater.inflate(R.layout.fragment_equipment_select, container, false)
         findViews()
         initRecycler()
+        initFinishButton()
         return parent
     }
 
     private fun findViews(){
         equipmentRecycler = parent.findViewById(R.id.equipment_select_RCV_recycler)
+        finishButton = parent.findViewById(R.id.equipment_select_BTN_done)
+
+
+    }
+
+    fun initFinishButton(){
+        finishButton.setOnClickListener {
+            onSelectionDone(equipmentAdapter.getSelectedEquipment())
+        }
     }
 
     private fun initRecycler(){
@@ -49,17 +62,22 @@ class FragmentEquipmentSelect : Fragment() {
         //DUBELES_LIGHT
         //"Dumbbells Light"
 
-        data.add(EquipmentSelect(1,"Dumbbells 1", R.drawable.ic_dumbbell))
-        data.add(EquipmentSelect(2,"Dumbbells 2", R.drawable.ic_dumbbell))
-        data.add(EquipmentSelect(3,"Dumbbells 3", R.drawable.ic_dumbbell))
-        data.add(EquipmentSelect(4,"Dumbbells 4", R.drawable.ic_dumbbell))
-        data.add(EquipmentSelect(4,"Rope 4", R.drawable.ic_dumbbell))
+        data.add(EquipmentSelect(1,"Light\nDumbbells", R.drawable.ic_dumbbell_small))
+        data.add(EquipmentSelect(2,"Medium\nDumbbells", R.drawable.ic_dumbbell))
+        data.add(EquipmentSelect(3,"Heavy\nDumbbells", R.drawable.ic_dumbbell_large))
+        data.add(EquipmentSelect(4,"Mattress", R.drawable.ic_mattress_full))
+        data.add(EquipmentSelect(5,"Rope", R.drawable.ic_skipping_rope))
+        data.add(EquipmentSelect(6,"Pull Up Bar", R.drawable.ic_pull_up))
+        data.add(EquipmentSelect(7,"Light\nKettlebell", R.drawable.ic_kettlebell_small))
+        data.add(EquipmentSelect(8,"Medium\nKettlebell", R.drawable.ic_kettlebell))
+        data.add(EquipmentSelect(9,"Heavy\nKettlebell", R.drawable.ic_kettlebell_large))
 
 
         equipmentAdapter = EquipmentSelectAdapter(requireContext(), data)
         equipmentRecycler.layoutManager = GridLayoutManager(requireContext(), 3)
 
         equipmentRecycler.adapter = equipmentAdapter
+
 
 
 

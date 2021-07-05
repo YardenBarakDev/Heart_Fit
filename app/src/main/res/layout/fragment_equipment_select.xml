@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.FragmentEquipmentSelect">
+
 
     <TextView
         android:layout_width="match_parent"
@@ -12,14 +14,32 @@
         android:id="@+id/equipment_select_LBL_title"
         android:text="@string/which_equipment_do_you_have_at_home"
         android:maxLines="2"
-        android:gravity="center"
-        android:layout_marginTop="40dp"
+        android:gravity="center|start"
+        android:paddingStart="0dp"
+        android:paddingEnd="18dp"
+        android:layout_marginBottom="20dp"
+        android:layout_toStartOf="@id/equipment_select_BTN_done"
+        />
+
+
+    <ImageButton
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/ic_baseline_check_circle_24"
+        app:backgroundTint="@android:color/holo_green_dark"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/equipment_select_BTN_done"
+
         />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/equipment_select_RCV_recycler"
         android:layout_below="@id/equipment_select_LBL_title"
         />
+
+
+
+
 </RelativeLayout>
