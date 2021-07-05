@@ -2,26 +2,19 @@ package com.idan_koren_israeli.heartfit.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.replace
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
+import com.firebase.ui.auth.AuthUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 import com.idan_koren_israeli.heartfit.R
-import com.idan_koren_israeli.heartfit.component.BottomNavigationManager
 import com.idan_koren_israeli.heartfit.firebase.auth.AuthManager
-import com.idan_koren_israeli.heartfit.fragment.FragmentEquipmentSelect
 import com.idan_koren_israeli.heartfit.fragment.FragmentHome
 import com.idan_koren_israeli.heartfit.fragment.FragmentSplash
-import com.idan_koren_israeli.heartfit.fragment.FragmentWorkout
-import com.idan_koren_israeli.heartfit.model.Workout
-import com.idan_koren_israeli.heartfit.model.exercise.Exercise
-import com.idan_koren_israeli.heartfit.model.exercise.RepsAction
-import com.idan_koren_israeli.heartfit.model.exercise.TimeAction
 
 
 class MainActivity : AppCompatActivity() {
@@ -35,19 +28,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         //initNavigation()
 
         val splashFragment : FragmentSplash = FragmentSplash.newInstance(R.mipmap.ic_launcher)
         splashFragment.setOnAnimationFinishListener {
-            supportFragmentManager.beginTransaction().replace(R.id.mainActivity_fragment, FragmentHome()).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.mainActivity_fragment, FragmentHome()).commitAllowingStateLoss()
         }
 
         supportFragmentManager.beginTransaction().replace(R.id.mainActivity_fragment,
             splashFragment
-        ).commit()
+        ).commitAllowingStateLoss()
+
+        AuthManager.handleSignIn(this)
+
 
         //control when the bottomNavigation will be visible according to the fragment presented
        // navHostFragment.findNavController().addOnDestinationChangedListener { _, destination, _ ->
@@ -75,6 +73,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        Log.i("pttt", "Activity Result")
         AuthManager.authScreenResult(requestCode, resultCode, data)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        // No call for super()
     }
 }

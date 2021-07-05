@@ -43,7 +43,7 @@ class FragmentHome : Fragment() {
 
     private fun initTopBarFragment(){
         topBar = FragmentTopBar.newInstance()
-        requireActivity().supportFragmentManager.beginTransaction().replace(R.id.home_FRAG_top_bar, topBar).commit()
+        requireActivity().supportFragmentManager.beginTransaction().replace(R.id.home_FRAG_top_bar, topBar).commitAllowingStateLoss()
     }
 
     private fun findViews(parent: View){
@@ -69,15 +69,15 @@ class FragmentHome : Fragment() {
         val levelC = arrayListOf<Workout>()
         val levelD = arrayListOf<Workout>()
         val levelE = arrayListOf<Workout>()
-        levelA.add(Workout(1,"Workouts A",heartsValue = 1, heartsToUnlock = 1))
-        levelB.add(Workout(2,"Workouts B1",heartsValue = 1, heartsToUnlock = 1))
-        levelB.add(Workout(3,"Workouts B2",heartsValue = 1, heartsToUnlock = 1))
-        levelC.add(Workout(4,"Workouts C1",heartsValue = 1, heartsToUnlock = 1))
-        levelC.add(Workout(5,"Workouts C2",heartsValue = 1, heartsToUnlock = 1))
-        levelC.add(Workout(6,"Workouts C3",heartsValue = 1, heartsToUnlock = 1))
-        levelD.add(Workout(7,"Workouts D1",heartsValue = 1, heartsToUnlock = 1))
-        levelE.add(Workout(8,"Workouts E1",heartsValue = 1, heartsToUnlock = 1))
-        levelE.add(Workout(9,"Workouts E2",heartsValue = 1, heartsToUnlock = 1))
+        levelA.add(Workout(1,"Workouts A",heartsValue = 1, heartsToUnlock = 1,actions = listOf()))
+        levelB.add(Workout(2,"Workouts B1",heartsValue = 1, heartsToUnlock = 1, actions = listOf()))
+        levelB.add(Workout(3,"Workouts B2",heartsValue = 1, heartsToUnlock = 1, actions = listOf()))
+        levelC.add(Workout(4,"Workouts C1",heartsValue = 1, heartsToUnlock = 1, actions = listOf()))
+        levelC.add(Workout(5,"Workouts C2",heartsValue = 1, heartsToUnlock = 1, actions = listOf()))
+        levelC.add(Workout(6,"Workouts C3",heartsValue = 1, heartsToUnlock = 1, actions = listOf()))
+        levelD.add(Workout(7,"Workouts D1",heartsValue = 1, heartsToUnlock = 1, actions = listOf()))
+        levelE.add(Workout(8,"Workouts E1",heartsValue = 1, heartsToUnlock = 1, actions = listOf()))
+        levelE.add(Workout(9,"Workouts E2",heartsValue = 1, heartsToUnlock = 1, actions = listOf()))
 
         val workouts : ArrayList<ArrayList<Workout>> = arrayListOf()
         workouts.add(levelA)

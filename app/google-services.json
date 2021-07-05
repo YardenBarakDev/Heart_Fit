@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "549946480929-2bvl8oga80kgdejelge8suoc8p08q3jt.apps.googleusercontent.com",
+          "client_id": "549946480929-egajnm33peofi2nb6jlsn6ge40t9n49p.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.idan_koren_israeli.heartfit",
-            "certificate_hash": "daed54b7605b7c2d48e82c3702e7322d6138fe2c"
+            "certificate_hash": "780ada26f052d38a3a4cd1bf217f8195b769bfd2"
           }
         },
         {

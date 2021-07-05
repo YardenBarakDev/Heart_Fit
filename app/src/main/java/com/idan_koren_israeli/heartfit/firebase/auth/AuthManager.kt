@@ -22,14 +22,14 @@ object AuthManager {
     }
 
     fun authScreenShow(activity:FragmentActivity){
-        if (auth!!.currentUser != null) {
+        if (auth.currentUser != null) {
             // already signed in
         } else {
             activity.startActivityForResult(
                 AuthUI.getInstance()
                     .createSignInIntentBuilder()
                     .setAvailableProviders(
-                        Arrays.asList(
+                        listOf(
                             AuthUI.IdpConfig.GoogleBuilder().build()
                         )
                     )
@@ -46,6 +46,7 @@ object AuthManager {
             if(resultCode == AppCompatActivity.RESULT_OK){
                 //
                 Log.i("pttt", "Auth Successful")
+
             }
             else{
                 if(response==null) {
@@ -59,6 +60,18 @@ object AuthManager {
         if(auth.currentUser==null)
             return null
         return auth.currentUser!!.displayName
+
+    }
+
+    fun handleSignIn(activity: MainActivity) {
+        if(auth.currentUser==null)
+            authScreenShow(activity);
+        else
+            Log.i("pttt","User Auth Auto-Detected " + auth.currentUser!!.uid)
+    }
+
+    fun signOut(activity: MainActivity){
+        AuthUI.getInstance().signOut(activity).addOnCompleteListener {authScreenShow(activity)}
 
     }
 
