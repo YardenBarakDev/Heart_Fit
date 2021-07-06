@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -15,6 +14,7 @@ import com.hamzaahmedkhan.circulartimerview.TimeFormatEnum
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.model.Exercise
 import com.idan_koren_israeli.heartfit.model.Workout
+import com.idankorenisraeli.customprogressbar.CustomProgressBar
 import java.io.Serializable
 import kotlin.math.ceil
 
@@ -40,6 +40,7 @@ class FragmentWorkout : Fragment() {
     private lateinit var exercises: List<Exercise>
 
 
+    private lateinit var workoutProgress:CustomProgressBar
     private lateinit var nextExerciseText: TextView
     private lateinit var nextExerciseTitle: TextView
     private lateinit var timerView : CircularTimerView
@@ -47,6 +48,7 @@ class FragmentWorkout : Fragment() {
     private lateinit var nextButton : ImageButton
     private lateinit var prevButton : ImageButton
 
+    private var totalWorkoutTime:Int = 0
     private var currentExercise:Int = 0
 
     private var paused : Boolean = false
@@ -68,6 +70,7 @@ class FragmentWorkout : Fragment() {
         val parent:View = inflater.inflate(R.layout.fragment_workout, container, false)
         findViews(parent)
         initTimer()
+        initProgress()
         initButtons()
 
         for(exe:Exercise in exercises){
@@ -84,6 +87,7 @@ class FragmentWorkout : Fragment() {
         prevButton = parent.findViewById(R.id.workout_BTN_prev)
         nextExerciseText = parent.findViewById(R.id.workout_LBL_next_exercise)
         nextExerciseTitle = parent.findViewById(R.id.workout_LBL_next_title)
+        workoutProgress = parent.findViewById(R.id.workout_PRG_progress_bar)
 
     }
 
@@ -92,10 +96,18 @@ class FragmentWorkout : Fragment() {
 
     }
 
+    private fun initProgress(){
+        totalWorkoutTime = exercises.fold(0,{acc, exercise ->  acc+exercise.timeInSeconds!!})
+        workoutProgress.value = 0f
+
+        workoutProgress.textTitle = workout.name
+    }
+
 
     private fun startTimerForNextExercise(){
         updateNextPrevButtonsVisibility()
-        updateNextExerciseText()
+        updateProgressBar()
+        updateNextUpText()
         if(currentExercise == exercises.size){
             workoutDone()
             return
@@ -118,6 +130,11 @@ class FragmentWorkout : Fragment() {
 
         timerView.startTimer()
         timerView.prefix = exercises[currentExercise].name
+
+    }
+
+    private fun updateProgressBar() {
+        workoutProgress.value = calculateProgressBarValue()
 
     }
 
@@ -154,7 +171,7 @@ class FragmentWorkout : Fragment() {
 
     }
 
-    private fun updateNextExerciseText(){
+    private fun updateNextUpText(){
         if(currentExercise==exercises.size-1){
             nextExerciseText.visibility = View.INVISIBLE
             nextExerciseTitle.visibility = View.INVISIBLE
@@ -166,6 +183,16 @@ class FragmentWorkout : Fragment() {
         }
 
 
+    }
+
+    private fun calculateProgressBarValue():Float{
+        var timePastExercises:Int = 0
+        exercises.forEachIndexed lit@{index, exercise ->
+            if(index>currentExercise) return@lit
+            timePastExercises+=exercise.timeInSeconds!!
+        } // local return to the caller of the lambda
+
+        return timePastExercises / totalWorkoutTime.toFloat()
     }
 
     private fun workoutDone(){

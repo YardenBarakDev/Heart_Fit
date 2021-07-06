@@ -6,6 +6,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.FragmentWorkout">
 
+    <com.idankorenisraeli.customprogressbar.CustomProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+
+        android:layout_alignParentTop="true"
+        android:layout_margin="18dp"
+        app:barPadding="4dp"
+        app:barCornerRadius="50dp"
+
+        app:barBackgroundColor="@android:color/darker_gray"
+        app:colorType="single_static"
+        app:colorStatic="@android:color/background_light"
+
+
+        app:textType="custom_static"
+        app:textTitle="Hello World"
+        app:textPadding="3dp"
+        app:textGravity="center"
+        app:textColor="@color/text"
+
+        app:value="0.8"
+        android:id="@+id/workout_PRG_progress_bar"
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -16,6 +39,8 @@
         android:layout_centerHorizontal="true"
         android:textSize="18sp"
         android:textAllCaps="true"
+        android:layout_below="@id/workout_PRG_progress_bar"
+        android:gravity="bottom"
         android:textColor="@android:color/darker_gray"
         />
 

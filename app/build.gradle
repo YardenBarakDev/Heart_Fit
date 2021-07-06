@@ -73,4 +73,6 @@ dependencies {
     // Settings Screen
     implementation 'com.github.Idan503:MySettingsScreen:v1.0.01'
 
+    // Slider
+    implementation 'com.github.Idan503:CustomProgressBar:v1.0.3'
 }
