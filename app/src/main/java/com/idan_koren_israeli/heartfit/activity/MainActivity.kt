@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
             FirestoreManager.loadExercisesByLevel(ExerciseLevel.Basic) { loaded ->
                 Log.i("pttt", "Loaded Exercises: ${loaded.size}")
-                val workout = Workout("MyWorkout", listOf(Equipment.Bench), listOf(MuscleGroup.ARMS), 2, 0, WorkoutLevel.Basic)
+                val workout = Workout("Noy's Abs Workout", listOf(Equipment.Bench), listOf(MuscleGroup.ARMS), 6, 0, WorkoutLevel.Basic)
                 supportFragmentManager.beginTransaction().replace(R.id.mainActivity_fragment, FragmentWorkout.newInstance(workout ,loaded)).commitAllowingStateLoss()
             }
         }

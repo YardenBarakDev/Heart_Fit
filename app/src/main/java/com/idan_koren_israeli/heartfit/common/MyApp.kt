@@ -3,6 +3,7 @@ package com.idan_koren_israeli.heartfit.common
 import android.app.Application
 import android.content.ContextWrapper
 import android.util.Log
+import androidx.appcompat.app.AppCompatDelegate
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.firebase.auth.AuthManager
 import com.idan_koren_israeli.heartfit.firebase.database.DatabaseManager
@@ -28,6 +29,7 @@ class MyApp : Application(){
         initSettingsScreen()
         initSharedPrefs()
 
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
     }
 

@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.os.CountDownTimer;
 import android.text.TextPaint;
 import android.text.TextUtils;
@@ -52,7 +53,7 @@ public class CircularTimerView extends View {
     private float maxValue;
 
     private int progressTextColor = Color.BLACK;
-    private float textSize = 18;
+    private float textSize = 34;
     private String text = "";
     private String suffix = "";
     private String prefix = "";
@@ -105,7 +106,7 @@ public class CircularTimerView extends View {
         roundedCorners = ta.getBoolean(R.styleable.CircularTimerView_roundedCorners, false);
         maxValue = ta.getFloat(R.styleable.CircularTimerView_maxValue, 100);
         progressTextColor = ta.getColor(R.styleable.CircularTimerView_progressTextColor, Color.BLACK);
-        textSize = ta.getDimension(R.styleable.CircularTimerView_textSize, 18);
+        textSize = ta.getDimension(R.styleable.CircularTimerView_textSize, 32);
         suffix = ta.getString(R.styleable.CircularTimerView_suffix);
         prefix = ta.getString(R.styleable.CircularTimerView_prefix);
         text = ta.getString(R.styleable.CircularTimerView_progressText);
@@ -195,11 +196,18 @@ public class CircularTimerView extends View {
             prefix = "";
         }
 
-        String drawnText = prefix + text + suffix;
+        String firstLine = prefix; //Name of exercise
+        String secondLine = text; //Time
+
+
+
 
         if (!TextUtils.isEmpty(text)) {
             float textHeight = textPaint.descent() + textPaint.ascent();
-            canvas.drawText(drawnText, (getWidth() - textPaint.measureText(drawnText)) / 2.0f, (getWidth() - textHeight) / 2.0f, textPaint);
+            textPaint.setTypeface(Typeface.DEFAULT_BOLD);
+            canvas.drawText(firstLine, (getWidth() - textPaint.measureText(firstLine)) / 2.0f, (getWidth() - textHeight) / 2.0f + 65, textPaint);
+            textPaint.setTypeface(Typeface.DEFAULT);
+            canvas.drawText(secondLine, (getWidth() - textPaint.measureText(secondLine)) / 2.0f, (getWidth() - textHeight) / 2.0f + 145, textPaint);
         }
 
 

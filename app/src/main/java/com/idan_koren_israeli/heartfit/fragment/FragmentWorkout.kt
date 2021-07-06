@@ -16,6 +16,8 @@ import com.idan_koren_israeli.heartfit.model.Exercise
 import com.idan_koren_israeli.heartfit.model.Workout
 import com.idankorenisraeli.customprogressbar.CustomProgressBar
 import java.io.Serializable
+import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.math.ceil
 
 
@@ -47,6 +49,7 @@ class FragmentWorkout : Fragment() {
     private lateinit var pauseResumeButton : ImageButton
     private lateinit var nextButton : ImageButton
     private lateinit var prevButton : ImageButton
+    private lateinit var heartsCount: TextView
 
     private var totalWorkoutTime:Int = 0
     private var currentExercise:Int = 0
@@ -88,6 +91,7 @@ class FragmentWorkout : Fragment() {
         nextExerciseText = parent.findViewById(R.id.workout_LBL_next_exercise)
         nextExerciseTitle = parent.findViewById(R.id.workout_LBL_next_title)
         workoutProgress = parent.findViewById(R.id.workout_PRG_progress_bar)
+        heartsCount = parent.findViewById(R.id.workout_LBL_heart_count)
 
     }
 
@@ -100,7 +104,8 @@ class FragmentWorkout : Fragment() {
         totalWorkoutTime = exercises.fold(0,{acc, exercise ->  acc+exercise.timeInSeconds!!})
         workoutProgress.value = 0f
 
-        workoutProgress.textTitle = workout.name
+        workoutProgress.textTitle = capitalizeWords(workout.name!!)
+        heartsCount.text = workout.heartsValue.toString()
     }
 
 
@@ -116,7 +121,7 @@ class FragmentWorkout : Fragment() {
 
         timerView.setCircularTimerListener(object : CircularTimerListener{
             override fun updateDataOnTick(remainingTimeInMs: Long): String {
-                return  " " + ceil((remainingTimeInMs / 1000f).toDouble()).toInt().toString()
+                return generateTimeTextFromSeconds((remainingTimeInMs / 1000f).toInt())
             }
 
             override fun onTimerFinished() {
@@ -129,8 +134,22 @@ class FragmentWorkout : Fragment() {
         }, exercises[currentExercise].timeInSeconds!!.toLong(), TimeFormatEnum.SECONDS,30)
 
         timerView.startTimer()
-        timerView.prefix = exercises[currentExercise].name
+        timerView.prefix = capitalizeWords(exercises[currentExercise].name!!)
 
+    }
+
+    private fun generateTimeTextFromSeconds(numOfSeconds:Int):String{
+        val minutes = numOfSeconds/60
+        val seconds = ceil(((numOfSeconds%60)).toDouble()).toInt()
+        val stb:StringBuilder = java.lang.StringBuilder()
+        if(minutes<10)
+            stb.append('0')
+        stb.append(minutes)
+        stb.append(':')
+        if(seconds<10)
+            stb.append('0')
+        stb.append(seconds)
+        return stb.toString()
     }
 
     private fun updateProgressBar() {
@@ -179,11 +198,21 @@ class FragmentWorkout : Fragment() {
         else{
             nextExerciseTitle.visibility = View.VISIBLE
             nextExerciseText.visibility = View.VISIBLE
-            nextExerciseText.text = exercises[currentExercise+1].name
+            nextExerciseText.text = capitalizeWords(exercises[currentExercise+1].name!!)
         }
 
 
     }
+
+    private fun capitalizeWords(orgText:String):String{
+        return orgText.split(' ').joinToString(" ") { it ->
+            it.replaceFirstChar {
+                if (it.isLowerCase()) it.titlecase(
+                    Locale.getDefault()
+                ) else it.toString()
+            } }
+    }
+
 
     private fun calculateProgressBarValue():Float{
         var timePastExercises:Int = 0
