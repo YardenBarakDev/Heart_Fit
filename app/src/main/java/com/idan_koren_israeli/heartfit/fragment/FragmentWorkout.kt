@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.hamzaahmedkhan.circulartimerview.CircularTimerListener
 import com.hamzaahmedkhan.circulartimerview.CircularTimerView
@@ -39,6 +40,8 @@ class FragmentWorkout : Fragment() {
     private lateinit var exercises: List<Exercise>
 
 
+    private lateinit var nextExerciseText: TextView
+    private lateinit var nextExerciseTitle: TextView
     private lateinit var timerView : CircularTimerView
     private lateinit var pauseResumeButton : ImageButton
     private lateinit var nextButton : ImageButton
@@ -77,8 +80,10 @@ class FragmentWorkout : Fragment() {
     private fun findViews(parent: View){
         timerView = parent.findViewById(R.id.workout_CTV_timer)
         pauseResumeButton = parent.findViewById(R.id.workout_BTN_pause_resume)
-        nextButton = parent.findViewById(R.id.workout_BTN_next);
-        prevButton = parent.findViewById(R.id.workout_BTN_prev);
+        nextButton = parent.findViewById(R.id.workout_BTN_next)
+        prevButton = parent.findViewById(R.id.workout_BTN_prev)
+        nextExerciseText = parent.findViewById(R.id.workout_LBL_next_exercise)
+        nextExerciseTitle = parent.findViewById(R.id.workout_LBL_next_title)
 
     }
 
@@ -90,6 +95,7 @@ class FragmentWorkout : Fragment() {
 
     private fun startTimerForNextExercise(){
         updateNextPrevButtonsVisibility()
+        updateNextExerciseText()
         if(currentExercise == exercises.size){
             workoutDone()
             return
@@ -145,6 +151,20 @@ class FragmentWorkout : Fragment() {
             nextButton.visibility = View.INVISIBLE
         else
             nextButton.visibility = View.VISIBLE
+
+    }
+
+    private fun updateNextExerciseText(){
+        if(currentExercise==exercises.size-1){
+            nextExerciseText.visibility = View.INVISIBLE
+            nextExerciseTitle.visibility = View.INVISIBLE
+        }
+        else{
+            nextExerciseTitle.visibility = View.VISIBLE
+            nextExerciseText.visibility = View.VISIBLE
+            nextExerciseText.text = exercises[currentExercise+1].name
+        }
+
 
     }
 

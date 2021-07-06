@@ -7,6 +7,27 @@
     tools:context=".fragment.FragmentWorkout">
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/workout_LBL_next_title"
+        android:text="@string/next_up"
+        android:layout_above="@id/workout_LBL_next_exercise"
+        android:layout_centerHorizontal="true"
+        android:textSize="18sp"
+        android:textAllCaps="true"
+        android:textColor="@android:color/darker_gray"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/workout_CTV_timer"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/workout_LBL_next_exercise"
+        android:textSize="32sp"
+        />
+
 
     <com.hamzaahmedkhan.circulartimerview.CircularTimerView
         android:id="@+id/workout_CTV_timer"
