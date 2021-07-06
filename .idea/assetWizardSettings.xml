@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/D:/Program%20Files/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/check_circle/baseline_check_circle_24.xml" />
+                                      <entry key="url" value="jar:file:/D:/Program%20Files/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/navigate_next/baseline_navigate_next_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,7 +28,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_baseline_check_circle_24" />
+                            <entry key="outputName" value="ic_baseline_navigate_next_24" />
                             <entry key="sourceFile" value="D:\Downloads\noun_skipping rope_1137226.svg" />
                           </map>
                         </option>

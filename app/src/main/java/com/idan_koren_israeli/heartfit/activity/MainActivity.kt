@@ -15,10 +15,12 @@ import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.common.CommonUtils
 import com.idan_koren_israeli.heartfit.firebase.auth.AuthManager
 import com.idan_koren_israeli.heartfit.firebase.database.DatabaseManager
+import com.idan_koren_israeli.heartfit.firebase.firestore.FirestoreManager
 import com.idan_koren_israeli.heartfit.fragment.FragmentEquipmentSelect
 import com.idan_koren_israeli.heartfit.fragment.FragmentHome
 import com.idan_koren_israeli.heartfit.fragment.FragmentSplash
-import com.idan_koren_israeli.heartfit.model.EquipmentSelect
+import com.idan_koren_israeli.heartfit.fragment.FragmentWorkout
+import com.idan_koren_israeli.heartfit.model.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,11 +35,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        //initNavigation()
+        initNavigation()
 
         val splashFragment : FragmentSplash = FragmentSplash.newInstance(R.mipmap.ic_launcher)
         splashFragment.setOnAnimationFinishListener {
-            supportFragmentManager.beginTransaction().replace(R.id.mainActivity_fragment, createEquipmentSelectFragment()).commitAllowingStateLoss()
+            supportFragmentManager.beginTransaction().replace(R.id.mainActivity_fragment, FragmentHome()).commitAllowingStateLoss()
+
+            FirestoreManager.loadExercisesByLevel(ExerciseLevel.Basic) { loaded ->
+                Log.i("pttt", "Loaded Exercises: ${loaded.size}")
+                val workout = Workout("MyWorkout", listOf(Equipment.Bench), listOf(MuscleGroup.ARMS), 2, 0, WorkoutLevel.Basic)
+                supportFragmentManager.beginTransaction().replace(R.id.mainActivity_fragment, FragmentWorkout.newInstance(workout ,loaded)).commitAllowingStateLoss()
+            }
         }
 
         supportFragmentManager.beginTransaction().replace(R.id.mainActivity_fragment,
@@ -45,6 +53,8 @@ class MainActivity : AppCompatActivity() {
         ).commitAllowingStateLoss()
 
         AuthManager.handleSignIn(this)
+
+
 
 
         //control when the bottomNavigation will be visible according to the fragment presented

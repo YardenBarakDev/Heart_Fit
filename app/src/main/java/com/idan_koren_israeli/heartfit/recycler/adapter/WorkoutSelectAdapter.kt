@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.model.Workout
-import com.idan_koren_israeli.heartfit.recycler.holder.WorkoutSelectHolder
+import com.idan_koren_israeli.heartfit.recycler.holder.WorkoutSelectRowHolder
 
 class WorkoutSelectAdapter(context: Context, var workouts: ArrayList<ArrayList<Workout>>) :
-    RecyclerView.Adapter<WorkoutSelectHolder>() {
+    RecyclerView.Adapter<WorkoutSelectRowHolder>() {
 
 
 
@@ -25,14 +25,14 @@ class WorkoutSelectAdapter(context: Context, var workouts: ArrayList<ArrayList<W
         Log.i("pttt", workout.name + " Clicked!");
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkoutSelectHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkoutSelectRowHolder {
         val view: View = mInflater!!.inflate(R.layout.holder_workout_row,parent, false)
 
-        return WorkoutSelectHolder(view) { workout -> onWorkoutClick(workout)}
+        return WorkoutSelectRowHolder(view) { workout -> onWorkoutClick(workout)}
     }
 
-    override fun onBindViewHolder(holder: WorkoutSelectHolder, position: Int) {
-            holder.setContent(workouts[position])
+    override fun onBindViewHolder(rowHolder: WorkoutSelectRowHolder, position: Int) {
+            rowHolder.setContent(workouts[position])
     }
 
     override fun getItemCount(): Int {

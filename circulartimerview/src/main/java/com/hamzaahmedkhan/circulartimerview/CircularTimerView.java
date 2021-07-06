@@ -600,7 +600,6 @@ public class CircularTimerView extends View {
                 double percentTimeCompleted = ((maxTime - l) / (double) maxTime);
                 drawUpto = (float) (maxValue * percentTimeCompleted);
                 text = circularTimerListener.updateDataOnTick(l);
-                Log.i("pttt" , "TICK2");
                 invalidate();
             }
 

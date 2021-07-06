@@ -17,8 +17,7 @@
         app:backgroundColor="#e76130"
         app:progressBackgroundColor="#eee"
         app:backgroundWidth="8"
-        app:textSize="18sp"
-        app:prefix="Time Left "
+        app:textSize="28sp"
         app:suffix=" sec"
         app:progressText="Time Remaining..."
         app:maxValue="100"
@@ -27,13 +26,51 @@
         app:progressTextColor="#eee"/>
 
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/workout_BTN_pause_resume"
+        android:gravity="center"
+        android:layout_marginBottom="12dp"
+        android:orientation="horizontal"
 
-        />
+        >
+
+        <ImageButton
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_baseline_navigate_next_24"
+            android:scaleX="-1"
+            android:scaleType="fitCenter"
+            android:layout_marginEnd="10dp"
+            android:id="@+id/workout_BTN_prev"
+            />
+
+        <ImageButton
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_baseline_pause_circle_filled_24"
+            android:scaleType="fitCenter"
+            android:id="@+id/workout_BTN_pause_resume"
+            />
+
+        <ImageButton
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="10dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_baseline_navigate_next_24"
+            android:scaleType="fitCenter"
+
+            android:id="@+id/workout_BTN_next"
+            />
+
+
+
+    </LinearLayout>
+
+
 
 </RelativeLayout>

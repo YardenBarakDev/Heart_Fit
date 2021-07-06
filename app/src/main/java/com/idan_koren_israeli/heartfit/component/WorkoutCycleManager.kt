@@ -3,7 +3,7 @@ package com.idan_koren_israeli.heartfit.component
 import com.idan_koren_israeli.heartfit.model.Workout
 import com.pixplicity.easyprefs.library.Prefs
 
-object WorkoutManager{
+object WorkoutCycleManager{
 
     private const val HEARTS_KEY : String = "hearts"
 

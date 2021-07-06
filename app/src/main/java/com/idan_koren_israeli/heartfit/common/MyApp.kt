@@ -6,6 +6,7 @@ import android.util.Log
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.firebase.auth.AuthManager
 import com.idan_koren_israeli.heartfit.firebase.database.DatabaseManager
+import com.idan_koren_israeli.heartfit.firebase.firestore.FirestoreManager
 import com.idankorenisraeli.mysettingsscreen.MySettingsScreen
 import com.idankorenisraeli.mysettingsscreen.tile_data.essential.ButtonTileData
 import com.idankorenisraeli.mysettingsscreen.tile_data.essential.DividerTileData
@@ -22,6 +23,7 @@ class MyApp : Application(){
 
         AuthManager.initAuth()
         DatabaseManager.initDatabase()
+        FirestoreManager.initFirestore()
         CommonUtils.initHelper(this)
         initSettingsScreen()
         initSharedPrefs()

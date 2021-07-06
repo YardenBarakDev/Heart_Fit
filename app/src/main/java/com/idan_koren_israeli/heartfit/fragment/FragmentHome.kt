@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import androidx.recyclerview.widget.RecyclerView
 import com.idan_koren_israeli.heartfit.R
+import com.idan_koren_israeli.heartfit.model.Equipment
+import com.idan_koren_israeli.heartfit.model.MuscleGroup
 import com.idan_koren_israeli.heartfit.model.Workout
+import com.idan_koren_israeli.heartfit.model.WorkoutLevel
 import com.idan_koren_israeli.heartfit.recycler.adapter.WorkoutSelectAdapter
 
 
@@ -69,15 +71,8 @@ class FragmentHome : Fragment() {
         val levelC = arrayListOf<Workout>()
         val levelD = arrayListOf<Workout>()
         val levelE = arrayListOf<Workout>()
-        levelA.add(Workout(1,"Workouts A",heartsValue = 1, heartsToUnlock = 1,actions = listOf()))
-        levelB.add(Workout(2,"Workouts B1",heartsValue = 1, heartsToUnlock = 1, actions = listOf()))
-        levelB.add(Workout(3,"Workouts B2",heartsValue = 1, heartsToUnlock = 1, actions = listOf()))
-        levelC.add(Workout(4,"Workouts C1",heartsValue = 1, heartsToUnlock = 1, actions = listOf()))
-        levelC.add(Workout(5,"Workouts C2",heartsValue = 1, heartsToUnlock = 1, actions = listOf()))
-        levelC.add(Workout(6,"Workouts C3",heartsValue = 1, heartsToUnlock = 1, actions = listOf()))
-        levelD.add(Workout(7,"Workouts D1",heartsValue = 1, heartsToUnlock = 1, actions = listOf()))
-        levelE.add(Workout(8,"Workouts E1",heartsValue = 1, heartsToUnlock = 1, actions = listOf()))
-        levelE.add(Workout(9,"Workouts E2",heartsValue = 1, heartsToUnlock = 1, actions = listOf()))
+        levelA.add(Workout("Workout A", listOf(Equipment.Bench), listOf(MuscleGroup.ABDOMINALS),4,0,WorkoutLevel.Basic))
+
 
         val workouts : ArrayList<ArrayList<Workout>> = arrayListOf()
         workouts.add(levelA)

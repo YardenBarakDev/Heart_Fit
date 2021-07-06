@@ -1,6 +1,5 @@
 package com.idan_koren_israeli.heartfit.fragment
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,7 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.activity.MainActivity
-import com.idan_koren_israeli.heartfit.component.WorkoutManager
+import com.idan_koren_israeli.heartfit.component.WorkoutCycleManager
 import com.idan_koren_israeli.heartfit.firebase.auth.AuthManager
 
 private const val HEART_COUNT = "param1"
@@ -88,7 +87,7 @@ class FragmentTopBar : Fragment() {
         fun newInstance() =
             FragmentTopBar().apply {
                 arguments = Bundle().apply {
-                    putInt(HEART_COUNT, WorkoutManager.getHearts())
+                    putInt(HEART_COUNT, WorkoutCycleManager.getHearts())
                 }
             }
     }

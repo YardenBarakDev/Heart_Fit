@@ -1,14 +1,14 @@
 package com.idan_koren_israeli.heartfit.model
 
-import com.idan_koren_israeli.heartfit.model.exercise.Exercise
-import com.idan_koren_israeli.heartfit.model.exercise.WorkoutAction
 import java.io.Serializable
 
-class Workout(val id:Int? = null, val name:String? = null, val actions: List<WorkoutAction>, val heartsValue:Int, val heartsToUnlock:Int) : Serializable {
+/**
+ * This class includes constraints of a workout and all data about it
+ * the exercises themselves are being generated dynamically based on this workout
+ */
+class Workout(val name:String? = null, val equipment: List<Equipment>,
+              val muscle: List<MuscleGroup>, val heartsValue:Int,
+              val heartsToUnlock:Int, val workoutLevel: WorkoutLevel) : Serializable {
 
 
-    fun totalLength():Int{
-        // Calculates the total time, similar to python's reduce but with initial value
-        return actions.fold(0,{acc, action -> acc + action.totalTime()})
-    }
 }
