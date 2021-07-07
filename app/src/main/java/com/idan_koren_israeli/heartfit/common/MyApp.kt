@@ -29,6 +29,8 @@ class MyApp : Application(){
         initSettingsScreen()
         initSharedPrefs()
 
+        DatabaseManager.loadCurrentUser {  /*no op, just to fetch it from server while loading the app  */ }
+
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
     }

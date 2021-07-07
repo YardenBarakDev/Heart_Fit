@@ -26,6 +26,8 @@ import java.util.*
 object DatabaseManager {
     private lateinit var db: DatabaseReference
 
+    private var loadedUser: User? = null
+
     fun initDatabase(){
         db = Firebase.database.reference
     }
@@ -45,12 +47,26 @@ object DatabaseManager {
         db.child(KEY_USERS).child(AuthManager.getAuthUserId()!!).child("weight").setValue(newWeight)
     }
 
+    fun loadCurrentUserWeight(onLoaded: (userLoaded: Float?) -> Unit){
+        if(AuthManager.getAuthUserId()==null) onLoaded.invoke(null)
+
+        db.child(KEY_USERS).child(AuthManager.getAuthUserId()!!).child("weight").get()
+            .addOnSuccessListener {
+                onLoaded.invoke(it.value as Float?)
+            }
+    }
+
     fun loadCurrentUser(onLoaded: (userLoaded: User?) -> Unit){
         db.child(KEY_USERS)
             .child(AuthManager.getAuthUserId()!!).get().addOnSuccessListener {
+                loadedUser = it.getValue<User>()
                 onLoaded.invoke(it.getValue<User>())
             }
     }
 
+    // This function will load it from server but will return the user that is already loaded
+    fun getCurrentUser() : User?{
+        return loadedUser
+    }
 
 }

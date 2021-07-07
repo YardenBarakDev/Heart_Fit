@@ -39,13 +39,12 @@ class MainActivity : AppCompatActivity() {
         splashFragment.setOnAnimationFinishListener {
             supportFragmentManager.beginTransaction().replace(R.id.mainActivity_fragment, FragmentHome()).commitAllowingStateLoss()
 
-            // This initializes a worokout from loaded data from firestore::
-
-//            FirestoreManager.loadExercisesByLevel(ExerciseLevel.Basic) { loaded ->
-//                Log.i("pttt", "Loaded Exercises: ${loaded.size}")
-//                val workout = Workout("My Abs Workout", listOf(Equipment.Bench), listOf(MuscleGroup.ARMS), 6, 0, WorkoutLevel.Basic)
-//                supportFragmentManager.beginTransaction().replace(R.id.mainActivity_fragment, FragmentWorkout.newInstance(workout ,loaded)).commitAllowingStateLoss()
-//            }
+            // This initializes a worokout from loaded data from firestore as an example::
+            FirestoreManager.loadExercisesByLevel(ExerciseLevel.Basic) { loaded ->
+                Log.i("pttt", "Loaded Exercises: ${loaded.size}")
+                val workout = Workout("My Abs Workout", listOf(Equipment.Bench), listOf(MuscleGroup.ARMS), 6, 0, WorkoutLevel.Basic)
+                supportFragmentManager.beginTransaction().replace(R.id.mainActivity_fragment, FragmentWorkout.newInstance(workout ,loaded,DatabaseManager.getCurrentUser()!!)).commitAllowingStateLoss()
+            }
         }
 
         supportFragmentManager.beginTransaction().replace(R.id.mainActivity_fragment,

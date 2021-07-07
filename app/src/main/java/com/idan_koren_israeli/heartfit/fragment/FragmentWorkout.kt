@@ -13,7 +13,9 @@ import com.hamzaahmedkhan.circulartimerview.CircularTimerView
 import com.hamzaahmedkhan.circulartimerview.TimeFormatEnum
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.model.Exercise
+import com.idan_koren_israeli.heartfit.model.User
 import com.idan_koren_israeli.heartfit.model.Workout
+import com.idan_koren_israeli.heartfit.model.WorkoutLog
 import com.idankorenisraeli.customprogressbar.CustomProgressBar
 import java.io.Serializable
 import java.util.*
@@ -30,6 +32,7 @@ import kotlin.math.ceil
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val WORKOUT_KEY = "workout"
 private const val EXERCISES_KEY = "exercises"
+private const val USER_KEY = "user"
 
 /**
  * A simple [Fragment] subclass.
@@ -39,6 +42,7 @@ private const val EXERCISES_KEY = "exercises"
 class FragmentWorkout : Fragment() {
     // TODO: Rename and change types of parameters
     private lateinit var workout: Workout
+    private lateinit var user: User
     private lateinit var exercises: List<Exercise>
 
 
@@ -56,11 +60,16 @@ class FragmentWorkout : Fragment() {
 
     private var paused : Boolean = false
 
+    private lateinit  var workoutLog: WorkoutLog
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             workout = it.getSerializable(WORKOUT_KEY) as Workout
             exercises = it.getSerializable(EXERCISES_KEY) as ArrayList<Exercise>
+            user = it.getSerializable(USER_KEY) as User
+
+            workoutLog = WorkoutLog(workout, System.currentTimeMillis(),0, 0)
         }
     }
 
@@ -125,10 +134,11 @@ class FragmentWorkout : Fragment() {
             }
 
             override fun onTimerFinished() {
+                // Currently we are tracking each exercise that is fully complete via timer
+                // When user skips/goes back to other exercise it will not be saved
+                workoutLog.trackExerciseDone(exercises[currentExercise], user.weight!!)
                 currentExercise++
                 startTimerForNextExercise()
-
-
                 // Next timer of next exercise will start
             }
         }, exercises[currentExercise].timeInSeconds!!.toLong(), TimeFormatEnum.SECONDS,30)
@@ -236,11 +246,12 @@ class FragmentWorkout : Fragment() {
          * @return A new instance of fragment FragmentWorkout.
          */
         @JvmStatic
-        fun newInstance(workout: Workout, exercises:List<Exercise>) =
+        fun newInstance(workout: Workout, exercises:List<Exercise>, user:User) =
             FragmentWorkout().apply {
                 arguments = Bundle().apply {
                     putSerializable(WORKOUT_KEY, workout)
                     putSerializable(EXERCISES_KEY, exercises as Serializable)
+                    putSerializable(USER_KEY, user)
                 }
             }
     }

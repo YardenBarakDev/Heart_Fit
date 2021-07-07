@@ -69,12 +69,12 @@ class FragmentWeightPicker : Fragment() {
     private fun initNumbers(){
         //TODO oldWeight should be read from ROOM-SQL
 
-        DatabaseManager.loadCurrentUser {
-            var oldWeight = 80f
+        DatabaseManager.loadCurrentUserWeight{
+            var weight = 80f
             if(it!=null)
-                oldWeight = it.weight!!
-            leftNumber.value = oldWeight.roundToInt()
-            rightNumber.value = ((oldWeight - oldWeight.roundToInt()) * 10).roundToInt()
+                weight = it
+            leftNumber.value = weight.roundToInt()
+            rightNumber.value = ((weight - weight.roundToInt()) * 10).roundToInt()
         }
 
     }
