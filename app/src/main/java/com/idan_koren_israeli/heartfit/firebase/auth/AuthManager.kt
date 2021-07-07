@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentActivity
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.idan_koren_israeli.heartfit.activity.MainActivity
 import com.idan_koren_israeli.heartfit.common.CommonUtils
 import com.idan_koren_israeli.heartfit.firebase.database.DatabaseManager
@@ -19,6 +20,7 @@ import java.util.*
 object AuthManager {
 
     private lateinit var auth : FirebaseAuth
+    private lateinit var activity: MainActivity
 
     const val RC_SIGN_IN:Int = 123
 
@@ -26,7 +28,12 @@ object AuthManager {
         auth = FirebaseAuth.getInstance()
     }
 
-    fun authScreenShow(activity:FragmentActivity){
+    fun setActivity(nActivity: MainActivity){
+        activity = nActivity
+    }
+
+
+    fun authScreenShow(){
         if (auth.currentUser != null) {
             // already signed in
         } else {
@@ -62,22 +69,28 @@ object AuthManager {
         }
     }
 
-    fun getCurrentUserName():String?{
+    fun getAuthUserName():String?{
         if(auth.currentUser==null)
             return null
         return auth.currentUser!!.displayName
 
     }
 
-    fun handleSignIn(activity: MainActivity) {
+    fun getAuthUserId(): String? {
         if(auth.currentUser==null)
-            authScreenShow(activity);
+            return null
+        return auth.currentUser!!.uid
+    }
+
+    fun handleSignIn() {
+        if(auth.currentUser==null)
+            authScreenShow();
         else
             Log.i("pttt","User Auth Auto-Detected " + auth.currentUser!!.uid)
     }
 
-    fun signOut(activity: MainActivity){
-        AuthUI.getInstance().signOut(activity).addOnCompleteListener {authScreenShow(activity)}
+    fun signOut(){
+        AuthUI.getInstance().signOut(activity).addOnCompleteListener {authScreenShow()}
 
     }
 

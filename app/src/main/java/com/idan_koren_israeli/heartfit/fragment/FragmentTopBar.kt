@@ -59,7 +59,7 @@ class FragmentTopBar : Fragment() {
 
     private fun setClickListeners(){
         signOutButton!!.setOnClickListener {
-            AuthManager.signOut(requireActivity() as MainActivity)
+            AuthManager.signOut()
         }
     }
 

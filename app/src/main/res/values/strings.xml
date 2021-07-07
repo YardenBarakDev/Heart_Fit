@@ -20,5 +20,6 @@
     <string name="login_register">login_register</string>
     <string name="ok">OK</string>
     <string name="next_up">Next Up</string>
+    <string name="weight_separator">.</string>
 
 </resources>

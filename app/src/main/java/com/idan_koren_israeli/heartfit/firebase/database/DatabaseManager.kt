@@ -12,8 +12,11 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.idan_koren_israeli.heartfit.activity.MainActivity
+import com.idan_koren_israeli.heartfit.firebase.auth.AuthManager
+import com.idan_koren_israeli.heartfit.model.EquipmentSelect
 import com.idan_koren_israeli.heartfit.model.User
 import java.util.*
 
@@ -32,5 +35,22 @@ object DatabaseManager {
     fun storeUser(user: User){
         db.child(KEY_USERS).child(user.uid!!).setValue(user)
     }
+
+    fun storeUserWeight(userId: String, newWeight:Float){
+        db.child(KEY_USERS).child(userId).child("weight").setValue(newWeight)
+    }
+
+
+    fun storeCurrentUserWeight(newWeight:Float){
+        db.child(KEY_USERS).child(AuthManager.getAuthUserId()!!).child("weight").setValue(newWeight)
+    }
+
+    fun loadCurrentUser(onLoaded: (userLoaded: User?) -> Unit){
+        db.child(KEY_USERS)
+            .child(AuthManager.getAuthUserId()!!).get().addOnSuccessListener {
+                onLoaded.invoke(it.getValue<User>())
+            }
+    }
+
 
 }

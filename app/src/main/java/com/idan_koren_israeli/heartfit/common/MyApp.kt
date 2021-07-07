@@ -57,13 +57,14 @@ class MyApp : Application(){
             .withDefaultValue(0)
             .withIconId(R.drawable.ic_baseline_timer_24)
 
-        //Voice announcment checkbox tile if will be implemented
+        //TODO Voice announcment checkbox tile if will be implemented
 
-        val logOutTile:ButtonTileData = ButtonTileData("Log Out", "Currently logged in as " + AuthManager.getCurrentUserName())
+        val logOutTile:ButtonTileData = ButtonTileData("Log Out", "Currently logged in as " + AuthManager.getAuthUserName())
             .withIconId(ButtonTileData.IC_INVISIBLE)
             .withOnClickListener {
                 // Log out from account and back to main screen
-                // TODO Implement Logout system
+                // TODO Handle navigation graph
+                AuthManager.signOut()
                 Log.i("pttt", "Logging Out")
             }
 
@@ -73,14 +74,23 @@ class MyApp : Application(){
 
         val termsOfUseTime: ButtonTileData = ButtonTileData("Terms of Use","Read before using this app").withOnClickListener {
             //Opens Terms of use fragment
-            // TODO create terms of use
+            // TODO Handle navigation graph
+            // TODO Create Terms of Use Fragment
             Log.i("pttt", "Showing terms of use..")
         }
+
+        val weightTile :ButtonTileData = ButtonTileData("Your Weight", "For calories burned calculation")
+            .withOnClickListener{
+                //TODO Handle navigation graph
+                //TODO Create Weight selection fragment (with save to sp)
+            }
+            .withIconId(R.drawable.ic_baseline_accessibility_new_24)
 
         val dataTiles: ArrayList<SettingsTileData> = ArrayList()
 
         dataTiles.add(selectEquipmentTile)
         dataTiles.add(prepTimeTile)
+        dataTiles.add(weightTile)
         dataTiles.add(logOutTile)
         dataTiles.add(horizontalLineTile)
         dataTiles.add(termsOfUseTime)

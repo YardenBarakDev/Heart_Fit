@@ -20,4 +20,8 @@
         <item name="colorPrimary">@color/heart_color</item>
     </style>
 
+    <style name="CustomNumberPickerTheme" parent="Theme.HeartFit">
+        <item name="colorControlNormal">@android:color/transparent</item>
+    </style>
+
 </resources>

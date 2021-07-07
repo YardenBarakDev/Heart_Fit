@@ -23,6 +23,7 @@ class WorkoutSelectAdapter(context: Context, var workouts: ArrayList<ArrayList<W
 
     private fun onWorkoutClick(workout: Workout){
         Log.i("pttt", workout.name + " Clicked!");
+        // TODO Handle navigation graph - start workout
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkoutSelectRowHolder {
