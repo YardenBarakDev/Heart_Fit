@@ -5,6 +5,10 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.model.Workout
@@ -64,7 +68,7 @@ class WorkoutSelectRowHolder(itemView: View, private val onClick: (workout: Work
         workoutHolder.setOnClickListener {
             run {
                 Log.i("pttt","Workout Clicked: " + workout.name)
-
+                it.findNavController().navigate(R.id.action_fragmentHome_to_fragmentWorkout)
             }
         }
     }

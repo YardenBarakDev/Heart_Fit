@@ -54,8 +54,6 @@ class MainActivity : AppCompatActivity() {
         AuthManager.handleSignIn()
 
 
-
-
         //control when the bottomNavigation will be visible according to the fragment presented
        // navHostFragment.findNavController().addOnDestinationChangedListener { _, destination, _ ->
        //     when (destination.id) {
@@ -88,7 +86,7 @@ class MainActivity : AppCompatActivity() {
 
 
         //prevent the user to click on the same fragment twice
-        mainActivity_bottomNavigation.setOnNavigationItemReselectedListener {  /*no op*/ }
+        mainActivity_bottomNavigation.setOnItemReselectedListener {  /*no op*/ }
 
     }
 
