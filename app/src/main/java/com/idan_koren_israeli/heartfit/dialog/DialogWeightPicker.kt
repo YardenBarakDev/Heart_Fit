@@ -9,6 +9,7 @@ import android.widget.Button
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.firebase.database.DatabaseManager
+import com.idan_koren_israeli.heartfit.model_view.CurrentUserDataModelView
 import com.shawnlin.numberpicker.NumberPicker
 import java.math.RoundingMode
 import java.text.DecimalFormat
@@ -33,19 +34,20 @@ class DialogWeightPicker {
         return parent
     }
 
-    fun showDialog(materialAlertDialogBuilder: MaterialAlertDialogBuilder) {
+    fun showDialog(materialAlertDialogBuilder: MaterialAlertDialogBuilder, initWeight:Float) {
         findViews(parent)
-        initNumbers()
+        initNumbers(initWeight)
+
 
         // Building the Alert dialog using materialAlertDialogBuilder instance
         materialAlertDialogBuilder.setView(parent)
-            .setTitle("Select Your Weight")
-            .setMessage("What is your current weight? This will help us estimate how many calories you burn")
+            .setTitle("Your Weight")
+            .setMessage("This will help us estimate how many calories you burn.")
             .setPositiveButton("Ok") { dialog, _ ->
                 val df = DecimalFormat("#.#")
                 df.roundingMode = RoundingMode.HALF_UP
                 val newWeight :Float = (leftNumber.value + (rightNumber.value * 0.1f))
-                DatabaseManager.storeCurrentUserWeight(newWeight)
+                CurrentUserDataModelView.storeWeight(newWeight)
                 dialog.dismiss()
 
                 //TODO store on ROOM SQL/SP too
@@ -54,6 +56,8 @@ class DialogWeightPicker {
                 dialog.dismiss()
             }
             .show()
+
+
     }
 
 
@@ -67,16 +71,11 @@ class DialogWeightPicker {
     }
 
 
-    private fun initNumbers(){
+    private fun initNumbers(initWeight: Float){
         //TODO oldWeight should be read from ROOM-SQL/SP
 
-        DatabaseManager.loadCurrentUserWeight{
-            var weight = 80f
-            if(it!=null)
-                weight = it
-            leftNumber.value = weight.roundToInt()
-            rightNumber.value = ((weight - weight.roundToInt()) * 10).roundToInt()
-        }
+        leftNumber.value = initWeight.toInt()
+        rightNumber.value = ((initWeight - initWeight.roundToInt()) * 10).roundToInt()
 
     }
 

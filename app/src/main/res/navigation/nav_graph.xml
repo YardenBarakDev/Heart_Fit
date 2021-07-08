@@ -5,6 +5,7 @@
     android:id="@+id/navigation_graph"
     app:startDestination="@id/fragmentLoginAndRegister">
 
+
     <fragment
         android:id="@+id/fragmentEquipmentSelect"
         android:name="com.idan_koren_israeli.heartfit.fragment.FragmentEquipmentSelect"

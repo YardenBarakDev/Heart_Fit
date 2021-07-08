@@ -1,45 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_gravity="center">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/weight_picker_LAY_numbers"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp"
+    android:gravity="center"
+    android:orientation="horizontal"
+    tools:context=".dialog.DialogWeightPicker">
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <com.shawnlin.numberpicker.NumberPicker
+        android:id="@+id/weight_picker_NUM_left"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:id="@+id/weight_picker_LAY_numbers"
-        tools:context=".dialog.DialogWeightPicker">
+        android:theme="@style/CustomNumberPickerTheme"
+        app:np_max="200"
+        app:np_min="40"
+        app:np_value="80" />
 
-        <com.shawnlin.numberpicker.NumberPicker
-            android:id="@+id/weight_picker_NUM_left"
-            android:layout_width="wrap_content"
-            app:np_min="40"
-            app:np_max="200"
-            app:np_value="80"
-            android:layout_height="wrap_content"
-            android:theme="@style/CustomNumberPickerTheme" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/weight_separator"
+        android:textSize="24sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/weight_separator"
-            android:textSize="24sp" />
+    <com.shawnlin.numberpicker.NumberPicker
+        android:id="@+id/weight_picker_NUM_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:theme="@style/CustomNumberPickerTheme"
+        app:np_max="9"
+        app:np_min="0"
 
-        <com.shawnlin.numberpicker.NumberPicker
-            android:id="@+id/weight_picker_NUM_right"
-            android:layout_width="wrap_content"
-            app:np_min="0"
-            app:np_max="9"
-            app:np_value="0"
-            android:layout_height="wrap_content"
+        app:np_value="0" />
+</LinearLayout>
 
-            android:theme="@style/CustomNumberPickerTheme" />
-    </LinearLayout>
-
-</RelativeLayout>

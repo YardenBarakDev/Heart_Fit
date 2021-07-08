@@ -16,6 +16,7 @@ import com.idan_koren_israeli.heartfit.dialog.DialogWeightPicker
 import com.idan_koren_israeli.heartfit.firebase.auth.AuthManager
 import com.idan_koren_israeli.heartfit.firebase.database.DatabaseManager
 import com.idan_koren_israeli.heartfit.firebase.firestore.FirestoreManager
+import com.idan_koren_israeli.heartfit.model_view.CurrentUserDataModelView
 import com.idankorenisraeli.mysettingsscreen.MySettingsScreen
 import com.idankorenisraeli.mysettingsscreen.activity.MySettingsActivity
 import com.idankorenisraeli.mysettingsscreen.tile_data.essential.ButtonTileData
@@ -30,8 +31,6 @@ import com.pixplicity.easyprefs.library.Prefs
 class MyApp : MultiDexApplication() {
 
     val mFTActivityLifecycleCallbacks = MyAppLifecycleCallbacks()
-
-    private lateinit var materialAlertDialogBuilder: MaterialAlertDialogBuilder
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
@@ -52,10 +51,10 @@ class MyApp : MultiDexApplication() {
         CommonUtils.initHelper(this)
         initSettingsScreen()
         initSharedPrefs()
+        CurrentUserDataModelView.loadCurrentUser { /*Fetching the user from server */ }
 
         registerActivityLifecycleCallbacks(mFTActivityLifecycleCallbacks)
 
-       // DatabaseManager.loadCurrentUser {  /*no op, just to fetch it from server while loading the app  */ }
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
@@ -73,8 +72,7 @@ class MyApp : MultiDexApplication() {
     private fun initSettingsScreen(){
 
 
-        val weightPicker:DialogWeightPicker = DialogWeightPicker()
-        weightPicker.inflateLayout(LayoutInflater.from(this))
+
 
         val selectEquipmentTile: ButtonTileData = ButtonTileData("Select Equipment", "What do you have at home?")
             .withIconId(R.drawable.ic_dumbbell)
@@ -97,6 +95,7 @@ class MyApp : MultiDexApplication() {
             .withOnClickListener {
                 // Log out from account and back to main screen
                 // TODO Handle navigation graph
+                currentActivity()!!.finish()
                 AuthManager.signOut()
                 Log.i("pttt", "Logging Out")
             }
@@ -114,13 +113,17 @@ class MyApp : MultiDexApplication() {
 
         val weightTile :ButtonTileData = ButtonTileData("Your Weight", "For calories burned calculation")
             .withOnClickListener{
-                // We know this callback will be called in the settings activity:
+
+                // TODO Add Loading Screen (Calling the server here)
                 val settingsActivity:Activity? = currentActivity()
-                materialAlertDialogBuilder = MaterialAlertDialogBuilder(settingsActivity as Context)
-                weightPicker.showDialog(materialAlertDialogBuilder)
 
+                CurrentUserDataModelView.loadWeight {
+                    val materialAlertDialogBuilder = MaterialAlertDialogBuilder(settingsActivity as Context)
+                    val weightPicker = DialogWeightPicker()
+                    weightPicker.inflateLayout(LayoutInflater.from(this))
+                    weightPicker.showDialog(materialAlertDialogBuilder, it!!)
+                }
 
-                //TODO Create Weight selection fragment (with save to sp)
             }
             .withIconId(R.drawable.ic_baseline_accessibility_new_24)
 

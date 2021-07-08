@@ -2,23 +2,22 @@ package com.idan_koren_israeli.heartfit.recycler.holder
 
 import android.util.Log
 import android.view.View
-import android.widget.FrameLayout
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.idan_koren_israeli.heartfit.R
+import com.idan_koren_israeli.heartfit.common.CommonUtils
 import com.idan_koren_israeli.heartfit.model.Workout
+import com.idan_koren_israeli.heartfit.model_view.CurrentUserDataModelView
 
 
 class WorkoutSelectRowHolder(itemView: View, private val onClick: (workout: Workout) -> Unit) : RecyclerView.ViewHolder(itemView){
 
-    private lateinit var leftWorkout: FrameLayout
-    private lateinit var centerWorkout: FrameLayout
-    private lateinit var rightWorkout: FrameLayout
+    private lateinit var leftWorkout: ViewGroup
+    private lateinit var centerWorkout: ViewGroup
+    private lateinit var rightWorkout: ViewGroup
 
     init {
         findViews()
@@ -59,16 +58,31 @@ class WorkoutSelectRowHolder(itemView: View, private val onClick: (workout: Work
         }
     }
 
-    private fun attachWorkoutToLayout(workout: Workout, workoutHolder: FrameLayout) {
+    private fun attachWorkoutToLayout(workout: Workout, workoutHolder: ViewGroup) {
         val workoutName: TextView = workoutHolder.findViewById(R.id.workout_holder_LBL_name)
         val workoutImage: ImageView = workoutHolder.findViewById(R.id.workout_holder_IMG_image)
+        val heartsToUnlockText:TextView = workoutHolder.findViewById(R.id.workout_holder_LBL_hearts)
 
         workoutName.text = (workout.name)
+        heartsToUnlockText.text = workout.heartsToUnlock.toString()
 
         workoutHolder.setOnClickListener {
             run {
                 Log.i("pttt","Workout Clicked: " + workout.name)
-                it.findNavController().navigate(R.id.action_fragmentHome_to_fragmentWorkout)
+                CurrentUserDataModelView.loadHearts { hearts->
+                    if(hearts==null)
+                        CommonUtils.getInstance().showToast("Could not connect to server...")
+                    if(hearts!!<workout.heartsToUnlock) {
+                        CommonUtils.getInstance()
+                            .showToast("Not enough hearts to start this workout")
+                    }
+                    else{
+                        // User has enough hearts
+                        it.findNavController().navigate(R.id.action_fragmentHome_to_fragmentWorkout)
+                    }
+                }
+
+
             }
         }
     }

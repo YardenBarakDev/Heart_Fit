@@ -32,45 +32,36 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         AuthManager.setActivity(this)
-
         initNavigation()
 
-        val splashFragment : FragmentSplash = FragmentSplash.newInstance(R.mipmap.ic_launcher)
-        splashFragment.setOnAnimationFinishListener {
-            supportFragmentManager.beginTransaction().replace(R.id.mainActivity_fragment, FragmentHome()).commitAllowingStateLoss()
 
-            // This initializes a worokout from loaded data from firestore as an example::
-            /*
-            FirestoreManager.loadExercisesByLevel(ExerciseLevel.Basic) { loaded ->
-                Log.i("pttt", "Loaded Exercises: ${loaded.size}")
-                val workout = Workout("My Abs Workout", listOf(Equipment.Bench), listOf(MuscleGroup.ARMS), 6, 0, WorkoutLevel.Basic)
-                supportFragmentManager.beginTransaction().replace(R.id.mainActivity_fragment, FragmentWorkout.newInstance(workout ,loaded,DatabaseManager.getCurrentUser()!!)).commitAllowingStateLoss()
-            }
-
-             */
+        // This initializes a worokout from loaded data from firestore as an example:
+        /*
+        FirestoreManager.loadExercisesByLevel(ExerciseLevel.Basic) { loaded ->
+            Log.i("pttt", "Loaded Exercises: ${loaded.size}")
+            val workout = Workout("My Abs Workout", listOf(Equipment.Bench), listOf(MuscleGroup.ARMS), 6, 0, WorkoutLevel.Basic)
+            supportFragmentManager.beginTransaction().replace(R.id.mainActivity_fragment, FragmentWorkout.newInstance(workout ,loaded,DatabaseManager.getCurrentUser()!!)).commitAllowingStateLoss()
         }
 
-        supportFragmentManager.beginTransaction().replace(R.id.mainActivity_fragment,
-            splashFragment
-        ).commitAllowingStateLoss()
+         */
 
         AuthManager.handleSignIn()
 
 
         //control when the bottomNavigation will be visible according to the fragment presented
-       // navHostFragment.findNavController().addOnDestinationChangedListener { _, destination, _ ->
-       //     when (destination.id) {
-       //         R.id.fragmentHistory, R.id.fragmentHome -> mainActivity_bottomNavigation.visibility = View.VISIBLE
-       //         else -> mainActivity_bottomNavigation.visibility = View.GONE
-       //     }
-       // }
+        // navHostFragment.findNavController().addOnDestinationChangedListener { _, destination, _ ->
+        //     when (destination.id) {
+        //         R.id.fragmentHistory, R.id.fragmentHome -> mainActivity_bottomNavigation.visibility = View.VISIBLE
+        //         else -> mainActivity_bottomNavigation.visibility = View.GONE
+        //     }
+        // }
     }
 
     // This is for debugging usage
-    private fun createEquipmentSelectFragment() : FragmentEquipmentSelect{
+    private fun createEquipmentSelectFragment(): FragmentEquipmentSelect {
         val fragment = FragmentEquipmentSelect()
         fragment.onSelectionDone = { equipmentSelectedList ->
-            val equipmentNames : MutableSet<String> = mutableSetOf()
+            val equipmentNames: MutableSet<String> = mutableSetOf()
             equipmentSelectedList.forEach { eqSelected -> equipmentNames.add(eqSelected.displayName!!) }
             CommonUtils.getInstance().showToast(equipmentNames.toString())
 
@@ -78,14 +69,12 @@ class MainActivity : AppCompatActivity() {
         return fragment
     }
 
-    private fun initNavigation(){
+    private fun initNavigation() {
         //set navigation
         mainActivity_bottomNavigation = findViewById(R.id.mainActivity_bottomNavigation)
-        navHostFragment = supportFragmentManager.findFragmentById(R.id.mainActivity_fragment) as NavHostFragment
+        navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.mainActivity_fragment) as NavHostFragment
         mainActivity_bottomNavigation.setupWithNavController(navHostFragment.findNavController())
-
-
-
 
 
         //prevent the user to click on the same fragment twice

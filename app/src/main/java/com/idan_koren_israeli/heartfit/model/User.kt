@@ -3,6 +3,9 @@ package com.idan_koren_israeli.heartfit.model
 import com.google.firebase.auth.FirebaseUser
 import java.io.Serializable
 
-class User(val uid:String?=null, val name:String? = null, val weight:Float? = null, val hearts:Int?=null) : Serializable {
+const val DEFAULT_WEIGHT : Float = 80f
+const val DEFAULT_HEARTS : Int = 0
+
+class User(val uid:String?=null, var name:String? = null, var weight:Float? = DEFAULT_WEIGHT, var hearts:Int?=DEFAULT_HEARTS) : Serializable {
 
 }
