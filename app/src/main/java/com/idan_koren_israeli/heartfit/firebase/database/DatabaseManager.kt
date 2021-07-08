@@ -52,7 +52,8 @@ object DatabaseManager {
 
         db.child(KEY_USERS).child(AuthManager.getAuthUserId()!!).child("weight").get()
             .addOnSuccessListener {
-                onLoaded.invoke(it.value as Float?)
+                Log.i("pttt", " VALUE :  ${it.value}")
+                onLoaded.invoke((it.value as Double).toFloat())
             }
     }
 

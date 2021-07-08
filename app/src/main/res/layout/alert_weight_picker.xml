@@ -14,7 +14,7 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:id="@+id/weight_picker_LAY_numbers"
-        tools:context=".fragment.FragmentWeightPicker">
+        tools:context=".dialog.DialogWeightPicker">
 
         <com.shawnlin.numberpicker.NumberPicker
             android:id="@+id/weight_picker_NUM_left"
@@ -41,14 +41,5 @@
 
             android:theme="@style/CustomNumberPickerTheme" />
     </LinearLayout>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/weight_picker_LAY_numbers"
-        android:layout_centerHorizontal="true"
-        android:text="@string/ok"
-        android:id="@+id/weight_picker_BTN_ok"
-        />
 
 </RelativeLayout>

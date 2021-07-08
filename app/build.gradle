@@ -81,4 +81,7 @@ dependencies {
 
     // Number Picker
     implementation 'io.github.ShawnLin013:number-picker:2.4.13'
+
+    // Multi dex for detecting activity on Application class
+    implementation 'androidx.multidex:multidex:2.0.1'
 }
