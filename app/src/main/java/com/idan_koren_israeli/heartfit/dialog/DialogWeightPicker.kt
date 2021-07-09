@@ -1,14 +1,10 @@
 package com.idan_koren_israeli.heartfit.dialog
 
-import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.idan_koren_israeli.heartfit.R
-import com.idan_koren_israeli.heartfit.firebase.database.DatabaseManager
 import com.idan_koren_israeli.heartfit.model_view.CurrentUserDataModelView
 import com.shawnlin.numberpicker.NumberPicker
 import java.math.RoundingMode

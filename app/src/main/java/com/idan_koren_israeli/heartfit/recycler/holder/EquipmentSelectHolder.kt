@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.idan_koren_israeli.heartfit.R
-import com.idan_koren_israeli.heartfit.model.EquipmentSelect
+import com.idan_koren_israeli.heartfit.mvvm.model.EquipmentSelect
 
 class EquipmentSelectHolder(itemView: View, private val onClick: (equipmentSelect:EquipmentSelect) -> Unit, private var selected:Boolean = false):RecyclerView.ViewHolder(itemView){
 

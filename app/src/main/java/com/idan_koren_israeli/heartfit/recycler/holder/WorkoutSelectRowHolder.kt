@@ -5,11 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.common.CommonUtils
-import com.idan_koren_israeli.heartfit.model.Workout
+import com.idan_koren_israeli.heartfit.mvvm.model.Workout
 import com.idan_koren_israeli.heartfit.model_view.CurrentUserDataModelView
 
 
@@ -77,8 +76,14 @@ class WorkoutSelectRowHolder(itemView: View, private val onClick: (workout: Work
                             .showToast("Not enough hearts to start this workout")
                     }
                     else{
+                        /*
+                        pass data between fragments
+                        https://developer.android.com/guide/navigation/navigation-pass-data*/
                         // User has enough hearts
-                        it.findNavController().navigate(R.id.action_fragmentHome_to_fragmentWorkout)
+                            /** TODO: I don't know what kind of data you transfer, please contact me if need assistant*/
+
+                        //move to workout fragment
+                        //it.findNavController().navigate(R.id.action_fragmentHome_to_fragmentWorkout)
                     }
                 }
 

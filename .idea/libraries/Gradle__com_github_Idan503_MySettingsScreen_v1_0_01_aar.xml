@@ -4,10 +4,14 @@
       <root url="jar://$PROJECT_DIR$/.gradle/caches/transforms-2/files-2.1/d17a35c34be3033ddcae5bd95cbc3af0/jetified-MySettingsScreen-v1.0.01/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/.gradle/caches/transforms-2/files-2.1/d17a35c34be3033ddcae5bd95cbc3af0/jetified-MySettingsScreen-v1.0.01/res" />
       <root url="file://$PROJECT_DIR$/.gradle/caches/transforms-2/files-2.1/d17a35c34be3033ddcae5bd95cbc3af0/jetified-MySettingsScreen-v1.0.01/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d17a35c34be3033ddcae5bd95cbc3af0/jetified-MySettingsScreen-v1.0.01/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d17a35c34be3033ddcae5bd95cbc3af0/jetified-MySettingsScreen-v1.0.01/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d17a35c34be3033ddcae5bd95cbc3af0/jetified-MySettingsScreen-v1.0.01/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/.gradle/caches/modules-2/files-2.1/com.github.Idan503/MySettingsScreen/v1.0.01/70f6844aa6ffd696d6e8dd2b857521996ef60eec/MySettingsScreen-v1.0.01-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.Idan503/MySettingsScreen/v1.0.01/70f6844aa6ffd696d6e8dd2b857521996ef60eec/MySettingsScreen-v1.0.01-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

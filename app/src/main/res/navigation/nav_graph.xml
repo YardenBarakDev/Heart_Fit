@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/fragmentEquipmentSelect"
-        android:name="com.idan_koren_israeli.heartfit.fragment.FragmentEquipmentSelect"
+        android:name="com.idan_koren_israeli.heartfit.mvvm.view.fragment.FragmentEquipmentSelect"
         android:label="FragmentEquipmentSelect" >
         <action
             android:id="@+id/action_fragmentEquipmentSelect_to_fragmentHome"
@@ -16,11 +16,11 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentHistory"
-        android:name="com.idan_koren_israeli.heartfit.fragment.FragmentHistory"
+        android:name="com.idan_koren_israeli.heartfit.mvvm.view.fragment.FragmentHistory"
         android:label="FragmentHistory" />
     <fragment
         android:id="@+id/fragmentHome"
-        android:name="com.idan_koren_israeli.heartfit.fragment.FragmentHome"
+        android:name="com.idan_koren_israeli.heartfit.mvvm.view.fragment.FragmentHome"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentWorkout"
-        android:name="com.idan_koren_israeli.heartfit.fragment.FragmentWorkout"
+        android:name="com.idan_koren_israeli.heartfit.mvvm.view.fragment.FragmentWorkout"
         android:label="fragment_workout"
         tools:layout="@layout/fragment_workout" >
         <action
@@ -38,12 +38,12 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentWorkoutFinished"
-        android:name="com.idan_koren_israeli.heartfit.fragment.FragmentWorkoutFinished"
+        android:name="com.idan_koren_israeli.heartfit.mvvm.view.fragment.FragmentWorkoutFinished"
         android:label="fragment_workout_finished"
         tools:layout="@layout/fragment_workout_finished" />
     <fragment
         android:id="@+id/fragmentLoginAndRegister"
-        android:name="com.idan_koren_israeli.heartfit.fragment.FragmentLoginAndRegister"
+        android:name="com.idan_koren_israeli.heartfit.mvvm.view.fragment.FragmentLoginAndRegister"
         android:label="fragment_login_and_register"
         tools:layout="@layout/fragment_login_and_register" >
         <action
@@ -55,7 +55,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentSettings"
-        android:name="com.idan_koren_israeli.heartfit.fragment.FragmentSettings"
+        android:name="com.idan_koren_israeli.heartfit.mvvm.view.fragment.FragmentSettings"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" >
         <action
@@ -64,7 +64,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentSplash"
-        android:name="com.idan_koren_israeli.heartfit.fragment.FragmentSplash"
+        android:name="com.idan_koren_israeli.heartfit.mvvm.view.fragment.FragmentSplash"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action

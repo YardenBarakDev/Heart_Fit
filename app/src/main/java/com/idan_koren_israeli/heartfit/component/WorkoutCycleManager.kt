@@ -1,6 +1,6 @@
 package com.idan_koren_israeli.heartfit.component
 
-import com.idan_koren_israeli.heartfit.model.Workout
+import com.idan_koren_israeli.heartfit.mvvm.model.Workout
 import com.pixplicity.easyprefs.library.Prefs
 
 object WorkoutCycleManager{

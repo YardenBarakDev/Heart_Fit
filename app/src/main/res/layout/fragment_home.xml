@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.FragmentHome">
+    tools:context=".mvvm.view.fragment.FragmentHome">
 
 
-    <androidx.fragment.app.FragmentContainerView
+    <androidx.fragment.app.FragmentTabHost
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:name="com.idan_koren_israeli.heartfit.fragment.FragmentTopBar"

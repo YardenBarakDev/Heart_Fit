@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardBackgroundColor="@color/black"
     app:cardCornerRadius="12dp"
-    tools:context=".fragment.FragmentTopBar">
+    tools:context=".mvvm.view.fragment.FragmentTopBar">
 
 
     <RelativeLayout

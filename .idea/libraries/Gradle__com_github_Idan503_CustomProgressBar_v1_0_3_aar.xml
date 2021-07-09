@@ -4,10 +4,14 @@
       <root url="jar://$PROJECT_DIR$/.gradle/caches/transforms-2/files-2.1/c8033bc3c4c48539f5ace72688f69d31/jetified-CustomProgressBar-v1.0.3/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/.gradle/caches/transforms-2/files-2.1/c8033bc3c4c48539f5ace72688f69d31/jetified-CustomProgressBar-v1.0.3/res" />
       <root url="file://$PROJECT_DIR$/.gradle/caches/transforms-2/files-2.1/c8033bc3c4c48539f5ace72688f69d31/jetified-CustomProgressBar-v1.0.3/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c8033bc3c4c48539f5ace72688f69d31/jetified-CustomProgressBar-v1.0.3/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c8033bc3c4c48539f5ace72688f69d31/jetified-CustomProgressBar-v1.0.3/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c8033bc3c4c48539f5ace72688f69d31/jetified-CustomProgressBar-v1.0.3/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/.gradle/caches/modules-2/files-2.1/com.github.Idan503/CustomProgressBar/v1.0.3/3401487f0c9a7735bb683dd57d2cae5cb2bdcf67/CustomProgressBar-v1.0.3-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.Idan503/CustomProgressBar/v1.0.3/3401487f0c9a7735bb683dd57d2cae5cb2bdcf67/CustomProgressBar-v1.0.3-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

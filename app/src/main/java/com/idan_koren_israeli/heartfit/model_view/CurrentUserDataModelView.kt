@@ -1,9 +1,7 @@
 package com.idan_koren_israeli.heartfit.model_view
 
-import android.util.Log
-import androidx.room.Database
-import com.idan_koren_israeli.heartfit.firebase.database.DatabaseManager
-import com.idan_koren_israeli.heartfit.model.User
+import com.idan_koren_israeli.heartfit.db.firebase.database.DatabaseManager
+import com.idan_koren_israeli.heartfit.mvvm.model.User
 
 object CurrentUserDataModelView {
 

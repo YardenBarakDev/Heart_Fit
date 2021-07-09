@@ -10,7 +10,13 @@
         <item>All Workouts</item>
         <item>Weekly</item>
         <item>Monthly</item>
+        <item>Date</item>
+        <item>Total time</item>
+        <item>Hearts collected</item>
+        <item>Difficulty</item>
+        <item>Calories burned</item>
     </string-array>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="equipment">Equipment</string>
     <string name="which_equipment_do_you_have_at_home">Which equipment do you have at home?</string>

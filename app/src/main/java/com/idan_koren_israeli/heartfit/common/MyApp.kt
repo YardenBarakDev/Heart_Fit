@@ -1,10 +1,8 @@
 package com.idan_koren_israeli.heartfit.common
 
 import android.app.Activity
-import android.app.Application
 import android.content.Context
 import android.content.ContextWrapper
-import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatDelegate
@@ -13,12 +11,12 @@ import androidx.multidex.MultiDexApplication
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.dialog.DialogWeightPicker
-import com.idan_koren_israeli.heartfit.firebase.auth.AuthManager
-import com.idan_koren_israeli.heartfit.firebase.database.DatabaseManager
-import com.idan_koren_israeli.heartfit.firebase.firestore.FirestoreManager
+import com.idan_koren_israeli.heartfit.db.firebase.auth.AuthManager
+import com.idan_koren_israeli.heartfit.db.firebase.database.DatabaseManager
+import com.idan_koren_israeli.heartfit.db.firebase.firestore.FirestoreManager
+import com.idan_koren_israeli.heartfit.db.room_db.HeartFitRoomDB
 import com.idan_koren_israeli.heartfit.model_view.CurrentUserDataModelView
 import com.idankorenisraeli.mysettingsscreen.MySettingsScreen
-import com.idankorenisraeli.mysettingsscreen.activity.MySettingsActivity
 import com.idankorenisraeli.mysettingsscreen.tile_data.essential.ButtonTileData
 import com.idankorenisraeli.mysettingsscreen.tile_data.essential.DividerTileData
 import com.idankorenisraeli.mysettingsscreen.tile_data.essential.SettingsTileData
@@ -48,10 +46,11 @@ class MyApp : MultiDexApplication() {
         AuthManager.initAuth()
         DatabaseManager.initDatabase()
         FirestoreManager.initFirestore()
+        HeartFitRoomDB.init(this)
         CommonUtils.initHelper(this)
         initSettingsScreen()
         initSharedPrefs()
-        CurrentUserDataModelView.loadCurrentUser { /*Fetching the user from server */ }
+        //CurrentUserDataModelView.loadCurrentUser { /*Fetching the user from server */ }
 
         registerActivityLifecycleCallbacks(mFTActivityLifecycleCallbacks)
 

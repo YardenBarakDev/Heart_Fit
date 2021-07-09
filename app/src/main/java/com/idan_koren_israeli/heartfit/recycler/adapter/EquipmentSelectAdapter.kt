@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.idan_koren_israeli.heartfit.R
-import com.idan_koren_israeli.heartfit.model.EquipmentSelect
+import com.idan_koren_israeli.heartfit.mvvm.model.EquipmentSelect
 import com.idan_koren_israeli.heartfit.recycler.holder.EquipmentSelectHolder
 
 class EquipmentSelectAdapter(context: Context, equipmentSelectData: ArrayList<EquipmentSelect>): RecyclerView.Adapter<EquipmentSelectHolder>() {
