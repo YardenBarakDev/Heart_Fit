@@ -38,7 +38,7 @@
         <action
             android:id="@+id/action_fragmentWorkout_to_fragmentWorkoutFinished"
             app:destination="@id/fragmentWorkoutFinished" />
-    </fragment>
+       </fragment>
     <fragment
         android:id="@+id/fragmentWorkoutFinished"
         android:name="com.idan_koren_israeli.heartfit.mvvm.view.fragment.FragmentWorkoutFinished"

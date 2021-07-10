@@ -5,12 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Database
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.common.CommonUtils
 import com.idan_koren_israeli.heartfit.db.firebase.database.DatabaseManager
-import com.idan_koren_israeli.heartfit.mvvm.model.Workout
+import com.idan_koren_israeli.heartfit.mvvm.model.*
+import java.io.Serializable
 
 
 class WorkoutSelectRowHolder(itemView: View, private val onClick: (workout: Workout) -> Unit) :
@@ -79,6 +82,14 @@ class WorkoutSelectRowHolder(itemView: View, private val onClick: (workout: Work
                     https://developer.android.com/guide/navigation/navigation-pass-data*/
                     // User has enough hearts
                     /** TODO: I don't know what kind of data you transfer, please contact me if need assistant*/
+
+                    val bundle = bundleOf(
+                        "workout" to workout,
+                        "exercises" to arrayListOf<Exercise>(Exercise(listOf(Equipment.Bench), ExerciseLevel.Basic,
+                            listOf(MuscleGroup.ABDOMINALS),"Exercise Test", 8, 250)),
+                        "user" to DatabaseManager.currentUser
+                    )
+                    itemView.findNavController().navigate(R.id.action_fragmentHome_to_fragmentWorkout, bundle)
 
                     //move to workout fragment
                     //it.findNavController().navigate(R.id.action_fragmentHome_to_fragmentWorkout)
