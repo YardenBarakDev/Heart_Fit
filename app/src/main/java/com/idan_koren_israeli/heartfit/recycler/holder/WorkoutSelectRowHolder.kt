@@ -77,11 +77,10 @@ class WorkoutSelectRowHolder(itemView: View, private val onClick: (workout: Work
                     CommonUtils.getInstance()
                         .showToast("Not enough hearts to start this workout")
                 } else {
+                    // User has enough hearts, workout can be started
                     /*
                     pass data between fragments
                     https://developer.android.com/guide/navigation/navigation-pass-data*/
-                    // User has enough hearts
-                    /** TODO: I don't know what kind of data you transfer, please contact me if need assistant*/
 
                     val bundle = bundleOf(
                         "workout" to workout,
@@ -91,8 +90,6 @@ class WorkoutSelectRowHolder(itemView: View, private val onClick: (workout: Work
                     )
                     itemView.findNavController().navigate(R.id.action_fragmentHome_to_fragmentWorkout, bundle)
 
-                    //move to workout fragment
-                    //it.findNavController().navigate(R.id.action_fragmentHome_to_fragmentWorkout)
                 }
 
 
