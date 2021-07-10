@@ -16,9 +16,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.ktx.Firebase
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.common.CommonUtils
+import com.idan_koren_israeli.heartfit.db.firebase.database.DatabaseManager
 
 
 class FragmentAuth : Fragment() {
@@ -40,12 +43,12 @@ class FragmentAuth : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewLoginAndRegister =
-            inflater.inflate(R.layout.fragment_login_and_register, container, false)
+            inflater.inflate(R.layout.fragment_auth, container, false)
 
         findViews()
         loadBackGroundImage()
         if (userLoggedIn()) {
-            findNavController().navigate(R.id.action_fragmentAuth_to_fragmentHome)
+            onAuthSuccess(FirebaseAuth.getInstance().currentUser!!)
         } else {
             val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -53,10 +56,16 @@ class FragmentAuth : Fragment() {
                 .build()
 
             googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
+
+            sign_in_button.setOnClickListener {
+                val signInIntent = googleSignInClient.signInIntent
+                startActivityForResult(signInIntent, RC_SIGN_IN)
+            }
+
         }
-        sign_in_button.setOnClickListener {
-            signIn()
-        }
+
+
+
 
         return viewLoginAndRegister
     }
@@ -68,10 +77,6 @@ class FragmentAuth : Fragment() {
             .into(sign_in_coverImage)
     }
 
-    private fun signIn() {
-        val signInIntent = googleSignInClient.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)
-    }
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -84,7 +89,6 @@ class FragmentAuth : Fragment() {
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)!!
                 Log.d(TAG, "firebaseAuthWithGoogle:" + account.id)
-                Log.d(TAG, "fail 1")
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
@@ -100,14 +104,20 @@ class FragmentAuth : Fragment() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithCredential:success")
-                    findNavController().navigate(R.id.action_fragmentAuth_to_fragmentHome)
+                    onAuthSuccess(FirebaseAuth.getInstance().currentUser!!)
                 } else {
                     // If sign in fails, display a message to the user.
                     CommonUtils.getInstance().showToast("Could not log it, please try again")
-                    Log.d(TAG, "signInWithCredential:failure????????????????")
                     Log.d(TAG, "signInWithCredential:failure", task.exception)
                 }
             }
+    }
+
+    private fun onAuthSuccess(fbUser: FirebaseUser){
+        DatabaseManager.loadCurrentUser(fbUser){
+            findNavController().navigate(R.id.action_fragmentAuth_to_fragmentHome)
+        }
+
     }
 
     private fun userLoggedIn(): Boolean {

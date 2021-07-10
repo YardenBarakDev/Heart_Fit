@@ -14,7 +14,6 @@ import com.idan_koren_israeli.heartfit.dialog.DialogWeightPicker
 import com.idan_koren_israeli.heartfit.db.firebase.database.DatabaseManager
 import com.idan_koren_israeli.heartfit.db.firebase.firestore.FirestoreManager
 import com.idan_koren_israeli.heartfit.db.room_db.HeartFitRoomDB
-import com.idan_koren_israeli.heartfit.mvvm.view_model.CurrentUserDataViewModel
 import com.idankorenisraeli.mysettingsscreen.MySettingsScreen
 import com.idankorenisraeli.mysettingsscreen.tile_data.essential.ButtonTileData
 import com.idankorenisraeli.mysettingsscreen.tile_data.essential.DividerTileData
@@ -103,12 +102,12 @@ class MyApp : MultiDexApplication() {
                 // TODO Add Loading Screen (Calling the server here)
                 val settingsActivity:Activity? = currentActivity()
 
-                CurrentUserDataViewModel.loadWeight {
-                    val materialAlertDialogBuilder = MaterialAlertDialogBuilder(settingsActivity as Context)
-                    val weightPicker = DialogWeightPicker()
-                    weightPicker.inflateLayout(LayoutInflater.from(this))
-                    weightPicker.showDialog(materialAlertDialogBuilder, it!!)
-                }
+
+                val materialAlertDialogBuilder = MaterialAlertDialogBuilder(settingsActivity as Context)
+                val weightPicker = DialogWeightPicker()
+                weightPicker.inflateLayout(LayoutInflater.from(this))
+                weightPicker.showDialog(materialAlertDialogBuilder, DatabaseManager.currentUser.weight!!)
+
 
             }
             .withIconId(R.drawable.ic_baseline_accessibility_new_24)

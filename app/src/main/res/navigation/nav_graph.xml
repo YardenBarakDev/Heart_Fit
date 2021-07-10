@@ -47,8 +47,8 @@
     <fragment
         android:id="@+id/fragmentAuth"
         android:name="com.idan_koren_israeli.heartfit.mvvm.view.fragment.FragmentAuth"
-        android:label="fragment_login_and_register"
-        tools:layout="@layout/fragment_login_and_register" >
+        android:label="fragment_auth"
+        tools:layout="@layout/fragment_auth" >
         <action
             android:id="@+id/action_fragmentAuth_to_fragmentEquipmentSelect"
             app:destination="@id/fragmentEquipmentSelect" />

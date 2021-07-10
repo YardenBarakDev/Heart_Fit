@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.idan_koren_israeli.heartfit.R
-import com.idan_koren_israeli.heartfit.mvvm.view_model.CurrentUserDataViewModel
+import com.idan_koren_israeli.heartfit.db.firebase.database.DatabaseManager
 import com.shawnlin.numberpicker.NumberPicker
 import java.math.RoundingMode
 import java.text.DecimalFormat
@@ -42,8 +42,10 @@ class DialogWeightPicker {
                 val df = DecimalFormat("#.#")
                 df.roundingMode = RoundingMode.HALF_UP
                 val newWeight :Float = (leftNumber.value + (rightNumber.value * 0.1f))
-                CurrentUserDataViewModel.storeWeight(newWeight)
-                dialog.dismiss()
+                DatabaseManager.currentUser.weight = newWeight
+                DatabaseManager.storeCurrentUser {
+                    dialog.dismiss()
+                }
 
                 //TODO store on ROOM SQL/SP too
             }

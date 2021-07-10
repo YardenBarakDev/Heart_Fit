@@ -1,6 +1,7 @@
 package com.idan_koren_israeli.heartfit.db.firebase.database
 
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
@@ -12,24 +13,43 @@ import com.idan_koren_israeli.heartfit.mvvm.model.User
 object DatabaseManager {
     private lateinit var db: DatabaseReference
 
+    lateinit var currentUser: User
 
-
-    fun initDatabase(){
+    fun initDatabase() {
         db = Firebase.database.reference
     }
 
     private val KEY_USERS = "users"
 
-    fun storeUser(user: User){
+    fun storeUser(user: User, onStored: () -> Unit = {}) {
         db.child(KEY_USERS).child(user.uid!!).setValue(user)
+            .addOnSuccessListener { onStored.invoke() }
     }
 
-    // This function should be called
-    fun loadCurrentUser(onLoaded: (userLoaded: User?) -> Unit){
+    fun storeCurrentUser(onStored: () -> Unit = {}) {
+        db.child(KEY_USERS).child(currentUser.uid!!).setValue(currentUser)
+            .addOnSuccessListener { onStored.invoke() }
+    }
+
+    fun loadUser(uid: String, onLoaded: (userLoaded: User?) -> Unit) {
         db.child(KEY_USERS)
-            .child(FirebaseAuth.getInstance().uid!!).get().addOnSuccessListener {
+            .child(uid).get().addOnSuccessListener {
                 onLoaded.invoke(it.getValue<User>())
             }
+    }
+
+    fun loadCurrentUser(fbUser: FirebaseUser, onLoaded: (currentUser: User) -> Unit) {
+        loadUser(fbUser.uid) {
+            if (it == null) {
+                // New User
+                currentUser = User(fbUser.uid, fbUser.displayName)
+                storeUser(currentUser) { onLoaded.invoke(currentUser) }
+            }
+            else{
+                currentUser = it
+                onLoaded.invoke(currentUser)
+            }
+        }
     }
 
 
