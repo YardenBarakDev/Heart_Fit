@@ -11,11 +11,10 @@ import androidx.multidex.MultiDexApplication
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.dialog.DialogWeightPicker
-import com.idan_koren_israeli.heartfit.db.firebase.auth.AuthManager
 import com.idan_koren_israeli.heartfit.db.firebase.database.DatabaseManager
 import com.idan_koren_israeli.heartfit.db.firebase.firestore.FirestoreManager
 import com.idan_koren_israeli.heartfit.db.room_db.HeartFitRoomDB
-import com.idan_koren_israeli.heartfit.model_view.CurrentUserDataModelView
+import com.idan_koren_israeli.heartfit.mvvm.view_model.CurrentUserDataViewModel
 import com.idankorenisraeli.mysettingsscreen.MySettingsScreen
 import com.idankorenisraeli.mysettingsscreen.tile_data.essential.ButtonTileData
 import com.idankorenisraeli.mysettingsscreen.tile_data.essential.DividerTileData
@@ -23,7 +22,6 @@ import com.idankorenisraeli.mysettingsscreen.tile_data.essential.SettingsTileDat
 import com.idankorenisraeli.mysettingsscreen.tile_data.essential.TitleTileData
 import com.idankorenisraeli.mysettingsscreen.tile_data.view.SeekbarTileData
 import com.pixplicity.easyprefs.library.Prefs
-
 
 
 class MyApp : MultiDexApplication() {
@@ -43,7 +41,6 @@ class MyApp : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
 
-        AuthManager.initAuth()
         DatabaseManager.initDatabase()
         FirestoreManager.initFirestore()
         HeartFitRoomDB.init(this)
@@ -89,16 +86,6 @@ class MyApp : MultiDexApplication() {
 
         //TODO Voice announcment checkbox tile if will be implemented
 
-        val logOutTile:ButtonTileData = ButtonTileData("Log Out", "Currently logged in as " + AuthManager.getAuthUserName())
-            .withIconId(ButtonTileData.IC_INVISIBLE)
-            .withOnClickListener {
-                // Log out from account and back to main screen
-                // TODO Handle navigation graph
-                currentActivity()!!.finish()
-                AuthManager.signOut()
-                Log.i("pttt", "Logging Out")
-            }
-
         val horizontalLineTile : DividerTileData = DividerTileData(2)
 
         val infoTile : TitleTileData = TitleTileData("HeatFit Workout", "© 2021 Version 0.0.1")
@@ -116,7 +103,7 @@ class MyApp : MultiDexApplication() {
                 // TODO Add Loading Screen (Calling the server here)
                 val settingsActivity:Activity? = currentActivity()
 
-                CurrentUserDataModelView.loadWeight {
+                CurrentUserDataViewModel.loadWeight {
                     val materialAlertDialogBuilder = MaterialAlertDialogBuilder(settingsActivity as Context)
                     val weightPicker = DialogWeightPicker()
                     weightPicker.inflateLayout(LayoutInflater.from(this))
@@ -131,7 +118,6 @@ class MyApp : MultiDexApplication() {
         dataTiles.add(selectEquipmentTile)
         dataTiles.add(prepTimeTile)
         dataTiles.add(weightTile)
-        dataTiles.add(logOutTile)
         dataTiles.add(horizontalLineTile)
         dataTiles.add(termsOfUseTime)
         dataTiles.add(infoTile)

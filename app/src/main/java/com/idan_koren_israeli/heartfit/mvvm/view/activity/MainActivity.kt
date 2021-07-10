@@ -12,7 +12,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.common.CommonUtils
-import com.idan_koren_israeli.heartfit.db.firebase.auth.AuthManager
 import com.idan_koren_israeli.heartfit.mvvm.view.fragment.*
 
 
@@ -27,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        AuthManager.setActivity(this)
         initNavigation()
 
 
@@ -69,11 +67,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        Log.i("pttt", "Activity Result")
-        AuthManager.authScreenResult(requestCode, resultCode, data)
-    }
 
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
         // No call for super()

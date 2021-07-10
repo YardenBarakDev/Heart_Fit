@@ -6,16 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.LinearLayout
 import android.widget.Spinner
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.db.room_db.ExerciseSummary
-import com.idan_koren_israeli.heartfit.mvvm.model.Exercise
 import com.idan_koren_israeli.heartfit.mvvm.view_model.HistoryViewModel
-import com.idan_koren_israeli.heartfit.other.SortType
+import com.idan_koren_israeli.heartfit.enums.SortType
 import com.idan_koren_israeli.heartfit.recycler.adapter.HistoryListAdapter
 
 

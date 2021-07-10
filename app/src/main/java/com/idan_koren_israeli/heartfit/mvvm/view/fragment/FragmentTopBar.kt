@@ -7,10 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.component.WorkoutCycleManager
-import com.idan_koren_israeli.heartfit.db.firebase.auth.AuthManager
-
 private const val HEART_COUNT = "param1"
 
 /**
@@ -58,7 +58,8 @@ class FragmentTopBar : Fragment() {
 
     private fun setClickListeners(){
         signOutButton!!.setOnClickListener {
-            AuthManager.signOut()
+            FirebaseAuth.getInstance().signOut()
+            findNavController().navigate(R.id.action_fragmentHome_to_fragmentAuth)
         }
     }
 

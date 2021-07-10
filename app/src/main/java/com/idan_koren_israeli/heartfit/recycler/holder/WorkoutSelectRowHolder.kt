@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.common.CommonUtils
 import com.idan_koren_israeli.heartfit.mvvm.model.Workout
-import com.idan_koren_israeli.heartfit.model_view.CurrentUserDataModelView
+import com.idan_koren_israeli.heartfit.mvvm.view_model.CurrentUserDataViewModel
 
 
 class WorkoutSelectRowHolder(itemView: View, private val onClick: (workout: Workout) -> Unit) : RecyclerView.ViewHolder(itemView){
@@ -68,7 +68,7 @@ class WorkoutSelectRowHolder(itemView: View, private val onClick: (workout: Work
         workoutHolder.setOnClickListener {
             run {
                 Log.i("pttt","Workout Clicked: " + workout.name)
-                CurrentUserDataModelView.loadHearts { hearts->
+                CurrentUserDataViewModel.loadHearts { hearts->
                     if(hearts==null)
                         CommonUtils.getInstance().showToast("Could not connect to server...")
                     if(hearts!!<workout.heartsToUnlock) {

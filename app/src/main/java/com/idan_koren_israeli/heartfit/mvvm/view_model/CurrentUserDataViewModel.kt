@@ -1,9 +1,9 @@
-package com.idan_koren_israeli.heartfit.model_view
+package com.idan_koren_israeli.heartfit.mvvm.view_model
 
 import com.idan_koren_israeli.heartfit.db.firebase.database.DatabaseManager
 import com.idan_koren_israeli.heartfit.mvvm.model.User
 
-object CurrentUserDataModelView {
+object CurrentUserDataViewModel {
 
     // caching the current user
     private var currentUser: User? = null
@@ -19,7 +19,7 @@ object CurrentUserDataModelView {
 
     @Throws(Exception::class)
     fun storeHearts(newValue: Int){
-        if(currentUser==null)
+        if(currentUser ==null)
             throw Exception("Current user is not loaded") // User not loaded yet
 
         currentUser!!.hearts = newValue
@@ -37,7 +37,7 @@ object CurrentUserDataModelView {
 
     @Throws(Exception::class)
     fun storeWeight(newValue: Float){
-        if(currentUser==null)
+        if(currentUser ==null)
             throw Exception("Current user is not loaded") // User not loaded yet
 
         currentUser!!.weight = newValue
@@ -45,7 +45,7 @@ object CurrentUserDataModelView {
     }
 
     fun loadCurrentUser(onLoaded: (value: User?) -> Unit){
-        if(currentUser!=null)
+        if(currentUser !=null)
             return onLoaded.invoke(currentUser)
         else
             DatabaseManager.loadCurrentUser{

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/fragmentLoginAndRegister">
+    app:startDestination="@id/fragmentAuth">
 
 
     <fragment
@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_fragmentHome_to_fragmentWorkout"
             app:destination="@id/fragmentWorkout" />
+        <action
+            android:id="@+id/action_fragmentHome_to_fragmentAuth"
+            app:destination="@id/fragmentAuth" />
     </fragment>
     <fragment
         android:id="@+id/fragmentWorkout"
@@ -42,15 +45,15 @@
         android:label="fragment_workout_finished"
         tools:layout="@layout/fragment_workout_finished" />
     <fragment
-        android:id="@+id/fragmentLoginAndRegister"
-        android:name="com.idan_koren_israeli.heartfit.mvvm.view.fragment.FragmentLoginAndRegister"
+        android:id="@+id/fragmentAuth"
+        android:name="com.idan_koren_israeli.heartfit.mvvm.view.fragment.FragmentAuth"
         android:label="fragment_login_and_register"
         tools:layout="@layout/fragment_login_and_register" >
         <action
-            android:id="@+id/action_fragmentLoginAndRegister_to_fragmentEquipmentSelect"
+            android:id="@+id/action_fragmentAuth_to_fragmentEquipmentSelect"
             app:destination="@id/fragmentEquipmentSelect" />
         <action
-            android:id="@+id/action_fragmentLoginAndRegister_to_fragmentHome"
+            android:id="@+id/action_fragmentAuth_to_fragmentHome"
             app:destination="@id/fragmentHome" />
     </fragment>
     <fragment
