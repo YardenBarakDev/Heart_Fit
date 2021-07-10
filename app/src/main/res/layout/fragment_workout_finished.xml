@@ -11,11 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:id="@+id/workout_finish_LBL_title"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:textSize="28sp"
         />
 
 
     <LinearLayout
+        android:layout_marginTop="40dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -39,10 +42,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/workout_finish_LBL_duration"
-            android:textSize="38sp"
+            android:textSize="42sp"
             android:textAllCaps="true"
             android:textStyle="bold"
-            android:gravity="bottom|center"
+            android:gravity="top|center"
             />
 
 
@@ -57,7 +60,7 @@
         android:orientation="horizontal"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="25dp"
         android:weightSum="3"
         >
 
@@ -115,6 +118,7 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="@color/white"
+                android:id="@+id/workout_finish_LBL_hearts"
                 />
 
         </FrameLayout>

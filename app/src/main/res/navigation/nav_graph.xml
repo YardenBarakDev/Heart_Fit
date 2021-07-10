@@ -43,7 +43,11 @@
         android:id="@+id/fragmentWorkoutFinished"
         android:name="com.idan_koren_israeli.heartfit.mvvm.view.fragment.FragmentWorkoutFinished"
         android:label="fragment_workout_finished"
-        tools:layout="@layout/fragment_workout_finished" />
+        tools:layout="@layout/fragment_workout_finished" >
+        <action
+            android:id="@+id/action_fragmentWorkoutFinished_to_fragmentHome"
+            app:destination="@id/fragmentHome" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentAuth"
         android:name="com.idan_koren_israeli.heartfit.mvvm.view.fragment.FragmentAuth"

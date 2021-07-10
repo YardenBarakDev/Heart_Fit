@@ -15,19 +15,19 @@ interface ExerciseSummaryDao {
     @Delete
     fun delete(exerciseSummary: ExerciseSummary)
 
-    @Query("SELECT * FROM exercise_summary Where :uid = userId ORDER BY timestamp DESC")
+    @Query("SELECT * FROM workout_summary Where :uid = userId ORDER BY timestamp DESC")
     fun getAllRunsSortedByDate(uid : String): LiveData<List<ExerciseSummary>>
 
-    @Query("SELECT * FROM exercise_summary Where :uid = userId ORDER BY heartsCollected DESC")
+    @Query("SELECT * FROM workout_summary Where :uid = userId ORDER BY heartsCollected DESC")
     fun getAllSortedByMaXHearts(uid : String): LiveData<List<ExerciseSummary>>
 
-    @Query("SELECT * FROM exercise_summary Where :uid = userId ORDER BY caloriesBurned DESC")
+    @Query("SELECT * FROM workout_summary Where :uid = userId ORDER BY caloriesBurned DESC")
     fun getAllSortedByCaloriesBurned(uid : String): LiveData<List<ExerciseSummary>>
 
-    @Query("SELECT * FROM exercise_summary Where :uid = userId ORDER BY totalTime DESC")
+    @Query("SELECT * FROM workout_summary Where :uid = userId ORDER BY totalTime DESC")
     fun getAllSortedByTotalTime(uid : String): LiveData<List<ExerciseSummary>>
 
-    @Query("SELECT * FROM exercise_summary Where :uid = userId ORDER BY difficulty DESC")
+    @Query("SELECT * FROM workout_summary Where :uid = userId ORDER BY difficulty DESC")
     fun getAllSortedByDifficulty(uid : String): LiveData<List<ExerciseSummary>>
 
 }

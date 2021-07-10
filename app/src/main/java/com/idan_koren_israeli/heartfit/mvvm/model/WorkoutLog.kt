@@ -1,16 +1,16 @@
 package com.idan_koren_israeli.heartfit.mvvm.model
 
 import android.util.Log
+import java.io.Serializable
 
 const val MET = 4.0f // This is an ~est. of an exercising MET value
 // There is not enough academic research today to caculate this number accuritly
 
-// This data should be saved to ROOM-SQL
-class WorkoutLog(val workout:Workout? = null, val startTime:Long? = null,
-                 var exercisesDone:Int? = null, var caloriesBurned: Int? = null)  {
+class WorkoutLog(val workout:Workout? = null, var totalDuration:Int = 0,
+                 var exercisesDone: ArrayList<Exercise> = arrayListOf(), var caloriesBurned: Int? = null) : Serializable  {
 
     fun trackExerciseDone(exercise: Exercise, weight: Float){
-        exercisesDone = exercisesDone?.inc()
+        exercisesDone.add(exercise)
 
         caloriesBurned = caloriesBurned?.plus(calcCaloriesBurned(exercise, weight))
 
@@ -18,7 +18,7 @@ class WorkoutLog(val workout:Workout? = null, val startTime:Long? = null,
     }
 
     fun untrackExerciseDone(exercise: Exercise, weight:Float){
-        exercisesDone = exercisesDone?.dec()
+        exercisesDone.remove(exercise)
         caloriesBurned = caloriesBurned?.minus(calcCaloriesBurned(exercise, weight))
 
     }

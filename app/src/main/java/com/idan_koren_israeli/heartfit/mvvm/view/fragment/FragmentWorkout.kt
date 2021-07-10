@@ -9,15 +9,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.hamzaahmedkhan.circulartimerview.CircularTimerListener
 import com.hamzaahmedkhan.circulartimerview.CircularTimerView
 import com.hamzaahmedkhan.circulartimerview.TimeFormatEnum
 import com.idan_koren_israeli.heartfit.R
-import com.idan_koren_israeli.heartfit.mvvm.model.Exercise
-import com.idan_koren_israeli.heartfit.mvvm.model.User
-import com.idan_koren_israeli.heartfit.mvvm.model.Workout
-import com.idan_koren_israeli.heartfit.mvvm.model.WorkoutLog
+import com.idan_koren_israeli.heartfit.db.firebase.database.DatabaseManager
+import com.idan_koren_israeli.heartfit.mvvm.model.*
 import com.idankorenisraeli.customprogressbar.CustomProgressBar
 import java.io.Serializable
 import java.util.*
@@ -61,7 +61,6 @@ class FragmentWorkout : Fragment() {
     private var totalWorkoutTime:Int = 0
     private var currentExercise:Int = 0
 
-    private var secondsTotalDuration:Int = 0
 
 
     private var paused : Boolean = false
@@ -75,7 +74,7 @@ class FragmentWorkout : Fragment() {
             exercises = it.getSerializable(EXERCISES_KEY) as ArrayList<Exercise>
             user = it.getSerializable(USER_KEY) as User
 
-            workoutLog = WorkoutLog(workout, System.currentTimeMillis(),0, 0)
+            workoutLog = WorkoutLog(workout, 0, arrayListOf(), 0)
         }
     }
 
@@ -119,8 +118,8 @@ class FragmentWorkout : Fragment() {
         mainHandler.post(object : Runnable {
             override fun run() {
                 if(!paused) {
-                    secondsTotalDuration++
-                    updateDurationTimer(secondsTotalDuration)
+                    workoutLog.totalDuration = workoutLog.totalDuration.plus(1)
+                    updateDurationTimer(workoutLog.totalDuration)
                 }
                 mainHandler.postDelayed(this, 1000)
             }
@@ -139,13 +138,13 @@ class FragmentWorkout : Fragment() {
 
 
     private fun startTimerForNextExercise(){
-        updateNextPrevButtonsVisibility()
-        updateProgressBar()
-        updateNextUpText()
         if(currentExercise == exercises.size){
             workoutDone()
             return
         }
+        updateNextPrevButtonsVisibility()
+        updateProgressBar()
+        updateNextUpText()
 
 
         timerView.setCircularTimerListener(object : CircularTimerListener{
@@ -261,8 +260,10 @@ class FragmentWorkout : Fragment() {
            User has enough hearts*/
         /** TODO: I don't know what kind of data you transfer, please contact me if need assistant*/
 
+        val bundle = bundleOf("workout_log" to workoutLog)
+
         //move to workoutFinished fragment
-        //it.findNavController().navigate(R.id.action_fragmentWorkout_to_fragmentWorkoutFinished)
+        findNavController().navigate(R.id.action_fragmentWorkout_to_fragmentWorkoutFinished, bundle)
 
         Log.i("pttt", "Finished")
     }
