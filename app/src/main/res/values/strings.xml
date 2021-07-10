@@ -27,5 +27,6 @@
     <string name="ok">OK</string>
     <string name="next_up">Next Up</string>
     <string name="weight_separator">.</string>
+    <string name="duration">duration</string>
 
 </resources>

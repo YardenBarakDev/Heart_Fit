@@ -85,7 +85,11 @@ class WorkoutSelectRowHolder(itemView: View, private val onClick: (workout: Work
                     val bundle = bundleOf(
                         "workout" to workout,
                         "exercises" to arrayListOf<Exercise>(Exercise(listOf(Equipment.Bench), ExerciseLevel.Basic,
-                            listOf(MuscleGroup.ABDOMINALS),"Exercise Test", 8, 250)),
+                            listOf(MuscleGroup.ABDOMINALS),"Exercise Test", 8, 30),
+                            Exercise(listOf(Equipment.Bench), ExerciseLevel.Basic,
+                                listOf(MuscleGroup.ABDOMINALS),"Exercise Test", 8, 30),
+                            Exercise(listOf(Equipment.Bench), ExerciseLevel.Basic,
+                                listOf(MuscleGroup.ABDOMINALS),"Exercise Test", 8, 30)),
                         "user" to DatabaseManager.currentUser
                     )
                     itemView.findNavController().navigate(R.id.action_fragmentHome_to_fragmentWorkout, bundle)

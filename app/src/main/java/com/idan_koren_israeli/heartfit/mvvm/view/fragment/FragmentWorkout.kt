@@ -1,6 +1,8 @@
 package com.idan_koren_israeli.heartfit.mvvm.view.fragment
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -54,9 +56,13 @@ class FragmentWorkout : Fragment() {
     private lateinit var nextButton : ImageButton
     private lateinit var prevButton : ImageButton
     private lateinit var heartsCount: TextView
+    private lateinit var durationTimerText: TextView
 
     private var totalWorkoutTime:Int = 0
     private var currentExercise:Int = 0
+
+    private var secondsTotalDuration:Int = 0
+
 
     private var paused : Boolean = false
 
@@ -81,7 +87,7 @@ class FragmentWorkout : Fragment() {
 
         val parent:View = inflater.inflate(R.layout.fragment_workout, container, false)
         findViews(parent)
-        initTimer()
+        initTimers()
         initProgress()
         initButtons()
 
@@ -101,11 +107,25 @@ class FragmentWorkout : Fragment() {
         nextExerciseTitle = parent.findViewById(R.id.workout_LBL_next_title)
         workoutProgress = parent.findViewById(R.id.workout_PRG_progress_bar)
         heartsCount = parent.findViewById(R.id.workout_LBL_heart_count)
+        durationTimerText= parent.findViewById(R.id.workout_LBL_duration)
 
     }
 
-    private fun initTimer(){
+    private fun initTimers(){
         startTimerForNextExercise()
+
+        val mainHandler = Handler(Looper.getMainLooper())
+
+        mainHandler.post(object : Runnable {
+            override fun run() {
+                if(!paused) {
+                    secondsTotalDuration++
+                    updateDurationTimer(secondsTotalDuration)
+                }
+                mainHandler.postDelayed(this, 1000)
+            }
+        })
+
 
     }
 
@@ -264,4 +284,11 @@ class FragmentWorkout : Fragment() {
                 }
             }
     }
+
+    private fun updateDurationTimer(seconds:Int) {
+        durationTimerText.text=
+            String.format("%02d:%02d:%02d", seconds / 3600,
+                (seconds % 3600) / 60, (seconds % 60));
+    }
+
 }
