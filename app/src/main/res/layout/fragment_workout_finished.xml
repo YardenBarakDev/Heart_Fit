@@ -3,21 +3,176 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".mvvm.view.fragment.FragmentWorkoutFinished">
+
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/done"
-        android:id="@+id/workout_finished_BTN_done"
+        android:layout_height="80dp"
+        android:id="@+id/workout_finish_LBL_title"
+        android:layout_marginTop="20dp"
         />
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:id="@+id/workout_finish_LAY_duration"
+        android:layout_below="@id/workout_finish_LBL_title"
+        >
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/workout_finish_LBL_duration_title"
+            android:text="@string/duration"
+            android:textSize="18sp"
+            android:textAllCaps="true"
+            android:gravity="bottom|center"
+            android:textColor="@android:color/darker_gray"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/workout_finish_LBL_duration"
+            android:textSize="38sp"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:gravity="bottom|center"
+            />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:id="@+id/workout_finish_LAY_stats"
+        android:layout_below="@id/workout_finish_LAY_duration"
+        android:orientation="horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        android:weightSum="3"
+        >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/workout_finish_LBL_calories_title"
+                android:text="@string/calories"
+                android:textSize="16sp"
+                android:textAllCaps="true"
+                android:gravity="bottom|center"
+                android:textColor="@android:color/darker_gray"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/workout_finish_LBL_calories"
+                android:textSize="26sp"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:gravity="bottom|center"
+                />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_heart"
+                android:padding="15dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/number_example"
+                android:gravity="center"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                />
+
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/workout_finish_LBL_exercises_count_title"
+                android:text="@string/exercises"
+                android:textSize="16sp"
+                android:textAllCaps="true"
+                android:gravity="bottom|center"
+                android:textColor="@android:color/darker_gray"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/workout_finish_LBL_exercises_count"
+                android:textSize="26sp"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:gravity="bottom|center"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/workout_finish_LAY_stats"
+        android:layout_marginTop="16dp"
+        android:id="@+id/workout_finish_RYC_exercises"
+        />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="34dp"
+        android:id="@+id/workout_finish_FAB_done"
+        android:src="@drawable/ic_baseline_navigate_next_24"
+        app:backgroundTint="@color/heart_color_variant"
+        />
 
 
 </RelativeLayout>
