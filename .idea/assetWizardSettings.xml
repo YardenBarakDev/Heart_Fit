@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/D:/Program%20Files/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/accessibility_new/baseline_accessibility_new_24.xml" />
+                                      <entry key="url" value="jar:file:/D:/Program%20Files/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/local_fire_department/baseline_local_fire_department_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,7 +28,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_baseline_accessibility_new_24" />
+                            <entry key="outputName" value="ic_baseline_local_fire_department_24" />
                             <entry key="sourceFile" value="D:\Downloads\noun_skipping rope_1137226.svg" />
                           </map>
                         </option>

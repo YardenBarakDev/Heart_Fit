@@ -31,5 +31,6 @@
     <string name="calories">calories</string>
     <string name="number_example">00</string>
     <string name="exercises">exercises</string>
+    <string name="exercises_done">Exercises Done</string>
 
 </resources>

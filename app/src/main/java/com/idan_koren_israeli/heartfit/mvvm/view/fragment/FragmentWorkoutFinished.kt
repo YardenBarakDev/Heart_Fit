@@ -7,12 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.mvvm.model.Exercise
 import com.idan_koren_israeli.heartfit.mvvm.model.WorkoutLog
-
+import com.idan_koren_israeli.heartfit.recycler.adapter.EquipmentSelectAdapter
+import com.idan_koren_israeli.heartfit.recycler.adapter.ExercisesDoneAdapter
 
 
 private const val KEY_WORKOUT_LOG = "workout_log"
@@ -74,6 +77,13 @@ class FragmentWorkoutFinished : Fragment() {
             (seconds % 3600) / 60, (seconds % 60));
         exercisesCountText.text = workoutLog!!.exercisesDone.size.toString()
         heartsText.text = workoutLog!!.workout!!.heartsValue.toString()
+
+
+
+        val exercisesAdapter = ExercisesDoneAdapter(requireContext(), workoutLog!!.exercisesDone)
+        exercisesRecycler.layoutManager = LinearLayoutManager(requireContext())
+
+        exercisesRecycler.adapter = exercisesAdapter
 
     }
 
