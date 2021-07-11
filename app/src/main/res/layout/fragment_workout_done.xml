@@ -18,7 +18,7 @@
 
 
     <LinearLayout
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -176,6 +176,9 @@
         android:layout_below="@id/workout_finish_LBL_exercises_title"
         android:layout_marginTop="2dp"
         android:id="@+id/workout_finish_RYC_exercises"
+        android:paddingBottom="180dp"
+        android:clipToPadding="false"
+        android:scrollbarStyle="outsideOverlay"
         />
 
 
@@ -186,8 +189,9 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="34dp"
         android:id="@+id/workout_finish_FAB_done"
-        android:src="@drawable/ic_baseline_navigate_next_24"
-        app:backgroundTint="@color/heart_color_variant"
+        android:src="@drawable/ic_baseline_done_24"
+        app:tint="@color/white"
+        app:backgroundTint="@color/heart_color"
         />
 
 

@@ -87,7 +87,7 @@ class WorkoutSelectRowHolder(itemView: View, private val onClick: (workout: Work
                         "exercises" to arrayListOf<Exercise>(Exercise(listOf(Equipment.Bench), ExerciseLevel.Basic,
                             listOf(MuscleGroup.ABDOMINALS),"Exercise Test", 8, 20),
                             Exercise(listOf(Equipment.Bench), ExerciseLevel.Basic,
-                                listOf(MuscleGroup.ABDOMINALS),"Exercise Test", 8, 30),
+                                listOf(MuscleGroup.ABDOMINALS),"Exercise Test", 8, 30,8),
                             Exercise(listOf(Equipment.Bench), ExerciseLevel.Basic,
                                 listOf(MuscleGroup.ABDOMINALS),"Exercise Test", 8, 30)),
                         "user" to DatabaseManager.currentUser

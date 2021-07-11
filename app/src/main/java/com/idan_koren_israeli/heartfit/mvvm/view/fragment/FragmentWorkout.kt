@@ -8,15 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.hamzaahmedkhan.circulartimerview.CircularTimerListener
 import com.hamzaahmedkhan.circulartimerview.CircularTimerView
 import com.hamzaahmedkhan.circulartimerview.TimeFormatEnum
 import com.idan_koren_israeli.heartfit.R
-import com.idan_koren_israeli.heartfit.db.firebase.database.DatabaseManager
 import com.idan_koren_israeli.heartfit.mvvm.model.*
 import com.idankorenisraeli.customprogressbar.CustomProgressBar
 import java.io.Serializable
@@ -36,6 +37,8 @@ private const val WORKOUT_KEY = "workout"
 private const val EXERCISES_KEY = "exercises"
 private const val USER_KEY = "user"
 
+private const val ANIMATION_RESOURCE_NAME_PREFIX = "anim_exercise_"
+
 /**
  * A simple [Fragment] subclass.
  * Use the [FragmentWorkout.newInstance] factory method to
@@ -49,6 +52,7 @@ class FragmentWorkout : Fragment() {
 
 
     private lateinit var workoutProgress:CustomProgressBar
+    private lateinit var animationImage: ImageView
     private lateinit var nextExerciseText: TextView
     private lateinit var nextExerciseTitle: TextView
     private lateinit var timerView : CircularTimerView
@@ -90,9 +94,7 @@ class FragmentWorkout : Fragment() {
         initProgress()
         initButtons()
 
-        for(exe:Exercise in exercises){
-            Log.i("pttt", exe.name + " | " + exe.timeInSeconds)
-        }
+
 
         return parent
     }
@@ -107,6 +109,7 @@ class FragmentWorkout : Fragment() {
         workoutProgress = parent.findViewById(R.id.workout_PRG_progress_bar)
         heartsCount = parent.findViewById(R.id.workout_LBL_heart_count)
         durationTimerText= parent.findViewById(R.id.workout_LBL_duration)
+        animationImage = parent.findViewById(R.id.workout_IMG_animation)
 
     }
 
@@ -145,6 +148,7 @@ class FragmentWorkout : Fragment() {
         updateNextPrevButtonsVisibility()
         updateProgressBar()
         updateNextUpText()
+        updateAnimation()
 
 
         timerView.setCircularTimerListener(object : CircularTimerListener{
@@ -184,6 +188,20 @@ class FragmentWorkout : Fragment() {
     private fun updateProgressBar() {
         workoutProgress.value = calculateProgressBarValue()
 
+
+    }
+
+    private fun updateAnimation(){
+        if(exercises[currentExercise].animationId==null) {
+            Glide.with(this).clear(animationImage)
+            return
+        }
+
+        val id = resources.getIdentifier(
+            ANIMATION_RESOURCE_NAME_PREFIX+exercises[currentExercise].animationId,
+            "raw", context?.packageName)
+
+        Glide.with(this).asGif().load(id).into(animationImage)
     }
 
     private fun initButtons(){

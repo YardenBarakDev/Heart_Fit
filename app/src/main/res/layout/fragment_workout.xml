@@ -1,44 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".mvvm.view.fragment.FragmentWorkout">
 
 
     <RelativeLayout
+        android:id="@+id/workout_LAY_progress_bar"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_alignParentTop="true"
-        android:layout_margin="18dp"
-        android:id="@+id/workout_LAY_progress_bar"
-        >
+        android:layout_margin="18dp">
 
         <com.idankorenisraeli.customprogressbar.CustomProgressBar
+            android:id="@+id/workout_PRG_progress_bar"
             android:layout_width="match_parent"
+
+
             android:layout_height="match_parent"
-
-
-
-            app:barPadding="6dp"
-            app:barCornerRadius="50dp"
-
             app:barBackgroundColor="@color/progress_bar_background"
-            app:colorType="single_static"
+
+            app:barCornerRadius="50dp"
+            app:barPadding="6dp"
             app:colorStatic="@color/heart_color_variant"
 
 
-            app:textType="custom_static"
-            app:textTitle="Hello World"
-            app:textPadding="4dp"
-            app:textGravity="center"
+            app:colorType="single_static"
             app:textColor="@color/text"
+            app:textGravity="center"
+            app:textPadding="4dp"
+            app:textTitle="Hello World"
 
 
-            app:value="0.8"
-            android:id="@+id/workout_PRG_progress_bar"
-            />
+            app:textType="custom_static"
+            app:value="0.8" />
 
 
         <FrameLayout
@@ -49,162 +46,162 @@
             android:padding="2dp"
 
             >
+
             <TextView
-                android:layout_height="match_parent"
+                android:id="@+id/workout_LBL_heart_count"
                 android:layout_width="match_parent"
-                android:translationZ="4dp"
+                android:layout_height="match_parent"
 
                 android:gravity="center"
-                android:id="@+id/workout_LBL_heart_count"
-                />
+                android:translationZ="4dp" />
 
             <ImageView
 
+                android:id="@+id/workout_IMG_heart"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_heart"
-                android:id="@+id/workout_IMG_heart"
-                />
-
-
+                android:src="@drawable/ic_heart" />
 
 
         </FrameLayout>
 
 
-
     </RelativeLayout>
 
 
-
-
-
     <TextView
+        android:id="@+id/workout_LBL_next_title"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:id="@+id/workout_LBL_next_title"
-        android:text="@string/next_up"
-        android:layout_centerHorizontal="true"
-        android:textSize="18sp"
-        android:textAllCaps="true"
-        android:layout_marginTop="20dp"
         android:layout_below="@id/workout_LAY_progress_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:gravity="bottom|center"
+        android:text="@string/next_up"
+        android:textAllCaps="true"
         android:textColor="@android:color/darker_gray"
-        />
+        android:textSize="18sp" />
 
     <TextView
+        android:id="@+id/workout_LBL_next_exercise"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/workout_LBL_next_title"
         android:layout_centerHorizontal="true"
-        android:id="@+id/workout_LBL_next_exercise"
         android:gravity="center"
-        android:textSize="24sp"
         android:lines="1"
+        android:textSize="24sp"
 
         />
 
 
-    <com.hamzaahmedkhan.circulartimerview.CircularTimerView
-        android:id="@+id/workout_CTV_timer"
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:progressColor="@color/heart_color"
-        android:layout_below="@id/workout_LBL_next_exercise"
-        app:backgroundColor="@color/background_primary"
-        app:progressBackgroundColor="@color/timer_progress_background"
-        app:backgroundWidth="20"
+
+        android:layout_below="@id/workout_LBL_next_exercise">
 
 
-        app:textSize="34sp"
+        <com.hamzaahmedkhan.circulartimerview.CircularTimerView
+            android:id="@+id/workout_CTV_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundColor="@color/workout_timer_background"
 
-        app:progressText="Time Remaining..."
-        app:maxValue="100"
+            app:backgroundWidth="20"
+            app:maxValue="100"
+            app:progressBackgroundColor="@color/timer_progress_background"
 
-        app:startingPoint="bottom"
 
-        />
+            app:progressColor="@color/heart_color"
+
+            app:progressText="Time Remaining..."
+            app:startingPoint="bottom"
+
+            app:textSize="34sp"
+
+            />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="50dp"
+            android:layout_gravity="center"
+            android:id="@+id/workout_IMG_animation"
+            />
+
+    </FrameLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/workout_LAY_pause_resume_control"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
         android:layout_marginBottom="28dp"
-        >
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <TextView
+            android:id="@+id/workout_LBL_duration_title"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:id="@+id/workout_LBL_duration_title"
-            android:text="@string/duration"
-            android:textSize="18sp"
-            android:textAllCaps="true"
             android:gravity="bottom|center"
+            android:text="@string/duration"
+            android:textAllCaps="true"
             android:textColor="@android:color/darker_gray"
-            />
+            android:textSize="18sp" />
 
         <TextView
+            android:id="@+id/workout_LBL_duration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/workout_LBL_duration"
-            android:textSize="26sp"
-            android:textAllCaps="true"
             android:gravity="bottom|center"
-            />
+            android:textAllCaps="true"
+            android:textSize="26sp" />
 
 
     </LinearLayout>
 
 
     <LinearLayout
+        android:id="@+id/workout_LAY_pause_resume_control"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:gravity="center"
         android:layout_marginBottom="22dp"
-        android:orientation="horizontal"
-        android:id="@+id/workout_LAY_pause_resume_control"
-        >
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <ImageButton
+            android:id="@+id/workout_BTN_prev"
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_baseline_navigate_next_24"
-            android:scaleX="-1"
-            android:scaleType="fitCenter"
             android:layout_marginEnd="10dp"
-            android:id="@+id/workout_BTN_prev"
-            />
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:scaleX="-1"
+            android:src="@drawable/ic_baseline_navigate_next_24" />
 
         <ImageButton
+            android:id="@+id/workout_BTN_pause_resume"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_baseline_pause_circle_filled_24"
             android:scaleType="fitCenter"
-            android:id="@+id/workout_BTN_pause_resume"
-            />
+            android:src="@drawable/ic_baseline_pause_circle_filled_24" />
 
         <ImageButton
+            android:id="@+id/workout_BTN_next"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_marginStart="10dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_baseline_navigate_next_24"
             android:scaleType="fitCenter"
 
-            android:id="@+id/workout_BTN_next"
-            />
-
+            android:src="@drawable/ic_baseline_navigate_next_24" />
 
 
     </LinearLayout>
-
 
 
 </RelativeLayout>

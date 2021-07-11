@@ -23,4 +23,5 @@
     <color name="progress_bar_background">#E6E6E6</color>
     <color name="equip_selected">#9928E81A</color>
     <color name="equip_non_selected">#ABA1A1A1</color>
+    <color name="workout_timer_background">#FFFFFF</color>
 </resources>
