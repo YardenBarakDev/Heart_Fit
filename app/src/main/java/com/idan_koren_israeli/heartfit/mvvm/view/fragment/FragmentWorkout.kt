@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -20,6 +21,9 @@ import com.hamzaahmedkhan.circulartimerview.TimeFormatEnum
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.mvvm.model.*
 import com.idankorenisraeli.customprogressbar.CustomProgressBar
+import com.idankorenisraeli.mysettingsscreen.MySettingsScreen
+import com.idankorenisraeli.mysettingsscreen.tile_data.essential.BasicTileData
+import com.idankorenisraeli.mysettingsscreen.tile_data.view.SeekbarTileData
 import java.io.Serializable
 import java.util.*
 import kotlin.collections.ArrayList
@@ -48,7 +52,7 @@ class FragmentWorkout : Fragment() {
     // TODO: Rename and change types of parameters
     private lateinit var workout: Workout
     private lateinit var user: User
-    private lateinit var exercises: List<Exercise>
+    private lateinit var exercises: ArrayList<Exercise>
 
 
     private lateinit var workoutProgress:CustomProgressBar
@@ -61,6 +65,7 @@ class FragmentWorkout : Fragment() {
     private lateinit var prevButton : ImageButton
     private lateinit var heartsCount: TextView
     private lateinit var durationTimerText: TextView
+    private var prepTimeSeconds: Int = 0
 
     private var totalWorkoutTime:Int = 0
     private var currentExercise:Int = 0
@@ -90,6 +95,7 @@ class FragmentWorkout : Fragment() {
 
         val parent:View = inflater.inflate(R.layout.fragment_workout, container, false)
         findViews(parent)
+        initPreparation()
         initTimers()
         initProgress()
         initButtons()
@@ -139,6 +145,14 @@ class FragmentWorkout : Fragment() {
         heartsCount.text = workout.heartsValue.toString()
     }
 
+    private fun initPreparation(){
+        prepTimeSeconds = (MySettingsScreen.getInstance().getTileByTitle("Preparation Time") as SeekbarTileData).savedValue
+
+        if(prepTimeSeconds > 0)
+            exercises.add(0, Exercise(timeInSeconds = prepTimeSeconds, name = "Get Ready", isBreak = true))
+
+    }
+
 
     private fun startTimerForNextExercise(){
         if(currentExercise == exercises.size){
@@ -150,6 +164,11 @@ class FragmentWorkout : Fragment() {
         updateNextUpText()
         updateAnimation()
 
+        if(exercises[currentExercise].isBreak)
+            timerView.setProgressColor(ContextCompat.getColor(requireContext(),R.color.color_break))
+        else
+            timerView.setProgressColor(ContextCompat.getColor(requireContext(),R.color.progress_bar))
+
 
         timerView.setCircularTimerListener(object : CircularTimerListener{
             override fun updateDataOnTick(remainingTimeInMs: Long): String {
@@ -159,7 +178,9 @@ class FragmentWorkout : Fragment() {
             override fun onTimerFinished() {
                 // Currently we are tracking each exercise that is fully complete via timer
                 // When user skips/goes back to other exercise it will not be saved
-                workoutLog.trackExerciseDone(exercises[currentExercise], user.weight!!)
+                if(!exercises[currentExercise].isBreak) {
+                    workoutLog.trackExerciseDone(exercises[currentExercise], user.weight)
+                }
                 currentExercise++
                 startTimerForNextExercise()
                 // Next timer of next exercise will start
