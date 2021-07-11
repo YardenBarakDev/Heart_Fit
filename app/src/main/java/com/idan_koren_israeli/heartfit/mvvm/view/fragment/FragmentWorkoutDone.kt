@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Database
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.idan_koren_israeli.heartfit.R
@@ -92,7 +93,7 @@ class FragmentWorkoutFinished : Fragment() {
 
 
 
-        val exercisesAdapter = ExercisesDoneAdapter(requireContext(), workoutLog!!.exercisesDone)
+        val exercisesAdapter = ExercisesDoneAdapter(requireContext(), workoutLog!!.exercisesDone, DatabaseManager.currentUser.weight)
         exercisesRecycler.layoutManager = LinearLayoutManager(requireContext())
 
         exercisesRecycler.adapter = exercisesAdapter

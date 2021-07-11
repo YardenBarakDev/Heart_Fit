@@ -10,7 +10,9 @@ import com.idan_koren_israeli.heartfit.mvvm.model.Exercise
 import com.idan_koren_israeli.heartfit.recycler.holder.EquipmentSelectHolder
 import com.idan_koren_israeli.heartfit.recycler.holder.ExercisesDoneHolder
 
-class ExercisesDoneAdapter(context: Context, exercises: ArrayList<Exercise>) : RecyclerView.Adapter<ExercisesDoneHolder>() {
+class ExercisesDoneAdapter(context: Context, exercises: ArrayList<Exercise>,
+                           private val userWeight: Float
+) : RecyclerView.Adapter<ExercisesDoneHolder>() {
 
     var data : ArrayList<Exercise> = arrayListOf()
     private val mInflater:LayoutInflater = LayoutInflater.from(context)
@@ -26,7 +28,7 @@ class ExercisesDoneAdapter(context: Context, exercises: ArrayList<Exercise>) : R
     }
 
     override fun onBindViewHolder(holder: ExercisesDoneHolder, position: Int) {
-        holder.setExercise(data[position])
+        holder.setExercise(data[position], userWeight)
     }
 
     override fun getItemCount(): Int {

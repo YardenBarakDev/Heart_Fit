@@ -5,6 +5,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.mvvm.model.Exercise
+import com.idan_koren_israeli.heartfit.mvvm.model.WorkoutLog
 
 class ExercisesDoneHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -22,8 +23,9 @@ class ExercisesDoneHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         nameText = parent.findViewById(R.id.exercise_holder_LBL_name)
     }
 
-    fun setExercise(exercise: Exercise) {
-        caloriesText.text = exercise.timeInSeconds.toString()
+    fun setExercise(exercise: Exercise, weight:Float) {
+
+        caloriesText.text = WorkoutLog.calcCaloriesBurned(exercise, weight).toString()
         timeText.text = String.format("%s seconds", exercise.timeInSeconds.toString())
         nameText.text = exercise.name
     }

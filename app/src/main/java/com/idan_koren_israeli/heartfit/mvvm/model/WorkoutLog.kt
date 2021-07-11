@@ -23,8 +23,11 @@ class WorkoutLog(val workout:Workout? = null, var totalDuration:Int = 0,
 
     }
 
-    private fun calcCaloriesBurned(exercise: Exercise, weight:Float) : Int{
-        //The formula to use is: METs x 3.5 x (your body weight in kilograms) / 200 = calories burned per minute
-        return (((MET.times(3.5f).times(weight)).div(200)).times(exercise.timeInSeconds!!.div(60f))).toInt()
+    companion object{
+        fun calcCaloriesBurned(exercise: Exercise, weight:Float) : Int{
+            //The formula to use is: METs x 3.5 x (your body weight in kilograms) / 200 = calories burned per minute
+            return (((MET.times(3.5f).times(weight)).div(200)).times(exercise.timeInSeconds!!.div(60f))).toInt()
+        }
     }
+
 }
