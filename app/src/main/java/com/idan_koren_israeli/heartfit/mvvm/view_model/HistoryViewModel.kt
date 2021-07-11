@@ -2,7 +2,7 @@ package com.idan_koren_israeli.heartfit.mvvm.view_model
 
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
-import com.idan_koren_israeli.heartfit.db.room_db.ExerciseSummary
+import com.idan_koren_israeli.heartfit.db.room_db.WorkoutSummary
 import com.idan_koren_israeli.heartfit.mvvm.repository.HistoryRepository
 import com.idan_koren_israeli.heartfit.enums.SortType
 
@@ -16,7 +16,7 @@ class HistoryViewModel : ViewModel() {
     private val exerciseSummaryMaXHearts = historyRepository.getAllExerciseSummarySortedByMaXHearts()
     private val exerciseSummaryTotalTime = historyRepository.getAllExerciseSummarySortedByTotalTime()
 
-    val exerciseSummary = MediatorLiveData<List<ExerciseSummary>>()
+    val exerciseSummary = MediatorLiveData<List<WorkoutSummary>>()
     var sortType = SortType.DATE
 
     init {

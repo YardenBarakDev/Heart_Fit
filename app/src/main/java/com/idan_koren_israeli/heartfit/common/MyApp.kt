@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.util.Log
 import android.view.LayoutInflater
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
@@ -14,7 +15,10 @@ import com.idan_koren_israeli.heartfit.dialog.DialogWeightPicker
 import com.idan_koren_israeli.heartfit.db.firebase.database.DatabaseManager
 import com.idan_koren_israeli.heartfit.db.firebase.firestore.FirestoreManager
 import com.idan_koren_israeli.heartfit.db.room_db.HeartFitRoomDB
+import com.idan_koren_israeli.heartfit.mvvm.model.Equipment
 import com.idankorenisraeli.mysettingsscreen.MySettingsScreen
+import com.idankorenisraeli.mysettingsscreen.callback.OnMultiSelectListener
+import com.idankorenisraeli.mysettingsscreen.tile_data.dialog.MultiChoiceTileData
 import com.idankorenisraeli.mysettingsscreen.tile_data.essential.ButtonTileData
 import com.idankorenisraeli.mysettingsscreen.tile_data.essential.DividerTileData
 import com.idankorenisraeli.mysettingsscreen.tile_data.essential.SettingsTileData
@@ -68,13 +72,21 @@ class MyApp : MultiDexApplication() {
 
 
 
+        val equipmentNames :ArrayList<String> = arrayListOf()
+        for(eq in Equipment.values()){
+            equipmentNames.add(eq.displayName)
+        }
 
-        val selectEquipmentTile: ButtonTileData = ButtonTileData("Select Equipment", "What do you have at home?")
+        val selectEquipmentTile: MultiChoiceTileData = MultiChoiceTileData("Select Equipment", "What equipment do you have at home?")
             .withIconId(R.drawable.ic_dumbbell)
-            .withOnClickListener {
-                //Show Fragment of Equipmnet Selection and use a callback to update the result
-                Log.i("pttt", "Showing equipment select menu.")
+            .withOptionsList(equipmentNames)
+            .withOnChangedListener{ options, checked ->
+                for(i in 0 until options.size){
+                    if(checked[i])
+                        Log.i("pttt", "Checked: ${options[i]}" )
+                }
 
+                // TODO load and save old and new preferences in firebase
             }
 
         val prepTimeTile :SeekbarTileData = SeekbarTileData("Preparation Time", "Pre-Workout delay in seconds")

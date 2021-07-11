@@ -5,10 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(version = 1, entities = [ExerciseSummary::class])
+@Database(version = 1, entities = [WorkoutSummary::class])
 abstract class HeartFitRoomDB : RoomDatabase() {
 
-    abstract fun exerciseSummaryDao(): ExerciseSummaryDao
+    abstract fun exerciseSummaryDao(): WorkoutSummaryDao
 
 
     companion object{

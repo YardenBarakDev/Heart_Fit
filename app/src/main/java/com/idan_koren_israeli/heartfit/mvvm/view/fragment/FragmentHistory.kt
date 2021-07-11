@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.idan_koren_israeli.heartfit.R
-import com.idan_koren_israeli.heartfit.db.room_db.ExerciseSummary
+import com.idan_koren_israeli.heartfit.db.room_db.WorkoutSummary
 import com.idan_koren_israeli.heartfit.mvvm.view_model.HistoryViewModel
 import com.idan_koren_israeli.heartfit.enums.SortType
 import com.idan_koren_israeli.heartfit.recycler.adapter.HistoryListAdapter
@@ -24,7 +24,7 @@ class FragmentHistory : Fragment() {
     private var viewFragmentHistory : View? = null
     private lateinit var fragmentHistory_Spinner : Spinner
     private lateinit var fragmentHistory_RecyclerView : RecyclerView
-    private lateinit var exerciseSummary: List<ExerciseSummary>
+    private lateinit var workoutSummary: List<WorkoutSummary>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (viewFragmentHistory == null)
@@ -47,8 +47,8 @@ class FragmentHistory : Fragment() {
     }
 
     private fun initRecycleView() {
-        exerciseSummary = mutableListOf()
-        historyListAdapter = HistoryListAdapter(exerciseSummary)
+        workoutSummary = mutableListOf()
+        historyListAdapter = HistoryListAdapter(workoutSummary)
         fragmentHistory_RecyclerView.adapter = historyListAdapter
         fragmentHistory_RecyclerView.layoutManager = LinearLayoutManager(requireContext())
         fragmentHistory_RecyclerView.setHasFixedSize(true)

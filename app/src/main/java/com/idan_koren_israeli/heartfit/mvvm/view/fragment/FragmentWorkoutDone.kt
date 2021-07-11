@@ -7,14 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
 import com.idan_koren_israeli.heartfit.R
-import com.idan_koren_israeli.heartfit.mvvm.model.Exercise
+import com.idan_koren_israeli.heartfit.db.firebase.database.DatabaseManager
+import com.idan_koren_israeli.heartfit.db.room_db.WorkoutSummary
+import com.idan_koren_israeli.heartfit.db.room_db.WorkoutSummaryDao
 import com.idan_koren_israeli.heartfit.mvvm.model.WorkoutLog
-import com.idan_koren_israeli.heartfit.recycler.adapter.EquipmentSelectAdapter
+import com.idan_koren_israeli.heartfit.mvvm.view_model.HistoryViewModel
 import com.idan_koren_israeli.heartfit.recycler.adapter.ExercisesDoneAdapter
 
 
@@ -37,6 +39,16 @@ class FragmentWorkoutFinished : Fragment() {
         arguments?.let {
             workoutLog = it.getSerializable(KEY_WORKOUT_LOG) as WorkoutLog
         }
+
+
+        //TODO save workout summary to ROOMSQL
+        // Id is currently 0, need to check for auto-generation
+        val summary:WorkoutSummary = WorkoutSummary(id = 0, timestamp = System.currentTimeMillis(),
+            userId = DatabaseManager.currentUser.uid!!, heartsCollected = workoutLog!!.workout!!.heartsValue,
+            caloriesBurned = workoutLog!!.caloriesBurned!!, totalDurationSeconds = workoutLog!!.totalDuration,
+            difficulty = workoutLog!!.workout!!.workoutLevel.name, muscles = workoutLog!!.workout!!.muscle.joinToString(separator = ", "))
+
+
     }
 
     override fun onCreateView(
@@ -44,7 +56,7 @@ class FragmentWorkoutFinished : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val parent = inflater.inflate(R.layout.fragment_workout_finished, container, false)
+        val parent = inflater.inflate(R.layout.fragment_workout_done, container, false)
         findViews(parent)
         attachInfo()
         initDoneButton()

@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.idan_koren_israeli.heartfit.R
-import com.idan_koren_israeli.heartfit.db.room_db.ExerciseSummary
+import com.idan_koren_israeli.heartfit.db.room_db.WorkoutSummary
 
-class HistoryListAdapter(private var historyList : List<ExerciseSummary>) : RecyclerView.Adapter<HistoryListAdapter.HistoryListHolder>() {
+class HistoryListAdapter(private var historyList : List<WorkoutSummary>) : RecyclerView.Adapter<HistoryListAdapter.HistoryListHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryListHolder {
@@ -24,7 +24,7 @@ class HistoryListAdapter(private var historyList : List<ExerciseSummary>) : Recy
 
         holder.historyList_LBL_heartsCollected.text = "Heart collected: " + exerciseSummary.heartsCollected
         holder.historyList_LBL_caloriesBurned.text = "Calories burned: " + exerciseSummary.caloriesBurned
-        holder.historyList_LBL_totalTime.text = "Total time: " + exerciseSummary.totalTime
+        holder.historyList_LBL_totalTime.text = "Total time: " + exerciseSummary.totalDurationSeconds
         holder.historyList_LBL_difficulty.text = "Difficulty: " + exerciseSummary.difficulty
         holder.historyList_LBL_muscles.text = "Muscles: " + exerciseSummary.muscles
     }
@@ -33,7 +33,7 @@ class HistoryListAdapter(private var historyList : List<ExerciseSummary>) : Recy
         return historyList.size
     }
 
-    fun updateList(historyList : List<ExerciseSummary>){
+    fun updateList(historyList : List<WorkoutSummary>){
         this.historyList = historyList
     }
 
