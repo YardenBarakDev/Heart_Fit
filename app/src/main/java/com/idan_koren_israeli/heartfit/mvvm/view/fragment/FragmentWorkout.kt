@@ -3,6 +3,7 @@ package com.idan_koren_israeli.heartfit.mvvm.view.fragment
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -22,8 +23,8 @@ import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.mvvm.model.*
 import com.idankorenisraeli.customprogressbar.CustomProgressBar
 import com.idankorenisraeli.mysettingsscreen.MySettingsScreen
-import com.idankorenisraeli.mysettingsscreen.tile_data.essential.BasicTileData
 import com.idankorenisraeli.mysettingsscreen.tile_data.view.SeekbarTileData
+import com.idankorenisraeli.mysettingsscreen.tile_data.view.ToggleTileData
 import java.io.Serializable
 import java.util.*
 import kotlin.collections.ArrayList
@@ -48,7 +49,7 @@ private const val ANIMATION_RESOURCE_NAME_PREFIX = "anim_exercise_"
  * Use the [FragmentWorkout.newInstance] factory method to
  * create an instance of this fragment.
  */
-class FragmentWorkout : Fragment() {
+class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
     // TODO: Rename and change types of parameters
     private lateinit var workout: Workout
     private lateinit var user: User
@@ -70,7 +71,8 @@ class FragmentWorkout : Fragment() {
     private var totalWorkoutTime:Int = 0
     private var currentExercise:Int = 0
 
-
+    private lateinit var tts : TextToSpeech
+    private var ttsEnabled : Boolean = false
 
     private var paused : Boolean = false
 
@@ -85,6 +87,8 @@ class FragmentWorkout : Fragment() {
 
             workoutLog = WorkoutLog(workout, 0, arrayListOf(), 0)
         }
+
+        tts = TextToSpeech(requireContext(), this)
     }
 
     override fun onCreateView(
@@ -164,6 +168,9 @@ class FragmentWorkout : Fragment() {
         updateNextUpText()
         updateAnimation()
 
+        if(ttsEnabled)
+            tts.speak(exercises[currentExercise].name,TextToSpeech.QUEUE_FLUSH,null, null)
+
         if(exercises[currentExercise].isBreak)
             timerView.setProgressColor(ContextCompat.getColor(requireContext(),R.color.color_break))
         else
@@ -211,6 +218,7 @@ class FragmentWorkout : Fragment() {
 
 
     }
+
 
     private fun updateAnimation(){
         if(exercises[currentExercise].animationId==null) {
@@ -351,10 +359,23 @@ class FragmentWorkout : Fragment() {
         pause()
     }
 
-    override fun onResume() {
-        super.onResume()
-        pause() // When user gets back to the screen, it should be still paused
-        // User will resume the workout by pressing the resume button
+    override fun onDestroy() {
+        tts.stop()
+        tts.shutdown()
+        super.onDestroy()
     }
+
+
+    //region TTS
+    override fun onInit(status: Int) {
+        ttsEnabled = (MySettingsScreen.getInstance().getTileByTitle("Text to Speech") as ToggleTileData).savedValue
+        if(!ttsEnabled)
+            return
+    }
+
+
+
+
+    //endregion
 
 }

@@ -18,12 +18,14 @@ import com.idan_koren_israeli.heartfit.db.room_db.HeartFitRoomDB
 import com.idan_koren_israeli.heartfit.mvvm.model.Equipment
 import com.idankorenisraeli.mysettingsscreen.MySettingsScreen
 import com.idankorenisraeli.mysettingsscreen.callback.OnMultiSelectListener
+import com.idankorenisraeli.mysettingsscreen.enums.ToggleType
 import com.idankorenisraeli.mysettingsscreen.tile_data.dialog.MultiChoiceTileData
 import com.idankorenisraeli.mysettingsscreen.tile_data.essential.ButtonTileData
 import com.idankorenisraeli.mysettingsscreen.tile_data.essential.DividerTileData
 import com.idankorenisraeli.mysettingsscreen.tile_data.essential.SettingsTileData
 import com.idankorenisraeli.mysettingsscreen.tile_data.essential.TitleTileData
 import com.idankorenisraeli.mysettingsscreen.tile_data.view.SeekbarTileData
+import com.idankorenisraeli.mysettingsscreen.tile_data.view.ToggleTileData
 import com.pixplicity.easyprefs.library.Prefs
 
 
@@ -95,7 +97,10 @@ class MyApp : MultiDexApplication() {
             .withDefaultValue(0)
             .withIconId(R.drawable.ic_baseline_timer_24)
 
-        //TODO Voice announcment checkbox tile if will be implemented
+
+        val ttsTile : ToggleTileData = ToggleTileData("Text to Speech", "Exercise name voice assistance")
+            .withToggleType(ToggleType.SWITCH).withDefaultValue(true)
+            .withIconId(R.drawable.ic_baseline_record_voice_over_24)
 
         val horizontalLineTile : DividerTileData = DividerTileData(2)
 
@@ -129,6 +134,7 @@ class MyApp : MultiDexApplication() {
         dataTiles.add(selectEquipmentTile)
         dataTiles.add(prepTimeTile)
         dataTiles.add(weightTile)
+        dataTiles.add(ttsTile)
         dataTiles.add(horizontalLineTile)
         dataTiles.add(termsOfUseTime)
         dataTiles.add(infoTile)
