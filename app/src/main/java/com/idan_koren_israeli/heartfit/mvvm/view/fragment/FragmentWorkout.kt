@@ -227,13 +227,7 @@ class FragmentWorkout : Fragment() {
 
     private fun initButtons(){
         pauseResumeButton.setOnClickListener {
-            timerView.togglePauseResume()
-            paused = !paused
-
-            if(paused)
-                pauseResumeButton.setImageResource(R.drawable.ic_baseline_play_circle_filled_24)
-            else
-                pauseResumeButton.setImageResource(R.drawable.ic_baseline_pause_circle_filled_24)
+            togglePauseResume()
         }
         nextButton.setOnClickListener {
             currentExercise++
@@ -329,6 +323,38 @@ class FragmentWorkout : Fragment() {
         durationTimerText.text=
             String.format("%02d:%02d:%02d", seconds / 3600,
                 (seconds % 3600) / 60, (seconds % 60));
+    }
+
+    private fun togglePauseResume(){
+        if(paused){
+            resume()
+        }
+        else
+            pause()
+    }
+
+    private fun pause(){
+        paused = true
+        timerView.pause()
+        pauseResumeButton.setImageResource(R.drawable.ic_baseline_play_circle_filled_24)
+    }
+
+
+    private fun resume(){
+        paused = false
+        timerView.resume()
+        pauseResumeButton.setImageResource(R.drawable.ic_baseline_pause_circle_filled_24)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        pause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        pause() // When user gets back to the screen, it should be still paused
+        // User will resume the workout by pressing the resume button
     }
 
 }

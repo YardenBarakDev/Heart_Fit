@@ -563,6 +563,14 @@ public class CircularTimerView extends View {
             countDownTimer.pause();
     }
 
+    public void pause(){
+        countDownTimer.pause();
+    }
+
+    public void resume(){
+        countDownTimer.resume();
+    }
+
 
     /**
      * Use this method to initialize Timer, default interval time is 1second, you can use other method to define interval

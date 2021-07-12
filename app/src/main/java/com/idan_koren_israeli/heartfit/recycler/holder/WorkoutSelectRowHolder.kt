@@ -12,6 +12,7 @@ import androidx.room.Database
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.common.CommonUtils
 import com.idan_koren_israeli.heartfit.db.firebase.database.DatabaseManager
+import com.idan_koren_israeli.heartfit.db.firebase.firestore.FirestoreManager
 import com.idan_koren_israeli.heartfit.mvvm.model.*
 import java.io.Serializable
 
@@ -82,21 +83,16 @@ class WorkoutSelectRowHolder(itemView: View, private val onClick: (workout: Work
                     pass data between fragments
                     https://developer.android.com/guide/navigation/navigation-pass-data*/
 
-                    val bundle = bundleOf(
-                        "workout" to workout,
-                        "exercises" to arrayListOf<Exercise>(Exercise(listOf(Equipment.Bench), ExerciseLevel.Basic,
-                            listOf(MuscleGroup.ABDOMINALS),"Exercise Test", 8, 20),
-                            Exercise(listOf(Equipment.Bench), ExerciseLevel.Basic,
-                                listOf(MuscleGroup.ABDOMINALS),"Exercise Test", 8, 30,8),
-                            Exercise(listOf(Equipment.Bench), ExerciseLevel.Basic,
-                                listOf(MuscleGroup.ABDOMINALS),"Exercise Test", 8, 30)),
-                        "user" to DatabaseManager.currentUser
-                    )
-                    itemView.findNavController().navigate(R.id.action_fragmentHome_to_fragmentWorkout, bundle)
-
+                    FirestoreManager.loadExercisesByName("Bench press") {
+                        val bundle = bundleOf(
+                            "workout" to workout,
+                            "exercises" to it,
+                            "user" to DatabaseManager.currentUser
+                        )
+                        itemView.findNavController()
+                            .navigate(R.id.action_fragmentHome_to_fragmentWorkout, bundle)
+                    }
                 }
-
-
             }
         }
     }
