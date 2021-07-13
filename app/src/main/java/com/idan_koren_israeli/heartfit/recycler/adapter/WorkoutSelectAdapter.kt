@@ -13,7 +13,14 @@ import com.idan_koren_israeli.heartfit.recycler.holder.WorkoutSelectRowHolder
 class WorkoutSelectAdapter(context: Context, var workouts: ArrayList<ArrayList<Workout>>) :
     RecyclerView.Adapter<WorkoutSelectRowHolder>() {
 
-
+    companion object{
+        val workoutColors = listOf<Int>(
+            R.color.workout_btn_background_1,
+            R.color.workout_btn_background_2,
+            R.color.workout_btn_background_3,
+            R.color.workout_btn_background_4,
+        )
+    }
 
     var mInflater: LayoutInflater? = null
 
@@ -33,7 +40,7 @@ class WorkoutSelectAdapter(context: Context, var workouts: ArrayList<ArrayList<W
     }
 
     override fun onBindViewHolder(rowHolder: WorkoutSelectRowHolder, position: Int) {
-            rowHolder.setContent(workouts[position])
+            rowHolder.setContent(workouts[position], workoutColors[position%workoutColors.size])
     }
 
     override fun getItemCount(): Int {

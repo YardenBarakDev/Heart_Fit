@@ -25,4 +25,14 @@
     <color name="equip_selected">#9928E81A</color>
     <color name="equip_non_selected">#ABA1A1A1</color>
     <color name="workout_timer_background">#FFFFFF</color>
+
+
+    <!--Workout Button Background Colors-->
+    <color name="workout_btn_background_1">#5BBBE8</color>
+    <color name="workout_btn_background_2">#EC9B28</color>
+    <color name="workout_btn_background_3">#BD82EF</color>
+    <color name="workout_btn_background_4">#70D625</color>
+
+
+
 </resources>

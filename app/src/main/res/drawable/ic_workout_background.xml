@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="oval">
-    <stroke
-        android:width="5dp"
-        android:color="#FFaaabbb"
-        />
-    <solid
-        android:color="#E3E6EF"/>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/ic_workout_ITEM_background">
+        <shape android:shape="oval">
+            <stroke
+                android:color="@color/background_primary"
+                android:width="14dp"
+                />
+            <solid
+                android:color="#E3E6EF"/>
+            <size
+                android:width="120dp"
+                android:height="120dp"/>
+        </shape>
+    </item>
 
-    <size
-        android:width="120dp"
-        android:height="120dp"/>
-</shape>
+    <item>
+        <shape android:shape="oval">
+            <stroke
+                android:color="#FFaaabbb"
+                android:width="8dp"
+                />
+            <size
+                android:width="120dp"
+                android:height="120dp"/>
+        </shape>
+    </item>
+</layer-list>
+
