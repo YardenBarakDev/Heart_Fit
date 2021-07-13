@@ -32,5 +32,9 @@
     <string name="number_example">00</string>
     <string name="exercises">exercises</string>
     <string name="exercises_done">Exercises Done</string>
+    <string name="workout_exit_title">Exit Workout</string>
+    <string name="workout_exit_message">Are you sure you would like to exit this workout?\n\nWorkout progress will not be saved.</string>
+    <string name="workout_exit_positive">Exit</string>
+    <string name="workout_exit_negative">Resume</string>
 
 </resources>

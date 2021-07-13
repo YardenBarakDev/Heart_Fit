@@ -11,11 +11,15 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hamzaahmedkhan.circulartimerview.CircularTimerListener
 import com.hamzaahmedkhan.circulartimerview.CircularTimerView
 import com.hamzaahmedkhan.circulartimerview.TimeFormatEnum
@@ -27,7 +31,6 @@ import com.idankorenisraeli.mysettingsscreen.tile_data.view.SeekbarTileData
 import com.idankorenisraeli.mysettingsscreen.tile_data.view.ToggleTileData
 import java.io.Serializable
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.math.ceil
 
 
@@ -89,6 +92,33 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
         }
 
         tts = TextToSpeech(requireContext(), this)
+
+        initBackPress()
+    }
+
+    private fun initBackPress() {
+
+        // This callback will only be called when MyFragment is at least Started.
+
+        // This callback will only be called when MyFragment is at least Started.
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true /* enabled by default */) {
+                override fun handleOnBackPressed() {
+                    pause()
+                    MaterialAlertDialogBuilder(requireContext())
+                        .setTitle(R.string.workout_exit_title)
+                        .setMessage(R.string.workout_exit_message)
+                        .setPositiveButton(R.string.workout_exit_positive) { _, _ ->
+                            findNavController()
+                                .navigate(R.id.action_fragmentWorkout_to_fragmentHome)
+                            }
+                        .setNegativeButton(R.string.workout_exit_negative, null)
+                        .setOnDismissListener{resume()}
+                        .show()
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+
     }
 
     override fun onCreateView(
