@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="65dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="@color/black"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/background_primary"
     app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true"
     tools:context=".mvvm.view.fragment.FragmentTopBar">
 
 
@@ -13,47 +15,188 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        >
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_baseline_exit_to_app_24"
-            app:tint="@color/white"
-            android:layout_centerVertical="true"
-            android:rotationY="180"
-            android:layout_alignParentStart="true"
-            android:id="@+id/top_bar_BTN_sign_out"
-            />
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_heart"
-            android:id="@+id/top_bar_IMG_heart"
-            android:layout_toEndOf="@id/top_bar_BTN_sign_out"
-            />
+        android:paddingStart="8dp"
+        android:layout_margin="5dp"
+        android:paddingEnd="8dp">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_toEndOf="@id/top_bar_IMG_heart"
-            android:layout_marginStart="20dp"
-            android:textColor="@android:color/white"
-            android:textSize="28sp"
-            android:gravity="center"
-            android:letterSpacing="-0.015"
-            android:id="@+id/top_bar_LBL_heart_count"
-            android:text="@string/app_name" />
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:textColor="@color/text_secondary"
+            android:id="@+id/top_bar_LBL_last_7_days"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/last_7_days" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/top_bar_LAY_stats"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/top_bar_LBL_last_7_days"
+            android:layout_centerInParent="true"
+            android:gravity="bottom"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:letterSpacing="0.04"
+                    android:layout_marginTop="8dp"
+                    android:includeFontPadding="false"
+                    android:id="@+id/top_bar_LBL_workouts"
+                    android:text="@string/_0"
+                    android:textSize="24sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="@color/text_secondary"
+                    android:id="@+id/top_bar_LBL_workouts_label"
+                    android:text="@string/workouts"
+                    />
+
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="30dp"
+                android:layout_height="0dp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:letterSpacing="0.04"
+                    android:layout_marginTop="10dp"
+                    android:includeFontPadding="false"
+                    android:id="@+id/top_bar_LBL_hours"
+                    android:text="@string/_0_0"
+                    android:textSize="36sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="@color/text_secondary"
+                    android:id="@+id/top_bar_LBL_hours_title"
+                    android:text="@string/hours"
+                    />
+
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="30dp"
+                android:layout_height="0dp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:letterSpacing="0.04"
+                    android:layout_marginTop="8dp"
+                    android:includeFontPadding="false"
+                    android:id="@+id/top_bar_LBL_calories"
+                    android:text="@string/_0"
+                    android:textSize="24sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="@color/text_secondary"
+                    android:id="@+id/top_bar_LBL_calories_title"
+                    android:text="@string/calories"
+                    />
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/top_bar_BTN_sign_out"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:rotationY="180"
+            android:layout_margin="3dp"
+            android:src="@drawable/ic_baseline_exit_to_app_24"
+            app:tint="@color/black" />
+
+
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="4dp">
+
+            <ImageView
+                android:id="@+id/top_bar_IMG_heart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_heart" />
+
+            <TextView
+                android:id="@+id/top_bar_LBL_heart_count"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:autoSizeMaxTextSize="24sp"
+                android:autoSizeMinTextSize="18sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="center"
+                android:letterSpacing="-0.015"
+                android:lines="1"
+                android:padding="4dp"
+                android:text="@string/app_name"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+        </FrameLayout>
 
 
     </RelativeLayout>
-
-
 
 
 </com.google.android.material.card.MaterialCardView>
