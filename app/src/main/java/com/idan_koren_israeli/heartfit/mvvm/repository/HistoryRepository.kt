@@ -16,6 +16,9 @@ class HistoryRepository : ViewModel() {
 
     fun getInstance() : HistoryRepository{return instance}
 
+    fun storeWorkoutInDB(workOut : WorkoutSummary){
+        exerciseSummaryDao.insertAll(workOut)
+    }
     fun getAllExerciseSummarySortedByDate() : LiveData<List<WorkoutSummary>>{
         return exerciseSummaryDao.getAllRunsSortedByDate(uid.toString())
     }
