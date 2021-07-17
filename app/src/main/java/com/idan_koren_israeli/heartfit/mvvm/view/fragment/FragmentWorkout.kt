@@ -109,9 +109,13 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
                         .setTitle(R.string.workout_exit_title)
                         .setMessage(R.string.workout_exit_message)
                         .setPositiveButton(R.string.workout_exit_positive) { _, _ ->
+                            tts.stop()
+                            tts.shutdown()
+
                             findNavController()
                                 .navigate(R.id.action_fragmentWorkout_to_fragmentHome)
                             }
+
                         .setNegativeButton(R.string.workout_exit_negative, null)
                         .setOnDismissListener{resume()}
                         .show()

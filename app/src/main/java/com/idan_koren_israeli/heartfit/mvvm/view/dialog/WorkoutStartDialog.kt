@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
-import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.db.firebase.database.DatabaseManager
@@ -18,6 +17,7 @@ import com.idan_koren_israeli.heartfit.mvvm.model.Workout
 
 class WorkoutStartDialogManager(val activity: Activity) {
     private lateinit var materialAlertDialogBuilder: MaterialAlertDialogBuilder
+    private lateinit var scrollLayout : ViewGroup
     private lateinit var dialogLayout : ViewGroup
 
     fun create(){
@@ -26,25 +26,29 @@ class WorkoutStartDialogManager(val activity: Activity) {
 
 
     fun inflate(){
-        dialogLayout = LayoutInflater.from(activity)
-            .inflate(R.layout.dialog_workout_start, null, false) as ViewGroup
+        dialogLayout = (LayoutInflater.from(activity)
+            .inflate(R.layout.dialog_workout_start, null, false) as ViewGroup)
+
+        scrollLayout = dialogLayout.findViewById(R.id.workout_start_dialog_SCRL_parent)
     }
 
     private fun addEquipmentToLayout(allEquipment: List<Equipment>){
 
         for(equipment in allEquipment){
             val equipmentHolder = LayoutInflater.from(activity)
-                .inflate(R.layout.holder_equipment_select, dialogLayout, false)
+                .inflate(R.layout.holder_equipment_select, scrollLayout, false)
 
 
             equipmentHolder.layoutParams =
                 ViewGroup.LayoutParams(160, ViewGroup.LayoutParams.WRAP_CONTENT)
 
+
+
             equipmentHolder.findViewById<TextView>(R.id.equipment_card_LBL_label).text = equipment.displayName
             val equipmentImage = equipmentHolder.findViewById<ImageView>(R.id.equipment_card_IMG_image)
             equipmentImage.setImageDrawable(ContextCompat.getDrawable(activity,equipment.imageId))
 
-            dialogLayout.addView(equipmentHolder)
+            scrollLayout.addView(equipmentHolder)
         }
 
 
