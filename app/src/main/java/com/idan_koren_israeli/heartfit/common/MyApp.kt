@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.util.Log
 import android.view.LayoutInflater
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
@@ -15,9 +14,8 @@ import com.idan_koren_israeli.heartfit.dialog.DialogWeightPicker
 import com.idan_koren_israeli.heartfit.db.firebase.database.DatabaseManager
 import com.idan_koren_israeli.heartfit.db.firebase.firestore.FirestoreManager
 import com.idan_koren_israeli.heartfit.db.room_db.HeartFitRoomDB
-import com.idan_koren_israeli.heartfit.mvvm.model.Equipment
+import com.idan_koren_israeli.heartfit.mvvm.repository.Equipment
 import com.idankorenisraeli.mysettingsscreen.MySettingsScreen
-import com.idankorenisraeli.mysettingsscreen.callback.OnMultiSelectListener
 import com.idankorenisraeli.mysettingsscreen.enums.ToggleType
 import com.idankorenisraeli.mysettingsscreen.tile_data.dialog.MultiChoiceTileData
 import com.idankorenisraeli.mysettingsscreen.tile_data.essential.ButtonTileData

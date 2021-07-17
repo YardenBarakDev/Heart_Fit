@@ -6,9 +6,9 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.idan_koren_israeli.heartfit.R
-import com.idan_koren_israeli.heartfit.mvvm.model.EquipmentSelect
+import com.idan_koren_israeli.heartfit.mvvm.repository.Equipment
 
-class EquipmentSelectHolder(itemView: View, private val onClick: (equipmentSelect:EquipmentSelect) -> Unit, private var selected:Boolean = false):RecyclerView.ViewHolder(itemView){
+class EquipmentSelectHolder(itemView: View, private val onClick: (equipmentSelect: Equipment) -> Unit, private var selected:Boolean = false):RecyclerView.ViewHolder(itemView){
 
     private lateinit var label: TextView
     private lateinit var image: ImageView
@@ -27,7 +27,7 @@ class EquipmentSelectHolder(itemView: View, private val onClick: (equipmentSelec
     }
 
 
-    fun setEquipment(equipmentSelect: EquipmentSelect){
+    fun setEquipment(equipmentSelect: Equipment){
         label.text = equipmentSelect.displayName
         image.setImageDrawable(ContextCompat.getDrawable(itemView.context,equipmentSelect.imageId!!))
 

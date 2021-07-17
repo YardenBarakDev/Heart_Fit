@@ -1,5 +1,6 @@
 package com.idan_koren_israeli.heartfit.recycler.holder
 
+import android.app.Activity
 import android.graphics.Color
 import android.graphics.drawable.DrawableContainer.DrawableContainerState
 import android.graphics.drawable.GradientDrawable
@@ -19,6 +20,7 @@ import com.idan_koren_israeli.heartfit.common.CommonUtils
 import com.idan_koren_israeli.heartfit.db.firebase.database.DatabaseManager
 import com.idan_koren_israeli.heartfit.db.firebase.firestore.FirestoreManager
 import com.idan_koren_israeli.heartfit.mvvm.model.*
+import com.idan_koren_israeli.heartfit.mvvm.view.dialog.WorkoutStartDialogManager
 
 
 class WorkoutSelectRowHolder(itemView: View, private val onClick: (workout: Workout) -> Unit) :
@@ -92,15 +94,26 @@ class WorkoutSelectRowHolder(itemView: View, private val onClick: (workout: Work
                     pass data between fragments
                     https://developer.android.com/guide/navigation/navigation-pass-data*/
 
+                    val dialogManager = WorkoutStartDialogManager(itemView.context as Activity)
+
+                    dialogManager.create()
+                    dialogManager.inflate()
+
+                    dialogManager.launch(workout)
+
+                    /*
                     FirestoreManager.loadExercisesByName("Bench press") {
                         val bundle = bundleOf(
                             "workout" to workout,
                             "exercises" to it,
                             "user" to DatabaseManager.currentUser
                         )
+
                         itemView.findNavController()
                             .navigate(R.id.action_fragmentHome_to_fragmentWorkout, bundle)
                     }
+
+                     */
                 }
             }
         }

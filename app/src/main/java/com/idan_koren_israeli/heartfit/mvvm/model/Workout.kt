@@ -1,5 +1,6 @@
 package com.idan_koren_israeli.heartfit.mvvm.model
 
+import com.idan_koren_israeli.heartfit.mvvm.repository.Equipment
 import java.io.Serializable
 
 /**

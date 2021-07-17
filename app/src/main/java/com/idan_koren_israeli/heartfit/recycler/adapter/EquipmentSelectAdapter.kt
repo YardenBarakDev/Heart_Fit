@@ -7,14 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.idan_koren_israeli.heartfit.R
-import com.idan_koren_israeli.heartfit.mvvm.model.EquipmentSelect
+import com.idan_koren_israeli.heartfit.mvvm.repository.Equipment
 import com.idan_koren_israeli.heartfit.recycler.holder.EquipmentSelectHolder
 
-class EquipmentSelectAdapter(context: Context, equipmentSelectData: ArrayList<EquipmentSelect>): RecyclerView.Adapter<EquipmentSelectHolder>() {
-    var data:ArrayList<EquipmentSelect> = arrayListOf()
+class EquipmentSelectAdapter(context: Context, equipmentSelectData: ArrayList<Equipment>): RecyclerView.Adapter<EquipmentSelectHolder>() {
+    var data:ArrayList<Equipment> = arrayListOf()
     var mInflater:LayoutInflater? = null
 
-    private var selectedEquipmentSelect: MutableSet<EquipmentSelect> = mutableSetOf()
+    private var selectedEquipmentSelect: MutableSet<Equipment> = mutableSetOf()
 
     init{
         mInflater = LayoutInflater.from(context)
@@ -22,7 +22,7 @@ class EquipmentSelectAdapter(context: Context, equipmentSelectData: ArrayList<Eq
     }
 
 
-    private fun onEquipmentClick(equipmentSelect:EquipmentSelect){
+    private fun onEquipmentClick(equipmentSelect: Equipment){
         if(equipmentSelect in selectedEquipmentSelect) {
             selectedEquipmentSelect.remove(equipmentSelect)
             Log.i("pttt", "REMOVED SELECTION " + equipmentSelect.displayName)
@@ -52,7 +52,7 @@ class EquipmentSelectAdapter(context: Context, equipmentSelectData: ArrayList<Eq
      * This function will return all the equipment that is currently selected from the list
      * This is the output of the recyclerview
      */
-    fun getSelectedEquipment():Set<EquipmentSelect>{
+    fun getSelectedEquipment():Set<Equipment>{
         return selectedEquipmentSelect
     }
 

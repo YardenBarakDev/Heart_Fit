@@ -3,6 +3,11 @@
   <component name="WizardSettings">
     <option name="children">
       <map>
+        <entry key="imageWizard">
+          <value>
+            <PersistentState />
+          </value>
+        </entry>
         <entry key="vectorWizard">
           <value>
             <PersistentState>
@@ -28,8 +33,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_baseline_record_voice_over_24" />
-                            <entry key="sourceFile" value="D:\Downloads\noun_skipping rope_1137226.svg" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_noun_twisting_bench_3437397" />
+                            <entry key="sourceFile" value="D:\Downloads\noun_twisting bench_3437397.svg" />
                           </map>
                         </option>
                       </PersistentState>

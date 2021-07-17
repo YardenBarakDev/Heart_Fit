@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.idan_koren_israeli.heartfit.R
-import com.idan_koren_israeli.heartfit.mvvm.model.Equipment
+import com.idan_koren_israeli.heartfit.mvvm.repository.Equipment
 import com.idan_koren_israeli.heartfit.mvvm.model.MuscleGroup
 import com.idan_koren_israeli.heartfit.mvvm.model.Workout
 import com.idan_koren_israeli.heartfit.mvvm.model.WorkoutLevel

@@ -27,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/equipment_card_IMG_image"
             android:padding="28dp"
-            app:tint="@color/white"
+            app:tint="@color/black"
             />
 
 
