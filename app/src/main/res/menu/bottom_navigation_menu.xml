@@ -5,18 +5,18 @@
     <item android:id="@+id/fragmentHistory"
         android:title="@string/history"
         android:orderInCategory="1"
-        android:icon="@drawable/ic_launcher_foreground"/>
+        android:icon="@drawable/ic_baseline_history_24"/>
 
     <item android:id="@+id/fragmentHome"
         android:title="@string/home"
         app:showAsAction="ifRoom"
         android:orderInCategory="2"
-        android:icon="@drawable/ic_launcher_foreground"/>
+        android:icon="@drawable/ic_baseline_home_24"/>
 
     <item android:id="@+id/fragmentSettings"
         android:title="@string/settings"
         app:showAsAction="always"
         android:orderInCategory="3"
-        android:icon="@drawable/ic_launcher_foreground"/>
+        android:icon="@drawable/ic_baseline_settings_24"/>
 
 </menu>
