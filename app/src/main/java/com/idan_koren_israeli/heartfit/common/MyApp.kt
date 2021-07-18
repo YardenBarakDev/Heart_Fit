@@ -10,12 +10,14 @@ import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.idan_koren_israeli.heartfit.R
+import com.idan_koren_israeli.heartfit.component.KotlinPrefsManager
 import com.idan_koren_israeli.heartfit.dialog.DialogWeightPicker
 import com.idan_koren_israeli.heartfit.db.firebase.database.DatabaseManager
 import com.idan_koren_israeli.heartfit.db.firebase.firestore.FirestoreManager
 import com.idan_koren_israeli.heartfit.db.room_db.HeartFitRoomDB
 import com.idan_koren_israeli.heartfit.mvvm.repository.Equipment
 import com.idankorenisraeli.mysettingsscreen.MySettingsScreen
+import com.idankorenisraeli.mysettingsscreen.common.SharedPrefsManager
 import com.idankorenisraeli.mysettingsscreen.enums.ToggleType
 import com.idankorenisraeli.mysettingsscreen.tile_data.dialog.MultiChoiceTileData
 import com.idankorenisraeli.mysettingsscreen.tile_data.essential.ButtonTileData
@@ -50,6 +52,7 @@ class MyApp : MultiDexApplication() {
         CommonUtils.initHelper(this)
         initSettingsScreen()
         initSharedPrefs()
+
         //CurrentUserDataModelView.loadCurrentUser { /*Fetching the user from server */ }
 
         registerActivityLifecycleCallbacks(mFTActivityLifecycleCallbacks)
@@ -66,7 +69,10 @@ class MyApp : MultiDexApplication() {
             .setPrefsName(packageName)
             .setUseDefaultSharedPreference(true)
             .build()
+
+        KotlinPrefsManager.init(this)
     }
+
 
     private fun initSettingsScreen(){
 
@@ -81,12 +87,15 @@ class MyApp : MultiDexApplication() {
             .withIconId(R.drawable.ic_dumbbell)
             .withOptionsList(equipmentNames)
             .withOnChangedListener{ options, checked ->
+                val myEquipment = java.util.ArrayList<Equipment?>()
                 for(i in 0 until options.size){
-                    if(checked[i])
-                        Log.i("pttt", "Checked: ${options[i]}" )
+                    if(checked[i]) {
+                        myEquipment.add(Equipment.fromInt(i)!!)
+                    }
                 }
+                KotlinPrefsManager.saveArrayList(myEquipment,CommonUtils.KEY_EQUIPMENT)
+                Log.i("pttt", "SAVING myEquipment "  +checked)
 
-                // TODO load and save old and new preferences in firebase
             }
 
         val prepTimeTile :SeekbarTileData = SeekbarTileData("Preparation Time", "Pre-Workout delay in seconds")

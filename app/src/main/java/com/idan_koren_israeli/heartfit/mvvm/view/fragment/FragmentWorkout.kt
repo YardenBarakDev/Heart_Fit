@@ -71,6 +71,7 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
     private lateinit var durationTimerText: TextView
     private var prepTimeSeconds: Int = 0
 
+
     private var totalWorkoutTime:Int = 0
     private var currentExercise:Int = 0
 
@@ -109,11 +110,18 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
                         .setTitle(R.string.workout_exit_title)
                         .setMessage(R.string.workout_exit_message)
                         .setPositiveButton(R.string.workout_exit_positive) { _, _ ->
-                            tts.stop()
-                            tts.shutdown()
 
-                            findNavController()
-                                .navigate(R.id.action_fragmentWorkout_to_fragmentHome)
+
+                            //findNavController()
+                            //    .navigate(R.id.action_fragmentWorkout_to_fragmentHome)
+
+//                            findNavController().navigate(R.id.action_fragmentWorkout_to_fragmentHome)
+                            findNavController().popBackStack(R.id.fragmentWorkout, true)
+                            findNavController().navigate(R.id.fragmentHome)
+
+                            // TODO make the dialog 'exit' functionality.
+                            //  For some reason, the pop back stack doesnt work when overriding the back press
+
                             }
 
                         .setNegativeButton(R.string.workout_exit_negative, null)
@@ -121,7 +129,7 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
                         .show()
                 }
             }
-        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+        //requireActivity().onBackPressedDispatcher.addCallback(this, callback)
 
     }
 
@@ -167,6 +175,7 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
                 if(!paused) {
                     workoutLog.totalDuration = workoutLog.totalDuration.plus(1)
                     updateDurationTimer(workoutLog.totalDuration)
+                    Log.i("pttt", "duratrion: "  +workoutLog.totalDuration)
                 }
                 mainHandler.postDelayed(this, 1000)
             }

@@ -40,6 +40,8 @@ public class CommonUtils {
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_IMAGE_CHOOSE = 1;
 
+    public static final String KEY_EQUIPMENT = "MY_EQUIPMENT";
+
     private CommonUtils(Context context) {
         this.context = context;
     }

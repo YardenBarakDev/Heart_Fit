@@ -10,7 +10,7 @@ import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.mvvm.model.Workout
 import com.idan_koren_israeli.heartfit.recycler.holder.WorkoutSelectRowHolder
 
-class WorkoutSelectAdapter(context: Context, var workouts: ArrayList<ArrayList<Workout>>) :
+class WorkoutSelectAdapter(context: Context, var workouts: MutableList<ArrayList<Workout>>) :
     RecyclerView.Adapter<WorkoutSelectRowHolder>() {
 
     companion object{
@@ -29,8 +29,7 @@ class WorkoutSelectAdapter(context: Context, var workouts: ArrayList<ArrayList<W
     }
 
     private fun onWorkoutClick(workout: Workout){
-        Log.i("pttt", workout.name + " Clicked!");
-        // TODO Handle navigation graph - start workout
+        Log.i("pttt", workout.name + " Clicked!")
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkoutSelectRowHolder {

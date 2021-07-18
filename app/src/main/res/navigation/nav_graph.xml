@@ -25,7 +25,11 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_fragmentHome_to_fragmentWorkout"
-            app:destination="@id/fragmentWorkout" />
+            app:destination="@id/fragmentWorkout"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/fragmentHome"
+            app:popUpToInclusive="true"
+            />
         <action
             android:id="@+id/action_fragmentHome_to_fragmentAuth"
             app:destination="@id/fragmentAuth" />

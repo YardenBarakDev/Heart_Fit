@@ -12,7 +12,10 @@ import com.idan_koren_israeli.heartfit.mvvm.repository.Equipment
 import com.idan_koren_israeli.heartfit.mvvm.model.MuscleGroup
 import com.idan_koren_israeli.heartfit.mvvm.model.Workout
 import com.idan_koren_israeli.heartfit.mvvm.model.WorkoutLevel
+import com.idan_koren_israeli.heartfit.mvvm.repository.WorkoutRepository
 import com.idan_koren_israeli.heartfit.recycler.adapter.WorkoutSelectAdapter
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 /**
@@ -52,29 +55,8 @@ class FragmentHome : Fragment() {
 
 
     private fun initRecycler(){
-        val levelA = arrayListOf<Workout>()
-        val levelB = arrayListOf<Workout>()
-        val levelC = arrayListOf<Workout>()
-        val levelD = arrayListOf<Workout>()
-        val levelE = arrayListOf<Workout>()
-        levelA.add(Workout("Workout 1", listOf(Equipment.Bench), listOf(MuscleGroup.ABDOMINALS),4,0,WorkoutLevel.Basic))
-        levelB.add(Workout("Workout 2", listOf(Equipment.Bench), listOf(MuscleGroup.ABDOMINALS),4,3,WorkoutLevel.Basic))
-        levelB.add(Workout("Workout 3", listOf(Equipment.Bench), listOf(MuscleGroup.ABDOMINALS),4,7,WorkoutLevel.Basic))
-        levelC.add(Workout("Workout 5", listOf(Equipment.Bench), listOf(MuscleGroup.ABDOMINALS),4,8,WorkoutLevel.Basic))
-        levelD.add(Workout("Workout 6", listOf(Equipment.Bench), listOf(MuscleGroup.ABDOMINALS),4,12,WorkoutLevel.Basic))
-        levelD.add(Workout("Workout 7", listOf(Equipment.Bench), listOf(MuscleGroup.ABDOMINALS),4,12,WorkoutLevel.Basic))
-        levelE.add(Workout("Workout 8", listOf(Equipment.Bench), listOf(MuscleGroup.ABDOMINALS),4,15,WorkoutLevel.Basic))
 
-
-        val workouts : ArrayList<ArrayList<Workout>> = arrayListOf()
-        workouts.add(levelA)
-        workouts.add(levelB)
-        workouts.add(levelC)
-        workouts.add(levelD)
-        workouts.add(levelE)
-
-
-        workoutsAdapter = WorkoutSelectAdapter(requireContext(), workouts)
+        workoutsAdapter = WorkoutSelectAdapter(requireContext(), WorkoutRepository.workoutByRows)
 
         workoutsRecycler.adapter = workoutsAdapter
 
