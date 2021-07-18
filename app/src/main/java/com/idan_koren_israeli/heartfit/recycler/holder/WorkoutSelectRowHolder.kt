@@ -97,9 +97,9 @@ class WorkoutSelectRowHolder(itemView: View, private val onClick: (workout: Work
 
 
 
-                    FirestoreManager.generateWorkout(workout){
+                    FirestoreManager.generateWorkout(workout){ exercises ->
 
-                        for(ex in it){
+                        for(ex in exercises){
                             Log.i("pttt", " EXERCISE: " + ex.level!!.name + " | " + ex.name + " | ")
                         }
 

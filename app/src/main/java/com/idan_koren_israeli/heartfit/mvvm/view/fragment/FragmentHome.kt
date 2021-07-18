@@ -1,6 +1,7 @@
 package com.idan_koren_israeli.heartfit.mvvm.view.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,14 +57,18 @@ class FragmentHome : Fragment() {
 
     private fun initRecycler(){
 
-        workoutsAdapter = WorkoutSelectAdapter(requireContext(), WorkoutRepository.workoutByRows)
+        workoutsAdapter = WorkoutSelectAdapter(requireContext(), WorkoutRepository.getWorkoutsTree())
 
         workoutsRecycler.adapter = workoutsAdapter
-
 
         val layoutManager = GridLayoutManager(requireContext(), 1)
 
         workoutsRecycler.layoutManager = layoutManager
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initRecycler()
     }
 
 
