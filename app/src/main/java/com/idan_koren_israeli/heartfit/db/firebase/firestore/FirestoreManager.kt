@@ -25,61 +25,6 @@ object FirestoreManager {
     }
 
 
-    fun generateWorkout(workout: Workout, onLoaded: (result: List<Exercise>) -> Unit) {
-
-        val requiredLevels = when (workout.workoutLevel) {
-            WorkoutLevel.Basic -> listOf(ExerciseLevel.Basic)
-            WorkoutLevel.BasicIntermediate -> listOf(
-                ExerciseLevel.Basic,
-                ExerciseLevel.Intermediate
-            )
-            WorkoutLevel.Intermediate -> listOf(ExerciseLevel.Intermediate)
-            WorkoutLevel.IntermediateAdvanced -> listOf(
-                ExerciseLevel.Intermediate,
-                ExerciseLevel.Advanced
-            )
-            WorkoutLevel.Advanced -> listOf(ExerciseLevel.Advanced)
-        }
-
-        val requiredMuscle: List<MuscleGroup> = workout.muscle
-        val requiredEquipment: ArrayList<Equipment?> = workout.equipment
-
-
-        exercisesRef
-            .whereArrayContainsAny("muscle", requiredMuscle)
-            .get().addOnSuccessListener {
-
-                // Received all exercises for requested muscles
-                val matchedExercises: MutableList<Exercise> = mutableListOf()
-
-                exercisesLoop@ for (document in it) {
-                    val loadedExercise : Exercise = document.toObject<Exercise>()
-
-                    if(loadedExercise.level in requiredLevels){
-
-                        // Found exercise in the requested level
-
-                        if(loadedExercise.equipment!=null){
-                           for(equipment in loadedExercise.equipment){
-                               if(equipment !in requiredEquipment) {
-                                    // Not suitable equipment found in this exercise, go to next one
-                                   continue@exercisesLoop
-                               }
-                           }
-                            matchedExercises.add(document.toObject()) // Equipment meet required
-                        }
-                        else
-                            matchedExercises.add(document.toObject()) // No equipment constraints
-
-                    }
-
-                }
-
-                onLoaded.invoke(matchedExercises)
-            }
-
-
-    }
 
 
     fun loadExercises() {
@@ -98,25 +43,38 @@ object FirestoreManager {
 
     }
 
-    //(equipmentSelect:EquipmentSelect) -> Unit
+
     fun loadExercisesByName(name: String, onLoaded: (result: List<Exercise>) -> Unit) {
-        val exerciseRef = db.collection(KEY_EXERCISE)
-        exerciseRef.whereEqualTo("name", name).get().addOnSuccessListener { documents ->
+        exercisesRef.whereEqualTo("name", name).get().addOnSuccessListener { documents ->
             val loadedExercises: MutableList<Exercise> = mutableListOf()
             for (document in documents) {
-                loadedExercises.add(document.toObject<Exercise>())
+                loadedExercises.add(document.toObject())
             }
             onLoaded.invoke(loadedExercises)
         }
     }
 
+    fun loadExercisesByMuscles(requiredMuscle : List<MuscleGroup>,onLoaded: (result: List<Exercise>) -> Unit ){
+
+        exercisesRef
+            .whereArrayContainsAny("muscle", requiredMuscle)
+            .get().addOnSuccessListener { documents ->
+                val loadedExercises: MutableList<Exercise> = mutableListOf()
+                for (document in documents) {
+                    loadedExercises.add(document.toObject())
+                }
+                onLoaded.invoke(loadedExercises)
+            }
+
+    }
+
     //(equipmentSelect:EquipmentSelect) -> Unit
     fun loadExercisesByLevel(level: ExerciseLevel, onLoaded: (result: List<Exercise>) -> Unit) {
-        val exerciseRef = db.collection(KEY_EXERCISE)
+        exercisesRef
             .whereEqualTo("level", level.name).get().addOnSuccessListener { documents ->
                 val loadedExercises: MutableList<Exercise> = mutableListOf()
                 for (document in documents) {
-                    loadedExercises.add(document.toObject<Exercise>())
+                    loadedExercises.add(document.toObject())
                 }
                 onLoaded.invoke(loadedExercises)
             }

@@ -11,16 +11,21 @@ object WorkoutRepository {
 
 
     private fun getMyEquipment(): ArrayList<Equipment?> {
-        Log.i("pttt", KotlinPrefsManager.getArrayList(CommonUtils.KEY_EQUIPMENT)!!.toString() + " |||| ")
+        if(KotlinPrefsManager.getArrayList(CommonUtils.KEY_EQUIPMENT) == null)
+            return arrayListOf()
+
         return KotlinPrefsManager.getArrayList(CommonUtils.KEY_EQUIPMENT)!!
     }
 
 
     private fun getAllWorkouts() : List<Workout> {
-        return listOf<Workout>(
+        
+        val myEquipment = getMyEquipment()
+        
+        return listOf(
             Workout(
                 "Legs " + WorkoutLevel.Basic.num,
-                getMyEquipment(),
+                myEquipment,
                 MuscleGroup.LOWER_BODY,
                 3,
                 0,
@@ -28,7 +33,7 @@ object WorkoutRepository {
             ),
             Workout(
                 "Arms " + WorkoutLevel.Basic.num,
-                getMyEquipment(),
+                myEquipment,
                 listOf(MuscleGroup.ARMS),
                 2,
                 0,
@@ -36,7 +41,7 @@ object WorkoutRepository {
             ),
             Workout(
                 "Core " + WorkoutLevel.Basic.num,
-                getMyEquipment(),
+                myEquipment,
                 MuscleGroup.CORE,
                 3,
                 0,
@@ -44,7 +49,7 @@ object WorkoutRepository {
             ),
             Workout(
                 "Chest " + WorkoutLevel.Basic.num,
-                getMyEquipment(),
+                myEquipment,
                 listOf(MuscleGroup.CHEST),
                 4,
                 0,
@@ -52,7 +57,7 @@ object WorkoutRepository {
             ),
             Workout(
                 "Full Body " + WorkoutLevel.Basic.num,
-                getMyEquipment(),
+                myEquipment,
                 MuscleGroup.values().toList(),
                 6,
                 10,
@@ -61,7 +66,7 @@ object WorkoutRepository {
 
             Workout(
                 "Legs " + WorkoutLevel.BasicIntermediate.num,
-                getMyEquipment(),
+                myEquipment,
                 listOf(MuscleGroup.LEGS),
                 7,
                 15,
@@ -69,7 +74,7 @@ object WorkoutRepository {
             ),
             Workout(
                 "Arms " + WorkoutLevel.BasicIntermediate.num,
-                getMyEquipment(),
+                myEquipment,
                 listOf(MuscleGroup.ARMS),
                 6,
                 24,
@@ -77,7 +82,7 @@ object WorkoutRepository {
             ),
             Workout(
                 "Core " + WorkoutLevel.BasicIntermediate.num,
-                getMyEquipment(),
+                myEquipment,
                 MuscleGroup.CORE,
                 5,
                 32,
@@ -85,7 +90,7 @@ object WorkoutRepository {
             ),
             Workout(
                 "Chest " + WorkoutLevel.BasicIntermediate.num,
-                getMyEquipment(),
+                myEquipment,
                 listOf(MuscleGroup.CHEST),
                 8,
                 38,
@@ -93,7 +98,7 @@ object WorkoutRepository {
             ),
             Workout(
                 "Full Body " + WorkoutLevel.BasicIntermediate.num,
-                getMyEquipment(),
+                myEquipment,
                 MuscleGroup.values().toList(),
                 12,
                 44,
@@ -102,7 +107,7 @@ object WorkoutRepository {
 
             Workout(
                 "Legs " + WorkoutLevel.Intermediate.num,
-                getMyEquipment(),
+                myEquipment,
                 listOf(MuscleGroup.LEGS),
                 12,
                 50,
@@ -110,7 +115,7 @@ object WorkoutRepository {
             ),
             Workout(
                 "Arms " + WorkoutLevel.Intermediate.num,
-                getMyEquipment(),
+                myEquipment,
                 listOf(MuscleGroup.ARMS),
                 12,
                 50,
@@ -118,7 +123,7 @@ object WorkoutRepository {
             ),
             Workout(
                 "Core " + WorkoutLevel.Intermediate.num,
-                getMyEquipment(),
+                myEquipment,
                 MuscleGroup.CORE,
                 14,
                 64,
@@ -126,7 +131,7 @@ object WorkoutRepository {
             ),
             Workout(
                 "Chest " + WorkoutLevel.Intermediate.num,
-                getMyEquipment(),
+                myEquipment,
                 listOf(MuscleGroup.CHEST),
                 14,
                 70,
@@ -134,7 +139,7 @@ object WorkoutRepository {
             ),
             Workout(
                 "Full Body " + WorkoutLevel.Intermediate.num,
-                getMyEquipment(),
+                myEquipment,
                 MuscleGroup.values().toList(),
                 18,
                 75,
@@ -143,7 +148,7 @@ object WorkoutRepository {
 
             Workout(
                 "Legs " + WorkoutLevel.IntermediateAdvanced.num,
-                getMyEquipment(),
+                myEquipment,
                 listOf(MuscleGroup.LEGS),
                 15,
                 110,
@@ -151,7 +156,7 @@ object WorkoutRepository {
             ),
             Workout(
                 "Arms " + WorkoutLevel.IntermediateAdvanced.num,
-                getMyEquipment(),
+                myEquipment,
                 listOf(MuscleGroup.ARMS),
                 15,
                 125,
@@ -159,7 +164,7 @@ object WorkoutRepository {
             ),
             Workout(
                 "Core " + WorkoutLevel.IntermediateAdvanced.num,
-                getMyEquipment(),
+                myEquipment,
                 MuscleGroup.CORE,
                 15,
                 138,
@@ -167,7 +172,7 @@ object WorkoutRepository {
             ),
             Workout(
                 "Chest " + WorkoutLevel.IntermediateAdvanced.num,
-                getMyEquipment(),
+                myEquipment,
                 listOf(MuscleGroup.CHEST),
                 16,
                 152,
@@ -175,7 +180,7 @@ object WorkoutRepository {
             ),
             Workout(
                 "Full Body " + WorkoutLevel.IntermediateAdvanced.num,
-                getMyEquipment(),
+                myEquipment,
                 MuscleGroup.values().toList(),
                 22,
                 175,
@@ -184,7 +189,7 @@ object WorkoutRepository {
 
             Workout(
                 "Legs " + WorkoutLevel.IntermediateAdvanced.num,
-                getMyEquipment(),
+                myEquipment,
                 listOf(MuscleGroup.LEGS),
                 26,
                 200,
@@ -192,7 +197,7 @@ object WorkoutRepository {
             ),
             Workout(
                 "Arms " + WorkoutLevel.IntermediateAdvanced.num,
-                getMyEquipment(),
+                myEquipment,
                 listOf(MuscleGroup.ARMS),
                 26,
                 230,
@@ -200,7 +205,7 @@ object WorkoutRepository {
             ),
             Workout(
                 "Core " + WorkoutLevel.IntermediateAdvanced.num,
-                getMyEquipment(),
+                myEquipment,
                 MuscleGroup.CORE,
                 25,
                 250,
@@ -208,7 +213,7 @@ object WorkoutRepository {
             ),
             Workout(
                 "Chest " + WorkoutLevel.IntermediateAdvanced.num,
-                getMyEquipment(),
+                myEquipment,
                 listOf(MuscleGroup.CHEST),
                 24,
                 263,
@@ -216,7 +221,7 @@ object WorkoutRepository {
             ),
             Workout(
                 "Full Body " + WorkoutLevel.IntermediateAdvanced.num,
-                getMyEquipment(),
+                myEquipment,
                 MuscleGroup.values().toList(),
                 30,
                 300,
@@ -226,7 +231,7 @@ object WorkoutRepository {
 
             Workout(
                 "Legs " + WorkoutLevel.Advanced.num,
-                getMyEquipment(),
+                myEquipment,
                 listOf(MuscleGroup.LEGS),
                 30,
                 500,
@@ -234,7 +239,7 @@ object WorkoutRepository {
             ),
             Workout(
                 "Arms " + WorkoutLevel.Advanced.num,
-                getMyEquipment(),
+                myEquipment,
                 listOf(MuscleGroup.ARMS),
                 32,
                 580,
@@ -242,7 +247,7 @@ object WorkoutRepository {
             ),
             Workout(
                 "Core " + WorkoutLevel.Advanced.num,
-                getMyEquipment(),
+                myEquipment,
                 MuscleGroup.CORE,
                 35,
                 645,
@@ -250,7 +255,7 @@ object WorkoutRepository {
             ),
             Workout(
                 "Chest " + WorkoutLevel.Advanced.num,
-                getMyEquipment(),
+                myEquipment,
                 listOf(MuscleGroup.CHEST),
                 38,
                 780,
@@ -258,7 +263,7 @@ object WorkoutRepository {
             ),
             Workout(
                 "Full Body " + WorkoutLevel.Advanced.num,
-                getMyEquipment(),
+                myEquipment,
                 MuscleGroup.values().toList(),
                 50,
                 1000,

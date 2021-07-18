@@ -17,6 +17,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.common.CommonUtils
+import com.idan_koren_israeli.heartfit.component.WorkoutGenerator
 import com.idan_koren_israeli.heartfit.db.firebase.database.DatabaseManager
 import com.idan_koren_israeli.heartfit.db.firebase.firestore.FirestoreManager
 import com.idan_koren_israeli.heartfit.mvvm.model.*
@@ -72,10 +73,19 @@ class WorkoutSelectRowHolder(itemView: View, private val onClick: (workout: Work
     }
 
     private fun attachWorkoutToLayout(workout: Workout, workoutHolder: ViewGroup, colorId: Int) {
+        val clickable : Boolean = (DatabaseManager.currentUser.hearts >= workout.heartsToUnlock)
+
+
         val workoutName: TextView = workoutHolder.findViewById(R.id.workout_holder_LBL_name)
         val workoutImage: ImageView = workoutHolder.findViewById(R.id.workout_holder_IMG_image)
+        val heartImage: ImageView = workoutHolder.findViewById(R.id.workout_holder_IMG_heart)
         val heartsToUnlockText: TextView =
             workoutHolder.findViewById(R.id.workout_holder_LBL_hearts)
+
+        if(!clickable)
+            heartImage.setImageResource(R.drawable.ic_heart_outlined_locked)
+        else
+            heartImage.setImageResource(R.drawable.ic_heart_outlined)
 
 
         setWorkoutButtonBackgroundColor(workoutImage, colorId)
@@ -85,8 +95,7 @@ class WorkoutSelectRowHolder(itemView: View, private val onClick: (workout: Work
 
         workoutHolder.setOnClickListener {
             run {
-                DatabaseManager.currentUser.hearts = 5000
-                if (DatabaseManager.currentUser.hearts < workout.heartsToUnlock) {
+                if (!clickable) {
                     CommonUtils.getInstance()
                         .showToast("Not enough hearts to start this workout")
                 } else {
@@ -97,10 +106,10 @@ class WorkoutSelectRowHolder(itemView: View, private val onClick: (workout: Work
 
 
 
-                    FirestoreManager.generateWorkout(workout){ exercises ->
+                    WorkoutGenerator.generateWorkout(workout){ exercises ->
 
                         for(ex in exercises){
-                            Log.i("pttt", " EXERCISE: " + ex.level!!.name + " | " + ex.name + " | ")
+                            Log.i("pttt", " EXERCISE: " + ex.name + " | ")
                         }
 
                         val dialogManager = WorkoutStartDialogManager(itemView.context as Activity)
@@ -108,7 +117,7 @@ class WorkoutSelectRowHolder(itemView: View, private val onClick: (workout: Work
                         dialogManager.create()
                         dialogManager.inflate()
 
-                        dialogManager.launch(workout)
+                        dialogManager.launch(workout, exercises)
 
                     }
 

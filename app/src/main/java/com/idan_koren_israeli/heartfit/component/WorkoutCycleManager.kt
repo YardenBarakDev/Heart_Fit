@@ -14,7 +14,6 @@ object WorkoutCycleManager{
 
     fun finishWorkout(workout: Workout){
         addHearts(workout.heartsValue)
-
     }
 
     private fun addHearts(heartCount: Int){

@@ -8,13 +8,13 @@
     <HorizontalScrollView
         android:id="@+id/workout_start_dialog_SCRL_parent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="14dp"
         android:orientation="horizontal"
         android:fillViewport="true"
         android:animateLayoutChanges="true"
-        android:padding="25dp">
+        android:padding="5dp">
 
         <LinearLayout
             android:layout_width="wrap_content"

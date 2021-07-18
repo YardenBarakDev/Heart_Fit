@@ -50,7 +50,6 @@ class FragmentHome : Fragment() {
         viewFragmentHome = inflater.inflate(R.layout.fragment_home, container, false)
         findViews()
         initTopBarFragment()
-        initRecycler()
         return viewFragmentHome
     }
 
