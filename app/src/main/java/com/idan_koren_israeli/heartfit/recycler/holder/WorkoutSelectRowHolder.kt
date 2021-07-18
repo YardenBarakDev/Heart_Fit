@@ -85,6 +85,7 @@ class WorkoutSelectRowHolder(itemView: View, private val onClick: (workout: Work
 
         workoutHolder.setOnClickListener {
             run {
+                DatabaseManager.currentUser.hearts = 5000
                 if (DatabaseManager.currentUser.hearts < workout.heartsToUnlock) {
                     CommonUtils.getInstance()
                         .showToast("Not enough hearts to start this workout")
@@ -94,12 +95,22 @@ class WorkoutSelectRowHolder(itemView: View, private val onClick: (workout: Work
                     pass data between fragments
                     https://developer.android.com/guide/navigation/navigation-pass-data*/
 
-                    val dialogManager = WorkoutStartDialogManager(itemView.context as Activity)
 
-                    dialogManager.create()
-                    dialogManager.inflate()
 
-                    dialogManager.launch(workout)
+                    FirestoreManager.generateWorkout(workout){
+
+                        for(ex in it){
+                            Log.i("pttt", " EXERCISE: " + ex.level!!.name + " | " + ex.name + " | ")
+                        }
+
+                        val dialogManager = WorkoutStartDialogManager(itemView.context as Activity)
+
+                        dialogManager.create()
+                        dialogManager.inflate()
+
+                        dialogManager.launch(workout)
+
+                    }
 
                     /*
                     FirestoreManager.loadExercisesByName("Bench press") {

@@ -66,4 +66,5 @@ class FragmentHome : Fragment() {
         workoutsRecycler.layoutManager = layoutManager
     }
 
+
 }

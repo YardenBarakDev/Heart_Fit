@@ -42,17 +42,6 @@ class MainActivity : AppCompatActivity() {
         mainActivity_bottomNavigation.setOnItemReselectedListener { /*no op*/ }
     }
 
-    // This is for debugging usage
-    private fun createEquipmentSelectFragment(): FragmentEquipmentSelect {
-        val fragment = FragmentEquipmentSelect()
-        fragment.onSelectionDone = { equipmentSelectedList ->
-            val equipmentNames: MutableSet<String> = mutableSetOf()
-            equipmentSelectedList.forEach { eqSelected -> equipmentNames.add(eqSelected.displayName!!) }
-            CommonUtils.getInstance().showToast(equipmentNames.toString())
-
-        }
-        return fragment
-    }
 
     private fun initNavigation() {
         //set navigation
@@ -71,4 +60,19 @@ class MainActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
         // No call for super()
     }
+
+    override fun onRestart() {
+        super.onRestart()
+
+        refreshHomeFragment()
+    }
+
+    private fun refreshHomeFragment(){
+        val label : CharSequence = navHostFragment.findNavController().currentDestination!!.label!!
+        if(label == "fragment_home") {
+            finish()
+            startActivity(intent)
+        }
+    }
+
 }

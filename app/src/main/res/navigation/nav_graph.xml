@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_fragmentHome_to_fragmentAuth"
             app:destination="@id/fragmentAuth" />
+        <action
+            android:id="@+id/action_fragmentHome_self"
+            app:destination="@id/fragmentHome" />
     </fragment>
     <fragment
         android:id="@+id/fragmentWorkout"

@@ -1,6 +1,7 @@
 package com.idan_koren_israeli.heartfit.mvvm.view.dialog
 
 import android.app.Activity
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -17,7 +18,7 @@ import com.idan_koren_israeli.heartfit.mvvm.model.Workout
 
 class WorkoutStartDialogManager(val activity: Activity) {
     private lateinit var materialAlertDialogBuilder: MaterialAlertDialogBuilder
-    private lateinit var scrollLayout : ViewGroup
+    private lateinit var parentLayout : ViewGroup
     private lateinit var dialogLayout : ViewGroup
 
     fun create(){
@@ -29,26 +30,32 @@ class WorkoutStartDialogManager(val activity: Activity) {
         dialogLayout = (LayoutInflater.from(activity)
             .inflate(R.layout.dialog_workout_start, null, false) as ViewGroup)
 
-        scrollLayout = dialogLayout.findViewById(R.id.workout_start_dialog_SCRL_parent)
+        parentLayout = dialogLayout.findViewById(R.id.workout_start_dialog_LAY_parent)
     }
 
-    private fun addEquipmentToLayout(allEquipment: List<Equipment>){
-
+    private fun addEquipmentToLayout(allEquipment: ArrayList<Equipment?>){
+        Log.i("pttt", " ALL EQU" + allEquipment)
         for(equipment in allEquipment){
             val equipmentHolder = LayoutInflater.from(activity)
-                .inflate(R.layout.holder_equipment_select, scrollLayout, false)
+                .inflate(R.layout.holder_equipment_select, parentLayout, false)
 
 
-            equipmentHolder.layoutParams =
-                ViewGroup.LayoutParams(160, ViewGroup.LayoutParams.WRAP_CONTENT)
+            val layoutParams:ViewGroup.MarginLayoutParams  = ViewGroup.MarginLayoutParams (130, ViewGroup.LayoutParams.WRAP_CONTENT)
+
+            layoutParams.marginStart = 15
+            layoutParams.marginEnd = 15
+
+            equipmentHolder.layoutParams = layoutParams
 
 
 
-            equipmentHolder.findViewById<TextView>(R.id.equipment_card_LBL_label).text = equipment.displayName
+
+
+            equipmentHolder.findViewById<TextView>(R.id.equipment_card_LBL_label).text = equipment!!.displayName
             val equipmentImage = equipmentHolder.findViewById<ImageView>(R.id.equipment_card_IMG_image)
             equipmentImage.setImageDrawable(ContextCompat.getDrawable(activity,equipment.imageId))
 
-            scrollLayout.addView(equipmentHolder)
+            parentLayout.addView(equipmentHolder)
         }
 
 

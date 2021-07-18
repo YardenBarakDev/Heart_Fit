@@ -1,29 +1,19 @@
 package com.idan_koren_israeli.heartfit.mvvm.repository
 
-import android.util.Log
-import com.google.gson.reflect.TypeToken
 import com.idan_koren_israeli.heartfit.common.CommonUtils
 import com.idan_koren_israeli.heartfit.component.KotlinPrefsManager
 import com.idan_koren_israeli.heartfit.mvvm.model.WorkoutLevel
 import com.idan_koren_israeli.heartfit.mvvm.model.MuscleGroup
 import com.idan_koren_israeli.heartfit.mvvm.model.Workout
-import com.idankorenisraeli.mysettingsscreen.MySettingsScreen
-import com.idankorenisraeli.mysettingsscreen.common.SharedPrefsManager
-import com.idankorenisraeli.mysettingsscreen.tile_data.dialog.MultiChoiceTileData
-import com.idankorenisraeli.mysettingsscreen.tile_data.essential.SavableTileData
-import com.idankorenisraeli.mysettingsscreen.tile_data.essential.SettingsTileData
 
 object WorkoutRepository {
 
 
-    private fun getMyEquipment(): List<Equipment> {
+    private fun getMyEquipment(): ArrayList<Equipment?> {
         val noneEquipment = ArrayList<Boolean>()
         noneEquipment.add(true)
 
-        val myPrefsEquipment = KotlinPrefsManager.getArrayList(CommonUtils.KEY_EQUIPMENT)
-
-        Log.i("pttt", "Loading myEquipment"  + myPrefsEquipment.toString())
-        return listOf()
+        return KotlinPrefsManager.getArrayList(CommonUtils.KEY_EQUIPMENT)!!
     }
 
 
@@ -233,6 +223,48 @@ object WorkoutRepository {
             WorkoutLevel.IntermediateAdvanced
         ),
 
+
+        Workout(
+            "Legs " + WorkoutLevel.Advanced.num,
+            getMyEquipment(),
+            listOf(MuscleGroup.LEGS),
+            30,
+            500,
+            WorkoutLevel.Advanced
+        ),
+        Workout(
+            "Arms " + WorkoutLevel.Advanced.num,
+            getMyEquipment(),
+            listOf(MuscleGroup.ARMS),
+            32,
+            580,
+            WorkoutLevel.Advanced
+        ),
+        Workout(
+            "Core " + WorkoutLevel.Advanced.num,
+            getMyEquipment(),
+            MuscleGroup.CORE,
+            35,
+            645,
+            WorkoutLevel.Advanced
+        ),
+        Workout(
+            "Chest " + WorkoutLevel.Advanced.num,
+            getMyEquipment(),
+            listOf(MuscleGroup.CHEST),
+            38,
+            780,
+            WorkoutLevel.Advanced
+        ),
+        Workout(
+            "Full Body " + WorkoutLevel.Advanced.num,
+            getMyEquipment(),
+            MuscleGroup.values().toList(),
+            50,
+            1000,
+            WorkoutLevel.Advanced
+        ),
+
         )
 
 
@@ -252,6 +284,10 @@ object WorkoutRepository {
         arrayListOf(allWorkouts[20]),
         arrayListOf(allWorkouts[21], allWorkouts[22], allWorkouts[23]),
         arrayListOf(allWorkouts[24]),
+        arrayListOf(allWorkouts[25], allWorkouts[26]),
+        arrayListOf(allWorkouts[27], allWorkouts[28]),
+        arrayListOf(allWorkouts[29]),
     )
+
 
 }
