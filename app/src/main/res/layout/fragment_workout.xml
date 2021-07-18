@@ -98,7 +98,7 @@
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:id="@+id/workout_LAY_timer"
         android:layout_below="@id/workout_LBL_next_exercise">
 
 
@@ -130,6 +130,22 @@
             android:id="@+id/workout_IMG_animation"
             />
 
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+
+            android:textStyle="italic"
+            android:textSize="18sp"
+            android:textColor="@color/text_secondary"
+            android:layout_marginBottom="12dp"
+            android:id="@+id/workout_LBL_equipment"
+            android:gravity="center"
+
+            />
+
+
     </FrameLayout>
 
 
@@ -139,6 +155,7 @@
         android:layout_above="@id/workout_LAY_pause_resume_control"
         android:layout_marginBottom="28dp"
         android:gravity="center_horizontal"
+        android:id="@+id/workout_LAY_duration"
         android:orientation="vertical">
 
         <TextView

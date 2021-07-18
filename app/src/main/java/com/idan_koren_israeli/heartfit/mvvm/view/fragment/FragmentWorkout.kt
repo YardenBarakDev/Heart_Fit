@@ -25,6 +25,7 @@ import com.hamzaahmedkhan.circulartimerview.CircularTimerView
 import com.hamzaahmedkhan.circulartimerview.TimeFormatEnum
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.mvvm.model.*
+import com.idan_koren_israeli.heartfit.mvvm.repository.Equipment
 import com.idankorenisraeli.customprogressbar.CustomProgressBar
 import com.idankorenisraeli.mysettingsscreen.MySettingsScreen
 import com.idankorenisraeli.mysettingsscreen.tile_data.view.SeekbarTileData
@@ -69,6 +70,7 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
     private lateinit var prevButton : ImageButton
     private lateinit var heartsCount: TextView
     private lateinit var durationTimerText: TextView
+    private lateinit var equipmentText: TextView
     private var prepTimeSeconds: Int = 0
 
 
@@ -115,7 +117,7 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
                             //findNavController()
                             //    .navigate(R.id.action_fragmentWorkout_to_fragmentHome)
 
-//                            findNavController().navigate(R.id.action_fragmentWorkout_to_fragmentHome)
+                           //findNavController().navigate(R.id.action_fragmentWorkout_to_fragmentHome)
                             findNavController().popBackStack(R.id.fragmentWorkout, true)
                             findNavController().navigate(R.id.fragmentHome)
 
@@ -162,6 +164,7 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
         heartsCount = parent.findViewById(R.id.workout_LBL_heart_count)
         durationTimerText= parent.findViewById(R.id.workout_LBL_duration)
         animationImage = parent.findViewById(R.id.workout_IMG_animation)
+        equipmentText = parent.findViewById(R.id.workout_LBL_equipment)
 
     }
 
@@ -209,7 +212,9 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
         updateNextPrevButtonsVisibility()
         updateProgressBar()
         updateNextUpText()
+        updateEquipmentText()
         updateAnimation()
+
 
         if(ttsEnabled)
             tts.speak(exercises[currentExercise].name,TextToSpeech.QUEUE_FLUSH,null, null)
@@ -239,6 +244,25 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
 
         timerView.startTimer()
         timerView.prefix = capitalizeWords(exercises[currentExercise].name!!)
+
+    }
+
+    private fun updateEquipmentText() {
+
+        val equipmentList = exercises[currentExercise].equipment
+        if(equipmentList == null || equipmentList.isEmpty()) {
+            equipmentText.text = ""
+            return
+        }
+
+        val builder : StringBuilder = StringBuilder()
+        builder.append("With ")
+        for(eq in exercises[currentExercise].equipment!!){
+            builder.append(eq.displayName + ", ")
+        }
+
+        equipmentText.text = builder.removeSuffix(", ")
+
 
     }
 

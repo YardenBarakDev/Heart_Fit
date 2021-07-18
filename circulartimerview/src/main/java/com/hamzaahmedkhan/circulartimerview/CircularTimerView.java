@@ -558,17 +558,18 @@ public class CircularTimerView extends View {
 
     public void togglePauseResume(){
         if(countDownTimer.isPaused())
-            countDownTimer.resume();
+            pause();
         else
-            countDownTimer.pause();
+            resume();
     }
 
     public void pause(){
-        countDownTimer.pause();
+        if(countDownTimer!=null)
+            countDownTimer.pause();
     }
 
     public void resume(){
-        countDownTimer.resume();
+        if(countDownTimer!=null) countDownTimer.resume();
     }
 
 

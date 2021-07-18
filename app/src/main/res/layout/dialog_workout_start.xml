@@ -13,6 +13,8 @@
         android:layout_margin="14dp"
         android:orientation="horizontal"
         android:fillViewport="true"
+        android:scrollbarAlwaysDrawHorizontalTrack="true"
+        android:scrollbarSize="12dp"
         android:animateLayoutChanges="true"
         android:padding="5dp">
 
