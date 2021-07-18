@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class WorkoutSummary(
     @PrimaryKey(autoGenerate = true) val id: Long,
     var timestamp: Long,
+    var name:String,
     var userId : String,
     var heartsCollected : Int,
     var caloriesBurned : Int,

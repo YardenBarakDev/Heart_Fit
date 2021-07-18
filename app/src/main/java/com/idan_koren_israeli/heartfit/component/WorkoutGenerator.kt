@@ -74,7 +74,7 @@ object WorkoutGenerator {
 
             while(matchedExercises.isNotEmpty() && targetLength >= currentWorkoutLength){
                 allWorkoutExercises.add(matchedExercises[currentIndex])
-                val breakExercise = Exercise(name = "Break", animationId = 25, timeInSeconds = breakLength)
+                val breakExercise = Exercise(name = "Break", animationId = 25, timeInSeconds = breakLength, isBreak = true)
                 allWorkoutExercises.add(breakExercise)
 
                 currentWorkoutLength+= matchedExercises[currentIndex].timeInSeconds!!
@@ -85,15 +85,15 @@ object WorkoutGenerator {
                 if(currentIndex==matchedExercises.size)
                     currentIndex = 0
 
+
             }
 
+            allWorkoutExercises.removeLast()
 
             onWorkoutGenerated.invoke(allWorkoutExercises)
 
 
         }
-
-
 
     }
 

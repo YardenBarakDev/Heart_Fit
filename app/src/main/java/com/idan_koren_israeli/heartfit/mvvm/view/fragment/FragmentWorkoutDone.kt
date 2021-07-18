@@ -18,6 +18,7 @@ import com.idan_koren_israeli.heartfit.db.room_db.WorkoutSummary
 import com.idan_koren_israeli.heartfit.db.room_db.WorkoutSummaryDao
 import com.idan_koren_israeli.heartfit.mvvm.model.WorkoutLog
 import com.idan_koren_israeli.heartfit.mvvm.view_model.HistoryViewModel
+import com.idan_koren_israeli.heartfit.mvvm.view_model.WorkoutFinishedViewModel
 import com.idan_koren_israeli.heartfit.recycler.adapter.ExercisesDoneAdapter
 
 
@@ -47,9 +48,21 @@ class FragmentWorkoutFinished : Fragment() {
         val summary:WorkoutSummary = WorkoutSummary(id = 0, timestamp = System.currentTimeMillis(),
             userId = DatabaseManager.currentUser.uid!!, heartsCollected = workoutLog!!.workout!!.heartsValue,
             caloriesBurned = workoutLog!!.caloriesBurned!!, totalDurationSeconds = workoutLog!!.totalDuration,
-            difficulty = workoutLog!!.workout!!.workoutLevel.name, muscles = workoutLog!!.workout!!.muscle.joinToString(separator = ", "))
+            difficulty = workoutLog!!.workout!!.workoutLevel.name, muscles = workoutLog!!.workout!!.muscle.joinToString(separator = ", "),
+            name = workoutLog!!.workout!!.name!!)
 
+        WorkoutFinishedViewModel.storeWorkoutInDB(summary)
 
+        if(isRealDone()){
+           DatabaseManager.currentUser.hearts = DatabaseManager.currentUser.hearts.plus(workoutLog!!.workout!!.heartsValue)
+           DatabaseManager.storeCurrentUser()
+        }
+    }
+
+    private fun isRealDone(): Boolean {
+        return true
+
+        //TODO Complete - check if the workout is finished by time compare
     }
 
     override fun onCreateView(

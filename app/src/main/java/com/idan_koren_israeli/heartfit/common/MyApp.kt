@@ -1,11 +1,8 @@
 package com.idan_koren_israeli.heartfit.common
 
 import android.app.Activity
-import android.app.AlarmManager
-import android.app.PendingIntent
 import android.content.Context
 import android.content.ContextWrapper
-import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatDelegate
@@ -13,13 +10,12 @@ import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.idan_koren_israeli.heartfit.R
-import com.idan_koren_israeli.heartfit.component.KotlinPrefsManager
 import com.idan_koren_israeli.heartfit.db.firebase.database.DatabaseManager
 import com.idan_koren_israeli.heartfit.db.firebase.firestore.FirestoreManager
 import com.idan_koren_israeli.heartfit.db.room_db.HeartFitRoomDB
+import com.idan_koren_israeli.heartfit.db.sharedpreferences.MySharedPreferences
 import com.idan_koren_israeli.heartfit.dialog.DialogWeightPicker
 import com.idan_koren_israeli.heartfit.mvvm.repository.Equipment
-import com.idan_koren_israeli.heartfit.mvvm.view.activity.MainActivity
 import com.idankorenisraeli.mysettingsscreen.MySettingsScreen
 import com.idankorenisraeli.mysettingsscreen.enums.ToggleType
 import com.idankorenisraeli.mysettingsscreen.tile_data.dialog.MultiChoiceTileData
@@ -73,7 +69,7 @@ class MyApp : MultiDexApplication() {
             .setUseDefaultSharedPreference(true)
             .build()
 
-        KotlinPrefsManager.init(this)
+        MySharedPreferences.init(this)
     }
 
 
@@ -96,7 +92,7 @@ class MyApp : MultiDexApplication() {
                         myEquipment.add(Equipment.fromInt(i)!!)
                     }
                 }
-                KotlinPrefsManager.saveArrayList(myEquipment,CommonUtils.KEY_EQUIPMENT)
+                MySharedPreferences.saveArrayList(myEquipment,CommonUtils.KEY_EQUIPMENT)
                 Log.i("pttt", "SAVING myEquipment "  +checked)
 
             }

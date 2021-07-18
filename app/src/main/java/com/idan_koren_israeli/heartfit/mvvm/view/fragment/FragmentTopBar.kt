@@ -1,7 +1,6 @@
 package com.idan_koren_israeli.heartfit.mvvm.view.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,11 +8,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.internal.IdTokenListener
-import com.google.firebase.ktx.Firebase
 import com.idan_koren_israeli.heartfit.R
-import com.idan_koren_israeli.heartfit.component.WorkoutCycleManager
+import com.idan_koren_israeli.heartfit.db.firebase.database.DatabaseManager
+
 private const val HEART_COUNT = "param1"
 
 /**
@@ -62,13 +62,12 @@ class FragmentTopBar : Fragment() {
     private fun setClickListeners(){
         signOutButton!!.setOnClickListener {
 
-
-
-
+            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build()
+            val mGoogleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
+            mGoogleSignInClient.signOut()
             FirebaseAuth.getInstance().signOut()
-            // This sign out method is not sufficiant for some reason
-            // When we log in again afterwards it just automattically asign to the last logged in user
-            // without the menu to choose an option of switching an account
 
             findNavController().navigate(R.id.action_fragmentHome_to_fragmentAuth)
 
@@ -99,7 +98,7 @@ class FragmentTopBar : Fragment() {
         fun newInstance() =
             FragmentTopBar().apply {
                 arguments = Bundle().apply {
-                    putInt(HEART_COUNT, WorkoutCycleManager.getHearts())
+                    putInt(HEART_COUNT, DatabaseManager.currentUser.hearts)
                 }
             }
     }

@@ -1,6 +1,12 @@
 package com.idan_koren_israeli.heartfit.mvvm.view.activity
 
+import android.app.AlarmManager
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
@@ -13,6 +19,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.common.CommonUtils
 import com.idan_koren_israeli.heartfit.mvvm.view.fragment.*
+import com.idan_koren_israeli.heartfit.receiver.HeartFitReceiver
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,8 +34,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        createNotificationChannel()
         initNavigation()
-
 
         //show the bottom navigation only to the relevant fragments
         navHostFragment.findNavController()
@@ -73,6 +81,34 @@ class MainActivity : AppCompatActivity() {
             finish()
             startActivity(intent)
         }
+    }
+
+    private fun createNotificationChannel() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            val channelName = "HeartFitAppChannel"
+            val description = "Channel for notification"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channel = NotificationChannel("HeartFit", channelName, importance)
+            channel.description = description
+
+            val notificationManager = getSystemService(NotificationManager::class.java)
+            notificationManager.createNotificationChannel(channel)
+        }
+        setNotification()
+    }
+
+    private fun setNotification(){
+        //86400000 is one day in ms
+        //add it to the timeInMillis before we submit
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(this, HeartFitReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(this,0,intent,0)
+        alarmManager.setInexactRepeating(
+            AlarmManager.RTC_WAKEUP,
+            Calendar.getInstance().timeInMillis + 86400000,
+            AlarmManager.INTERVAL_DAY,
+            pendingIntent)
     }
 
 }

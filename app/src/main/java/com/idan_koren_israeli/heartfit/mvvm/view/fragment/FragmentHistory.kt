@@ -1,6 +1,7 @@
 package com.idan_koren_israeli.heartfit.mvvm.view.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +16,6 @@ import com.idan_koren_israeli.heartfit.db.room_db.WorkoutSummary
 import com.idan_koren_israeli.heartfit.mvvm.view_model.HistoryViewModel
 import com.idan_koren_israeli.heartfit.enums.SortType
 import com.idan_koren_israeli.heartfit.recycler.adapter.HistoryListAdapter
-
 
 class FragmentHistory : Fragment() {
 
@@ -32,13 +32,6 @@ class FragmentHistory : Fragment() {
 
         findViews()
 
-        when(historyViewModel.sortType) {
-            SortType.DATE -> fragmentHistory_Spinner.setSelection(0)
-            SortType.TOTAL_TIME -> fragmentHistory_Spinner.setSelection(1)
-            SortType.MAX_HEARTS -> fragmentHistory_Spinner.setSelection(2)
-            SortType.DIFFICULTY -> fragmentHistory_Spinner.setSelection(3)
-            SortType.CALORIES_BURNED -> fragmentHistory_Spinner.setSelection(4)
-        }
         spinnerOnClick()
         initRecycleView()
         observerList()
@@ -61,10 +54,12 @@ class FragmentHistory : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 when(position){
                     0 -> historyViewModel.sortRuns(SortType.DATE)
-                    1 -> historyViewModel.sortRuns(SortType.TOTAL_TIME)
-                    2 -> historyViewModel.sortRuns(SortType.MAX_HEARTS)
-                    3 -> historyViewModel.sortRuns(SortType.DIFFICULTY)
-                    4 -> historyViewModel.sortRuns(SortType.CALORIES_BURNED)
+                    1 -> historyViewModel.sortRuns(SortType.PAST_SEVEN_DAYS)
+                    2 -> historyViewModel.sortRuns(SortType.PAST_MONTH)
+                    3 -> historyViewModel.sortRuns(SortType.TOTAL_TIME)
+                    4 -> historyViewModel.sortRuns(SortType.MAX_HEARTS)
+                    5 -> historyViewModel.sortRuns(SortType.DIFFICULTY)
+                    6 -> historyViewModel.sortRuns(SortType.CALORIES_BURNED)
                 }
             }
         }
@@ -72,6 +67,7 @@ class FragmentHistory : Fragment() {
 
     private fun observerList() {
         historyViewModel.exerciseSummary.observe(viewLifecycleOwner, Observer {
+            Log.i("pttt", "List Size: " + it.size)
             historyListAdapter.updateList(it)
             historyListAdapter.notifyDataSetChanged()
         })

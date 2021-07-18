@@ -54,7 +54,6 @@ private const val ANIMATION_RESOURCE_NAME_PREFIX = "anim_exercise_"
  * create an instance of this fragment.
  */
 class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
-    // TODO: Rename and change types of parameters
     private lateinit var workout: Workout
     private lateinit var user: User
     private lateinit var exercises: ArrayList<Exercise>
@@ -119,7 +118,7 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
 
                            //findNavController().navigate(R.id.action_fragmentWorkout_to_fragmentHome)
                             findNavController().popBackStack(R.id.fragmentWorkout, true)
-                            findNavController().navigate(R.id.fragmentHome)
+                            //findNavController().navigate(R.id.fragmentHome)
 
                             // TODO make the dialog 'exit' functionality.
                             //  For some reason, the pop back stack doesnt work when overriding the back press
@@ -362,11 +361,6 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
     }
 
     private fun workoutDone(){
-        /*
-           pass data between fragments
-           https://developer.android.com/guide/navigation/navigation-pass-data
-           User has enough hearts*/
-        /** TODO: I don't know what kind of data you transfer, please contact me if need assistant*/
 
         val bundle = bundleOf("workout_log" to workoutLog)
 

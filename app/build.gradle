@@ -77,10 +77,10 @@ dependencies {
     // Settings Screen
     implementation 'com.github.Idan503:MySettingsScreen:v1.0.01'
 
-    // Slider
+    // Top Workout Screen Slider
     implementation 'com.github.Idan503:CustomProgressBar:v1.0.3'
 
-    // Number Picker
+    // Number Picker for Weight Selection
     implementation 'io.github.ShawnLin013:number-picker:2.4.13'
 
     // Multi dex for detecting activity on Application class
@@ -99,5 +99,8 @@ dependencies {
 
     // Kotlin SharedPrefs
     implementation 'androidx.preference:preference-ktx:1.1.1'
+
+    // Kotlin Coroutine library
+    implementation "org.jetbrains.anko:anko:0.10.5"
 
 }

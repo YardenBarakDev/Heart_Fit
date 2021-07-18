@@ -30,4 +30,11 @@ interface WorkoutSummaryDao {
     @Query("SELECT * FROM workout_summary Where :uid = userId ORDER BY difficulty DESC")
     fun getAllSortedByDifficulty(uid : String): LiveData<List<WorkoutSummary>>
 
+    // 604800000 is one week in ms
+    @Query("SELECT * FROM workout_summary Where :uid = userId AND :currentTimeStamp - timestamp <= 604800000 ORDER BY timestamp DESC")
+    fun getAllRunsFromPastSevenDays(uid : String, currentTimeStamp : Long): LiveData<List<WorkoutSummary>>
+
+    //2592000000  is 30 days in ms
+    @Query("SELECT * FROM workout_summary Where :uid = userId AND :currentTimeStamp - timestamp <= 2592000000 ORDER BY timestamp DESC")
+    fun getAllRunsFromPastMonth(uid : String, currentTimeStamp : Long): LiveData<List<WorkoutSummary>>
 }

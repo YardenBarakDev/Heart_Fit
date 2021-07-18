@@ -15,6 +15,9 @@ class HistoryViewModel : ViewModel() {
     private val exerciseSummaryDifficulty = historyRepository.getAllExerciseSummarySortedByDifficulty()
     private val exerciseSummaryMaXHearts = historyRepository.getAllExerciseSummarySortedByMaXHearts()
     private val exerciseSummaryTotalTime = historyRepository.getAllExerciseSummarySortedByTotalTime()
+    private val exerciseSummaryPastSevenDays = historyRepository.getAllRunsFromPastSevenDays()
+    private val exerciseSummaryPastMonth = historyRepository.getAllRunsFromPastMonth()
+
 
     val exerciseSummary = MediatorLiveData<List<WorkoutSummary>>()
     var sortType = SortType.DATE
@@ -45,6 +48,16 @@ class HistoryViewModel : ViewModel() {
                 result?.let { exerciseSummary.value = it }
             }
         }
+        exerciseSummary.addSource(exerciseSummaryPastSevenDays) { result ->
+            if(sortType == SortType.PAST_SEVEN_DAYS) {
+                result?.let { exerciseSummary.value = it }
+            }
+        }
+        exerciseSummary.addSource(exerciseSummaryPastMonth) { result ->
+            if(sortType == SortType.PAST_MONTH) {
+                result?.let { exerciseSummary.value = it }
+            }
+        }
     }
 
     fun sortRuns(sortType: SortType) = when(sortType) {
@@ -53,6 +66,8 @@ class HistoryViewModel : ViewModel() {
         SortType.DIFFICULTY -> exerciseSummaryDifficulty.value?.let { exerciseSummary.value = it }
         SortType.MAX_HEARTS -> exerciseSummaryMaXHearts.value?.let { exerciseSummary.value = it }
         SortType.TOTAL_TIME -> exerciseSummaryTotalTime.value?.let { exerciseSummary.value = it }
+        SortType.PAST_SEVEN_DAYS -> exerciseSummaryPastSevenDays.value?.let { exerciseSummary.value = it }
+        SortType.PAST_MONTH -> exerciseSummaryPastMonth.value?.let { exerciseSummary.value = it }
     }.also {
         this.sortType = sortType
     }

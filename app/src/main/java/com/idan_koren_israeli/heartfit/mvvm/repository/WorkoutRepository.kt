@@ -1,8 +1,7 @@
 package com.idan_koren_israeli.heartfit.mvvm.repository
 
-import android.util.Log
 import com.idan_koren_israeli.heartfit.common.CommonUtils
-import com.idan_koren_israeli.heartfit.component.KotlinPrefsManager
+import com.idan_koren_israeli.heartfit.db.sharedpreferences.MySharedPreferences
 import com.idan_koren_israeli.heartfit.mvvm.model.WorkoutLevel
 import com.idan_koren_israeli.heartfit.mvvm.model.MuscleGroup
 import com.idan_koren_israeli.heartfit.mvvm.model.Workout
@@ -11,10 +10,10 @@ object WorkoutRepository {
 
 
     private fun getMyEquipment(): ArrayList<Equipment?> {
-        if(KotlinPrefsManager.getArrayList(CommonUtils.KEY_EQUIPMENT) == null)
+        if(MySharedPreferences.getArrayList(CommonUtils.KEY_EQUIPMENT) == null)
             return arrayListOf()
 
-        return KotlinPrefsManager.getArrayList(CommonUtils.KEY_EQUIPMENT)!!
+        return MySharedPreferences.getArrayList(CommonUtils.KEY_EQUIPMENT)!!
     }
 
 

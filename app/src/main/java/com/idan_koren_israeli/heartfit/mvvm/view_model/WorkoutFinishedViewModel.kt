@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.idan_koren_israeli.heartfit.db.room_db.WorkoutSummary
 import com.idan_koren_israeli.heartfit.mvvm.repository.HistoryRepository
 
-class WorkoutFinishedViewModel : ViewModel() {
+object WorkoutFinishedViewModel : ViewModel() {
 
     private var historyRepository = HistoryRepository()
 
