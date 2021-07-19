@@ -15,9 +15,10 @@ class HistoryRepository : ViewModel() {
 
     companion object{
         val instance = HistoryRepository()
-        val uid = FirebaseAuth.getInstance().currentUser?.uid
     }
+
     private val exerciseSummaryDao = HeartFitRoomDB.getInstance().exerciseSummaryDao()
+    private val uid = FirebaseAuth.getInstance().currentUser?.uid
 
     fun getInstance() : HistoryRepository{return instance}
 

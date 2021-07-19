@@ -1,8 +1,6 @@
 package com.idan_koren_israeli.heartfit.mvvm.view.fragment
 
-import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,22 +11,10 @@ import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.common.CommonUtils
 import com.idan_koren_israeli.heartfit.component.WorkoutGenerator
 import com.idan_koren_israeli.heartfit.db.firebase.database.DatabaseManager
-import com.idan_koren_israeli.heartfit.mvvm.repository.Equipment
-import com.idan_koren_israeli.heartfit.mvvm.model.MuscleGroup
-import com.idan_koren_israeli.heartfit.mvvm.model.Workout
-import com.idan_koren_israeli.heartfit.mvvm.model.WorkoutLevel
 import com.idan_koren_israeli.heartfit.mvvm.repository.WorkoutRepository
 import com.idan_koren_israeli.heartfit.mvvm.view.dialog.WorkoutStartDialogManager
 import com.idan_koren_israeli.heartfit.recycler.adapter.WorkoutSelectAdapter
-import java.util.*
-import kotlin.collections.ArrayList
 
-
-/**
- * A simple [Fragment] subclass.
- * Use the [FragmentHome.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FragmentHome : Fragment() {
 
     private lateinit var workoutsRecycler: RecyclerView
@@ -37,13 +23,9 @@ class FragmentHome : Fragment() {
     private lateinit var topBar: FragmentTopBar
     private lateinit var loadingScreen: ViewGroup
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     private fun initTopBarFragment() {
-        topBar = FragmentTopBar.newInstance()
+        topBar = FragmentTopBar()
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.home_FRAG_top_bar, topBar).commitAllowingStateLoss()
     }

@@ -37,4 +37,16 @@ interface WorkoutSummaryDao {
     //2592000000  is 30 days in ms
     @Query("SELECT * FROM workout_summary Where :uid = userId AND :currentTimeStamp - timestamp <= 2592000000 ORDER BY timestamp DESC")
     fun getAllRunsFromPastMonth(uid : String, currentTimeStamp : Long): LiveData<List<WorkoutSummary>>
+
+    @Query("SELECT SUM(heartsCollected) FROM workout_summary Where :uid = userId AND :currentTimeStamp - timestamp <= 604800000")
+    fun getAllHeartsCollectedInPastSevenDays(uid : String, currentTimeStamp : Long): LiveData<Int>
+
+    @Query("SELECT SUM(totalDurationSeconds) FROM workout_summary Where :uid = userId AND :currentTimeStamp - timestamp <= 604800000")
+    fun getTotalTimeOfSevenDaysWorkouts(uid : String, currentTimeStamp : Long): LiveData<Int>
+
+    @Query("SELECT SUM(caloriesBurned) FROM workout_summary Where :uid = userId AND :currentTimeStamp - timestamp <= 604800000")
+    fun getTotalCaloriesBurnedInPastSevenDays(uid : String, currentTimeStamp : Long): LiveData<Int>
+
+    @Query("SELECT COUNT(*) FROM workout_summary Where :uid = userId AND :currentTimeStamp - timestamp <= 604800000")
+    fun getSumOfWorkoutsFromPastSevenDays(uid : String, currentTimeStamp : Long): LiveData<Int>
 }
