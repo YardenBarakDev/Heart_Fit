@@ -200,7 +200,7 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
         })
 
 
-        timerView.typefaceBold = resources.getFont(R.font.saira_condensed_semibold)
+        timerView.typefaceBold = resources.getFont(R.font.saira_condensed_bold)
         timerView.typefaceRegular = resources.getFont(R.font.saira_condensed_regular)
     }
 
@@ -309,8 +309,6 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
 
     private fun updateProgressBar() {
         workoutProgress.value = calculateProgressBarValue()
-
-
     }
 
 
@@ -399,12 +397,6 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @return A new instance of fragment FragmentWorkout.
-         */
         @JvmStatic
         fun newInstance(workout: Workout, exercises: List<Exercise>, user: User) =
             FragmentWorkout().apply {
@@ -441,7 +433,6 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
     private fun resume() {
         paused = false
         timerView.resume()
-        Log.i("pttt" , "RESUMES")
         pauseResumeButton.setImageResource(R.drawable.ic_baseline_pause_circle_filled_24)
     }
 
@@ -454,7 +445,6 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
         tts.stop()
         tts.shutdown()
         stopHandler()
-        Log.i("pttt", "Destroy")
         super.onDestroy()
     }
 

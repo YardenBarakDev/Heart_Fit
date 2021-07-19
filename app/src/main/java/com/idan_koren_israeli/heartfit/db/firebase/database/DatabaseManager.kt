@@ -38,16 +38,16 @@ object DatabaseManager {
             }
     }
 
-    fun loadCurrentUser(fbUser: FirebaseUser, onLoaded: (currentUser: User) -> Unit) {
+    fun loadCurrentUser(fbUser: FirebaseUser, onLoaded: (currentUser: User, firstTime: Boolean) -> Unit) {
         loadUser(fbUser.uid) {
             if (it == null) {
                 // New User
                 currentUser = User(fbUser.uid, fbUser.displayName)
-                storeUser(currentUser) { onLoaded.invoke(currentUser) }
+                storeUser(currentUser) { onLoaded.invoke(currentUser, true) }
             }
             else{
                 currentUser = it
-                onLoaded.invoke(currentUser)
+                onLoaded.invoke(currentUser, false)
             }
         }
     }

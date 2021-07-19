@@ -1,6 +1,7 @@
 package com.idan_koren_israeli.heartfit.mvvm.repository
 
 
+import android.util.Log
 import com.idan_koren_israeli.heartfit.common.CommonUtils
 import com.idan_koren_israeli.heartfit.component.MySharedPreferences
 import com.idan_koren_israeli.heartfit.mvvm.model.WorkoutLevel
@@ -14,6 +15,7 @@ object WorkoutRepository {
         if (MySharedPreferences.getArrayList(CommonUtils.KEY_EQUIPMENT) == null)
             return arrayListOf()
 
+        Log.i("pttt", MySharedPreferences.getArrayList(CommonUtils.KEY_EQUIPMENT)!!.toString() + " ")
         return MySharedPreferences.getArrayList(CommonUtils.KEY_EQUIPMENT)!!
     }
 

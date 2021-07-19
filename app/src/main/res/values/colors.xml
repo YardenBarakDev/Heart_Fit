@@ -26,8 +26,8 @@
     <color name="heart_locked">#A5A5A5</color>
     <color name="progress_bar">#FF7268</color>
     <color name="progress_bar_background">#E6E6E6</color>
-    <color name="equip_selected">#9928E81A</color>
-    <color name="equip_non_selected">#ABA1A1A1</color>
+    <color name="equip_selected">#129A03</color>
+    <color name="equip_non_selected">#494545</color>
     <color name="workout_timer_background">#FFFFFF</color>
 
 

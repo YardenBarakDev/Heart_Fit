@@ -49,8 +49,9 @@ class MyApp : MultiDexApplication() {
         FirestoreManager.initFirestore()
         HeartFitRoomDB.init(this)
         CommonUtils.initHelper(this)
-        initSettingsScreen()
         initSharedPrefs()
+        initSettingsScreen()
+
 
         //CurrentUserDataModelView.loadCurrentUser { /*Fetching the user from server */ }
 
@@ -74,8 +75,6 @@ class MyApp : MultiDexApplication() {
 
 
     private fun initSettingsScreen(){
-
-
 
         val equipmentNames :ArrayList<String> = arrayListOf()
         for(eq in Equipment.values()){

@@ -6,9 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.idan_koren_israeli.heartfit.R
+import com.idan_koren_israeli.heartfit.common.CommonUtils
+import com.idan_koren_israeli.heartfit.component.MySharedPreferences
 import com.idan_koren_israeli.heartfit.mvvm.repository.Equipment
 import com.idan_koren_israeli.heartfit.recycler.adapter.EquipmentSelectAdapter
 
@@ -24,7 +27,6 @@ class FragmentEquipmentSelect : Fragment() {
     lateinit var equipmentRecycler: RecyclerView
     lateinit var equipmentAdapter: EquipmentSelectAdapter
     private lateinit var finishButton: ImageButton
-    lateinit var onSelectionDone: (equipmentSelected:Set<Equipment>) -> Unit
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,9 +49,12 @@ class FragmentEquipmentSelect : Fragment() {
 
     }
 
-    fun initFinishButton(){
+    private fun initFinishButton(){
         finishButton.setOnClickListener {
-            onSelectionDone(equipmentAdapter.getSelectedEquipment())
+            val selectedArrayList :ArrayList<Equipment?> = ArrayList(equipmentAdapter.getSelectedEquipment())
+            MySharedPreferences.saveArrayList(selectedArrayList,CommonUtils.KEY_EQUIPMENT)
+
+            findNavController().navigate(R.id.action_fragmentEquipmentSelect_to_fragmentHome)
         }
     }
 

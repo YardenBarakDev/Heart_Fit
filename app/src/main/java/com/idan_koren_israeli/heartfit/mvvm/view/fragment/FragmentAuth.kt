@@ -120,6 +120,7 @@ class FragmentAuth : Fragment() {
 
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
+        showLoadingLayout()
         mAuth.signInWithCredential(credential)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
@@ -135,8 +136,11 @@ class FragmentAuth : Fragment() {
     }
 
     private fun onAuthSuccess(fbUser: FirebaseUser){
-        DatabaseManager.loadCurrentUser(fbUser){
-            findNavController().navigate(R.id.action_fragmentAuth_to_fragmentHome)
+        DatabaseManager.loadCurrentUser(fbUser){ _, firstTime ->
+            if(firstTime)
+                findNavController().navigate(R.id.action_fragmentAuth_to_fragmentEquipmentSelect)
+            else
+                findNavController().navigate(R.id.action_fragmentAuth_to_fragmentHome)
         }
 
     }

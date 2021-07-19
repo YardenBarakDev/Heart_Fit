@@ -45,5 +45,6 @@
     <string name="burned">burned</string>
     <string name="collected">collected</string>
     <string name="viewing_options">Filter Options</string>
+    <string name="change_later">You can change it later in Settings</string>
 
 </resources>

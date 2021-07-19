@@ -1,5 +1,6 @@
 package com.idan_koren_israeli.heartfit.component
 
+import android.util.Log
 import com.google.firebase.firestore.ktx.toObject
 import com.idan_koren_israeli.heartfit.common.CommonUtils
 import com.idan_koren_israeli.heartfit.db.firebase.firestore.FirestoreManager
@@ -64,6 +65,7 @@ object WorkoutGenerator {
             val matchedExercises = filterMatchingExercises(loadedExercises,
                 requiredLevels,
                 requiredEquipment)
+
 
 
 
