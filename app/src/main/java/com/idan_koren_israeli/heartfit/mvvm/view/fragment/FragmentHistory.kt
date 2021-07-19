@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,11 +20,11 @@ import com.idan_koren_israeli.heartfit.recycler.adapter.HistoryListAdapter
 
 class FragmentHistory : Fragment() {
 
-    private lateinit var historyListAdapter : HistoryListAdapter
+    private lateinit var historyListAdapter: HistoryListAdapter
     private var historyViewModel: HistoryViewModel = HistoryViewModel()
-    private var viewFragmentHistory : View? = null
-    private lateinit var fragmentHistory_Spinner : Spinner
-    private lateinit var fragmentHistory_RecyclerView : RecyclerView
+    private var viewFragmentHistory: View? = null
+    private lateinit var fragmentHistory_Spinner: Spinner
+    private lateinit var fragmentHistory_RecyclerView: RecyclerView
     private lateinit var workoutSummary: List<WorkoutSummary>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -32,7 +33,7 @@ class FragmentHistory : Fragment() {
 
         findViews()
 
-        spinnerOnClick()
+        initSpinner()
         initRecycleView()
         observerList()
 
@@ -47,22 +48,34 @@ class FragmentHistory : Fragment() {
         fragmentHistory_RecyclerView.setHasFixedSize(true)
     }
 
-    private fun spinnerOnClick() {
-        fragmentHistory_Spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+    private fun initSpinner() {
+        //fragmentHistory_Spinner.adapter = ArrayAdapter<String>(requireContext(), R.layout.text_spinner_options)
+
+        fragmentHistory_Spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 historyViewModel.sortRuns(SortType.DATE)
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                when(position){
+                when (position) {
                     0 -> historyViewModel.sortRuns(SortType.DATE)
-                    1 -> historyViewModel.sortRuns(SortType.PAST_SEVEN_DAYS)
-                    2 -> historyViewModel.sortRuns(SortType.PAST_MONTH)
-                    3 -> historyViewModel.sortRuns(SortType.TOTAL_TIME)
-                    4 -> historyViewModel.sortRuns(SortType.MAX_HEARTS)
-                    5 -> historyViewModel.sortRuns(SortType.DIFFICULTY)
-                    6 -> historyViewModel.sortRuns(SortType.CALORIES_BURNED)
+                    1 -> historyViewModel.sortRuns(SortType.TOTAL_TIME)
+                    2 -> historyViewModel.sortRuns(SortType.MAX_HEARTS)
+                    3 -> historyViewModel.sortRuns(SortType.DIFFICULTY)
+                    4 -> historyViewModel.sortRuns(SortType.CALORIES_BURNED)
+                    5 -> historyViewModel.sortRuns(SortType.PAST_SEVEN_DAYS)
+                    6 -> historyViewModel.sortRuns(SortType.PAST_MONTH)
                 }
+
+                /*
+                    <item>Sort by Time Performed</item>
+                    <item>Sort by Duration</item>
+                    <item>Sort by Hearts collected</item>
+                    <item>Sort by Difficulty</item>
+                    <item>Sort by Calories Burned</item>
+                    <item>Last Week</item>
+                    <item>Last Month</item>
+                 */
             }
         }
     }

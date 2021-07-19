@@ -14,6 +14,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
+
 /**
  * The type Circular timer view.
  */
@@ -60,11 +61,30 @@ public class CircularTimerView extends View {
     private Boolean isClockwise = true;
     private int startingAngle = 270;
 
+    private Typeface typefaceBold = Typeface.DEFAULT_BOLD;
+    private Typeface typefaceRegular = Typeface.DEFAULT;
 
     /**
      * The Def style attr.
      */
     int defStyleAttr;
+
+
+    public Typeface getTypefaceBold() {
+        return typefaceBold;
+    }
+
+    public void setTypefaceBold(Typeface typefaceBold) {
+        this.typefaceBold = typefaceBold;
+    }
+
+    public Typeface getTypefaceRegular() {
+        return typefaceRegular;
+    }
+
+    public void setTypefaceRegular(Typeface typefaceRegular) {
+        this.typefaceRegular = typefaceRegular;
+    }
 
     private CircularTimerListener circularTimerListener;
     private CountDownTimerWithPause countDownTimer;
@@ -202,12 +222,13 @@ public class CircularTimerView extends View {
 
 
 
+
         if (!TextUtils.isEmpty(text)) {
             float textHeight = textPaint.descent() + textPaint.ascent();
-            textPaint.setTypeface(Typeface.DEFAULT_BOLD);
+            textPaint.setTypeface(typefaceBold);
             canvas.drawText(firstLine, (getWidth() - textPaint.measureText(firstLine)) / 2.0f, (getWidth() - textHeight) / 2.0f + 65, textPaint);
-            textPaint.setTypeface(Typeface.DEFAULT);
-            canvas.drawText(secondLine, (getWidth() - textPaint.measureText(secondLine)) / 2.0f, (getWidth() - textHeight) / 2.0f + 145, textPaint);
+            textPaint.setTypeface(typefaceRegular);
+            canvas.drawText(secondLine, (getWidth() - textPaint.measureText(secondLine)) / 2.0f, (getWidth() - textHeight) / 2.0f + 155, textPaint);
         }
 
 
