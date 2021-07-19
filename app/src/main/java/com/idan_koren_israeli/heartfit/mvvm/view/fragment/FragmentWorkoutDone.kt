@@ -13,6 +13,7 @@ import androidx.room.Database
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.idan_koren_israeli.heartfit.R
+import com.idan_koren_israeli.heartfit.common.CommonUtils
 import com.idan_koren_israeli.heartfit.db.firebase.database.DatabaseManager
 import com.idan_koren_israeli.heartfit.db.room_db.WorkoutSummary
 import com.idan_koren_israeli.heartfit.db.room_db.WorkoutSummaryDao
@@ -57,12 +58,13 @@ class FragmentWorkoutFinished : Fragment() {
            DatabaseManager.currentUser.hearts = DatabaseManager.currentUser.hearts.plus(workoutLog!!.workout!!.heartsValue)
            DatabaseManager.storeCurrentUser()
         }
+
     }
 
+    // Checks if workout was long enough to be considered as done
+    // because user can skip exercises
     private fun isRealDone(): Boolean {
-        return true
-
-        //TODO Complete - check if the workout is finished by time compare
+        return (workoutLog!!.exercisesDone.size + 3 >= workoutLog!!.totalExercisesCount)
     }
 
     override fun onCreateView(
@@ -102,8 +104,13 @@ class FragmentWorkoutFinished : Fragment() {
         durationText.text = String.format("%02d:%02d:%02d", seconds / 3600,
             (seconds % 3600) / 60, (seconds % 60));
         exercisesCountText.text = workoutLog!!.exercisesDone.size.toString()
-        heartsText.text = workoutLog!!.workout!!.heartsValue.toString()
 
+        if(isRealDone())
+            heartsText.text = workoutLog!!.workout!!.heartsValue.toString()
+        else {
+            heartsText.text = "0"
+            CommonUtils.getInstance().showToast("Too many exercises skipped\nno hearts collected.")
+        }
 
 
         val exercisesAdapter = ExercisesDoneAdapter(requireContext(), workoutLog!!.exercisesDone, DatabaseManager.currentUser.weight)

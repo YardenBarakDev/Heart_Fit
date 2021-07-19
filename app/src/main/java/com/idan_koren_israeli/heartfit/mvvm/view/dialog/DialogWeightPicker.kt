@@ -1,4 +1,4 @@
-package com.idan_koren_israeli.heartfit.dialog
+package com.idan_koren_israeli.heartfit.mvvm.view.dialog
 
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater

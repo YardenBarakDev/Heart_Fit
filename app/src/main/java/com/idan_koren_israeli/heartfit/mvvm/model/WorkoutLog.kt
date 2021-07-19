@@ -7,7 +7,8 @@ const val MET = 4.0f // This is an ~est. of an exercising MET value
 // There is not enough academic research today to caculate this number accuritly
 
 class WorkoutLog(val workout:Workout? = null, var totalDuration:Int = 0,
-                 var exercisesDone: ArrayList<Exercise> = arrayListOf(), var caloriesBurned: Int? = null) : Serializable  {
+                 var exercisesDone: ArrayList<Exercise> = arrayListOf(), var caloriesBurned: Int? = null,
+                var totalExercisesCount : Int = 0) : Serializable  {
 
     fun trackExerciseDone(exercise: Exercise, weight: Float){
         exercisesDone.add(exercise)

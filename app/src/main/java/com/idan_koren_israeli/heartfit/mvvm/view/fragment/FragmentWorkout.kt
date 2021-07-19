@@ -90,7 +90,7 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
             exercises = it.getSerializable(EXERCISES_KEY) as ArrayList<Exercise>
             user = it.getSerializable(USER_KEY) as User
 
-            workoutLog = WorkoutLog(workout, 0, arrayListOf(), 0)
+            workoutLog = WorkoutLog(workout, 0, arrayListOf(), 0, totalExercisesCount = exercises.size)
         }
 
         tts = TextToSpeech(requireContext(), this)

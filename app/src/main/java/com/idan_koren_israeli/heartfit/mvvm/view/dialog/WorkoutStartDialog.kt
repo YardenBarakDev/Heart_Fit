@@ -42,7 +42,7 @@ class WorkoutStartDialogManager(val activity: Activity) {
 
 
             val layoutParams: ViewGroup.MarginLayoutParams =
-                ViewGroup.MarginLayoutParams(130, ViewGroup.LayoutParams.WRAP_CONTENT)
+                ViewGroup.MarginLayoutParams(160, ViewGroup.LayoutParams.WRAP_CONTENT)
 
             layoutParams.marginStart = 15
             layoutParams.marginEnd = 15

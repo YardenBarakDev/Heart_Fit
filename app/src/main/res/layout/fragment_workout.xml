@@ -39,11 +39,11 @@
 
 
         <FrameLayout
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="14dp"
-            android:padding="2dp"
+            android:padding="1dp"
 
             >
 
@@ -53,6 +53,12 @@
                 android:layout_height="match_parent"
 
                 android:gravity="center"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="22sp"
+                android:autoSizeMinTextSize="14sp"
+
+                android:textStyle="bold"
+                android:padding="2dp"
                 android:translationZ="4dp" />
 
             <ImageView
@@ -60,7 +66,7 @@
                 android:id="@+id/workout_IMG_heart"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_heart" />
+                android:src="@drawable/ic_heart_outlined" />
 
 
         </FrameLayout>
