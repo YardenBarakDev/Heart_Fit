@@ -2,7 +2,6 @@ package com.idan_koren_israeli.heartfit.mvvm.view_model
 
 import androidx.lifecycle.ViewModel
 import com.idan_koren_israeli.heartfit.mvvm.repository.TopBarRepository
-import kotlin.math.round
 
 object TopBarViewModel : ViewModel() {
 
