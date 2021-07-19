@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center"
     tools:context=".mvvm.view.fragment.FragmentAuth">
@@ -12,15 +13,27 @@
         android:id="@+id/sign_in_coverImage"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
+        android:layout_marginBottom="-20dp"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="38sp"
+        android:textSize="44sp"
         android:text="@string/app_name"
         android:id="@+id/auth_LBL_app_name"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/auth_LBL_secondary_text"
+        android:text="@string/app_secondary_title"
+        android:textSize="22sp"
+        android:textColor="@color/text_secondary"
+        android:textStyle="italic"
         />
 
     <com.google.android.gms.common.SignInButton
@@ -28,6 +41,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        app:colorScheme="dark"
+        app:buttonSize="wide"
         android:padding="15dp"
         />
 

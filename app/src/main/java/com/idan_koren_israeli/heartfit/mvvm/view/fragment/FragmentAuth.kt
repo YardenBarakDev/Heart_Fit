@@ -37,6 +37,7 @@ class FragmentAuth : Fragment() {
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var logoImage: ImageView
     private lateinit var appNameText : TextView
+    private lateinit var appNameSecondaryText : TextView
     private lateinit var loadingLayout: ViewGroup
 
     override fun onCreateView(
@@ -78,6 +79,7 @@ class FragmentAuth : Fragment() {
         logoImage.visibility = View.GONE
         signInButton.visibility = View.GONE
         appNameText.visibility = View.GONE
+        appNameSecondaryText.visibility = View.GONE
         loadingLayout.visibility = View.VISIBLE
     }
 
@@ -85,6 +87,7 @@ class FragmentAuth : Fragment() {
         logoImage.visibility = View.VISIBLE
         signInButton.visibility = View.VISIBLE
         appNameText.visibility = View.VISIBLE
+        appNameSecondaryText.visibility = View.VISIBLE
         loadingLayout.visibility = View.GONE
     }
 
@@ -148,5 +151,6 @@ class FragmentAuth : Fragment() {
         logoImage = viewLoginAndRegister.findViewById(R.id.sign_in_coverImage)
         appNameText = viewLoginAndRegister.findViewById(R.id.auth_LBL_app_name)
         loadingLayout =  viewLoginAndRegister.findViewById(R.id.auth_LAY_loading)
+        appNameSecondaryText = viewLoginAndRegister.findViewById(R.id.auth_LBL_secondary_text)
     }
 }

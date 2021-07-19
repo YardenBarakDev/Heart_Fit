@@ -48,7 +48,6 @@
             app:layout_constraintHeight_percent="0.35"
 
 
-            android:fontFamily="sans-serif-condensed-light"
             android:id="@+id/equipment_card_LBL_label"
             android:text="@string/equipment"
             android:textColor="@color/white"

@@ -18,10 +18,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed"
             android:textColor="@color/text_secondary"
             android:id="@+id/top_bar_LBL_last_7_days"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:layout_marginTop="4dp"
             android:layout_centerHorizontal="true"
             android:text="@string/last_7_days" />
@@ -62,7 +61,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="18sp"
                     android:textColor="@color/text_secondary"
                     android:id="@+id/top_bar_LBL_workouts_label"
                     android:text="@string/workouts"
@@ -93,13 +92,13 @@
                     android:includeFontPadding="false"
                     android:id="@+id/top_bar_LBL_hours"
                     android:text="@string/_0_0"
-                    android:textSize="36sp"
+                    android:textSize="34sp"
                     />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="18sp"
                     android:textColor="@color/text_secondary"
                     android:id="@+id/top_bar_LBL_hours_title"
                     android:text="@string/hours"
@@ -136,7 +135,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="18sp"
                     android:textColor="@color/text_secondary"
                     android:id="@+id/top_bar_LBL_calories_title"
                     android:text="@string/calories"
