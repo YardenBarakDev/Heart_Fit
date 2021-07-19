@@ -46,6 +46,7 @@
 
 
                 <TextView
+                    android:id="@+id/top_bar_LBL_workouts"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
@@ -53,7 +54,6 @@
                     android:letterSpacing="0.04"
                     android:layout_marginTop="8dp"
                     android:includeFontPadding="false"
-                    android:id="@+id/top_bar_LBL_workouts"
                     android:text="@string/_0"
                     android:textSize="24sp"
                     />
@@ -83,6 +83,7 @@
 
 
                 <TextView
+                    android:id="@+id/top_bar_LBL_hours"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
@@ -90,7 +91,6 @@
                     android:letterSpacing="0.04"
                     android:layout_marginTop="10dp"
                     android:includeFontPadding="false"
-                    android:id="@+id/top_bar_LBL_hours"
                     android:text="@string/_0_0"
                     android:textSize="34sp"
                     />
@@ -120,6 +120,7 @@
 
 
                 <TextView
+                    android:id="@+id/top_bar_LBL_calories"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
@@ -127,7 +128,6 @@
                     android:letterSpacing="0.04"
                     android:layout_marginTop="8dp"
                     android:includeFontPadding="false"
-                    android:id="@+id/top_bar_LBL_calories"
                     android:text="@string/_0"
                     android:textSize="24sp"
                     />
