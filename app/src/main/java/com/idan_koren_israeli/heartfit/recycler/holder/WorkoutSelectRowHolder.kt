@@ -24,13 +24,16 @@ import com.idan_koren_israeli.heartfit.mvvm.model.*
 import com.idan_koren_israeli.heartfit.mvvm.view.dialog.WorkoutStartDialogManager
 
 
-class WorkoutSelectRowHolder(itemView: View, private val onClick: (workout: Workout) -> Unit) :
+class WorkoutSelectRowHolder(
+    itemView: View,
+    private val currentUser: User,
+    private val onClick: (workout: Workout) -> Unit
+) :
     RecyclerView.ViewHolder(itemView) {
 
     private lateinit var leftWorkout: ViewGroup
     private lateinit var centerWorkout: ViewGroup
     private lateinit var rightWorkout: ViewGroup
-
 
 
     init {
@@ -43,14 +46,13 @@ class WorkoutSelectRowHolder(itemView: View, private val onClick: (workout: Work
         centerWorkout = itemView.findViewById(R.id.workouts_row_LAY_center)
     }
 
-    fun setContent(workouts: ArrayList<Workout>, colorId:Int) {
-        Log.i("pttt", "Settings " + workouts.size + " length")
+    fun setContent(workouts: ArrayList<Workout>, colorId: Int) {
         when (workouts.size) {
             1 -> {
                 leftWorkout.visibility = View.GONE
                 centerWorkout.visibility = View.VISIBLE
                 rightWorkout.visibility = View.GONE
-                attachWorkoutToLayout(workouts[0], centerWorkout,colorId)
+                attachWorkoutToLayout(workouts[0], centerWorkout, colorId)
             }
             2 -> {
                 leftWorkout.visibility = View.VISIBLE
@@ -72,8 +74,12 @@ class WorkoutSelectRowHolder(itemView: View, private val onClick: (workout: Work
         }
     }
 
-    private fun attachWorkoutToLayout(workout: Workout, workoutHolder: ViewGroup, colorId: Int) {
-        val clickable : Boolean = (DatabaseManager.currentUser.hearts >= workout.heartsToUnlock)
+    private fun attachWorkoutToLayout(
+        workout: Workout,
+        workoutHolder: ViewGroup,
+        colorId: Int
+    ) {
+        val clickable: Boolean = (currentUser.hearts >= workout.heartsToUnlock)
 
 
         val workoutName: TextView = workoutHolder.findViewById(R.id.workout_holder_LBL_name)
@@ -82,7 +88,7 @@ class WorkoutSelectRowHolder(itemView: View, private val onClick: (workout: Work
         val heartsToUnlockText: TextView =
             workoutHolder.findViewById(R.id.workout_holder_LBL_hearts)
 
-        if(!clickable)
+        if (!clickable)
             heartImage.setImageResource(R.drawable.ic_heart_outlined_locked)
         else
             heartImage.setImageResource(R.drawable.ic_heart_outlined)
@@ -94,55 +100,15 @@ class WorkoutSelectRowHolder(itemView: View, private val onClick: (workout: Work
         heartsToUnlockText.text = workout.heartsToUnlock.toString()
 
         workoutHolder.setOnClickListener {
-            run {
-                if (!clickable) {
-                    CommonUtils.getInstance()
-                        .showToast("Not enough hearts to start this workout")
-                } else {
-                    // User has enough hearts, workout can be started
-                    /*
-                    pass data between fragments
-                    https://developer.android.com/guide/navigation/navigation-pass-data*/
-
-
-
-                    WorkoutGenerator.generateWorkout(workout){ exercises ->
-
-                        for(ex in exercises){
-                            Log.i("pttt", " EXERCISE: " + ex.name + " | ")
-                        }
-
-                        val dialogManager = WorkoutStartDialogManager(itemView.context as Activity)
-
-                        dialogManager.create()
-                        dialogManager.inflate()
-
-                        dialogManager.launch(workout, exercises)
-
-                    }
-
-                    /*
-                    FirestoreManager.loadExercisesByName("Bench press") {
-                        val bundle = bundleOf(
-                            "workout" to workout,
-                            "exercises" to it,
-                            "user" to DatabaseManager.currentUser
-                        )
-
-                        itemView.findNavController()
-                            .navigate(R.id.action_fragmentHome_to_fragmentWorkout, bundle)
-                    }
-
-                     */
-                }
-            }
+            onClick.invoke(workout)
         }
     }
 
 
-    private fun setWorkoutButtonBackgroundColor(workoutImage: ImageView, colorId:Int){
+    private fun setWorkoutButtonBackgroundColor(workoutImage: ImageView, colorId: Int) {
         val layerDrawable = workoutImage.background as LayerDrawable
-        val iconBackgroundDrawable = layerDrawable.findDrawableByLayerId(R.id.ic_workout_ITEM_background) as GradientDrawable
+        val iconBackgroundDrawable =
+            layerDrawable.findDrawableByLayerId(R.id.ic_workout_ITEM_background) as GradientDrawable
         iconBackgroundDrawable.setColor(ContextCompat.getColor(workoutImage.context, colorId))
 
     }

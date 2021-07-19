@@ -7,10 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.idan_koren_israeli.heartfit.R
+import com.idan_koren_israeli.heartfit.mvvm.model.User
 import com.idan_koren_israeli.heartfit.mvvm.model.Workout
 import com.idan_koren_israeli.heartfit.recycler.holder.WorkoutSelectRowHolder
 
-class WorkoutSelectAdapter(context: Context, var workouts: MutableList<ArrayList<Workout>>) :
+class WorkoutSelectAdapter(context: Context, var workouts: MutableList<ArrayList<Workout>>,
+                           private val currentUser: User,
+                           private val onWorkoutClick: (workout: Workout) -> Unit ) :
     RecyclerView.Adapter<WorkoutSelectRowHolder>() {
 
     companion object{
@@ -28,14 +31,12 @@ class WorkoutSelectAdapter(context: Context, var workouts: MutableList<ArrayList
         mInflater = LayoutInflater.from(context)
     }
 
-    private fun onWorkoutClick(workout: Workout){
-        Log.i("pttt", workout.name + " Clicked!")
-    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkoutSelectRowHolder {
         val view: View = mInflater!!.inflate(R.layout.holder_workout_row,parent, false)
 
-        return WorkoutSelectRowHolder(view) { workout -> onWorkoutClick(workout)}
+        return WorkoutSelectRowHolder(view, currentUser, onWorkoutClick)
     }
 
     override fun onBindViewHolder(rowHolder: WorkoutSelectRowHolder, position: Int) {

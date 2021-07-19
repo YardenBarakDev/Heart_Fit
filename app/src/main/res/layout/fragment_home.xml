@@ -22,6 +22,12 @@
             android:layout_below="@id/home_FRAG_top_bar"
             />
 
+    <include
+        layout="@layout/layout_loading_transition"
+        android:id="@+id/home_LAY_loading"
+        android:visibility="gone"
+        />
+
 
 
 </RelativeLayout>

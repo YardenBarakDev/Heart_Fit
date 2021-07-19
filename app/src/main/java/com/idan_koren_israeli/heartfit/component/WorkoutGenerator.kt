@@ -88,7 +88,8 @@ object WorkoutGenerator {
 
             }
 
-            allWorkoutExercises.removeLast()
+            if(allWorkoutExercises.size > 0)
+                allWorkoutExercises.removeLast()
 
             onWorkoutGenerated.invoke(allWorkoutExercises)
 
