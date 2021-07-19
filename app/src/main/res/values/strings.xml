@@ -41,5 +41,6 @@
     <string name="_0_0">0.0</string>
     <string name="_0">0</string>
     <string name="workouts">Workouts</string>
+    <string name="loading">Loading...</string>
 
 </resources>

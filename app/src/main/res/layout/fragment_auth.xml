@@ -1,26 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
     tools:context=".mvvm.view.fragment.FragmentAuth">
 
 
     <ImageView
         android:id="@+id/sign_in_coverImage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-         android:scaleType="fitXY"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:scaleType="fitXY"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="38sp"
+        android:text="@string/app_name"
+        android:id="@+id/auth_LBL_app_name"
         />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp"
-        android:padding="10dp"
+        android:layout_marginTop="50dp"
+        android:padding="15dp"
         />
 
-</RelativeLayout>
+    <include
+        layout="@layout/layout_loading"
+        android:visibility="gone"
+        android:id="@+id/auth_LAY_loading"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        />
+
+</LinearLayout>

@@ -12,8 +12,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.idan_koren_israeli.heartfit.R
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_ICON_ID = "icon_id"
 
 /**

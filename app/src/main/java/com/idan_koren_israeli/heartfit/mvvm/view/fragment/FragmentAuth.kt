@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -18,7 +19,6 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.ktx.Firebase
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.common.CommonUtils
 import com.idan_koren_israeli.heartfit.db.firebase.database.DatabaseManager
@@ -33,9 +33,11 @@ class FragmentAuth : Fragment() {
 
     lateinit var viewLoginAndRegister: View
     private lateinit var mAuth: FirebaseAuth
-    private lateinit var sign_in_button: SignInButton
+    private lateinit var signInButton: SignInButton
     private lateinit var googleSignInClient: GoogleSignInClient
-    private lateinit var sign_in_coverImage: ImageView
+    private lateinit var logoImage: ImageView
+    private lateinit var appNameText : TextView
+    private lateinit var loadingLayout: ViewGroup
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,8 +50,10 @@ class FragmentAuth : Fragment() {
         findViews()
         loadBackGroundImage()
         if (userLoggedIn()) {
+            showLoadingLayout()
             onAuthSuccess(FirebaseAuth.getInstance().currentUser!!)
         } else {
+            showRegularLayout()
             val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -57,7 +61,7 @@ class FragmentAuth : Fragment() {
 
             googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
-            sign_in_button.setOnClickListener {
+            signInButton.setOnClickListener {
                 val signInIntent = googleSignInClient.signInIntent
                 startActivityForResult(signInIntent, RC_SIGN_IN)
             }
@@ -70,11 +74,25 @@ class FragmentAuth : Fragment() {
         return viewLoginAndRegister
     }
 
+    private fun showLoadingLayout() {
+        logoImage.visibility = View.GONE
+        signInButton.visibility = View.GONE
+        appNameText.visibility = View.GONE
+        loadingLayout.visibility = View.VISIBLE
+    }
+
+    private fun showRegularLayout() {
+        logoImage.visibility = View.VISIBLE
+        signInButton.visibility = View.VISIBLE
+        appNameText.visibility = View.VISIBLE
+        loadingLayout.visibility = View.GONE
+    }
+
     private fun loadBackGroundImage() {
         Glide
             .with(requireContext())
-            .load(R.drawable.signin_background_image)
-            .into(sign_in_coverImage)
+            .load(R.mipmap.ic_launcher_foreground)
+            .into(logoImage)
     }
 
 
@@ -126,7 +144,9 @@ class FragmentAuth : Fragment() {
     }
 
     private fun findViews() {
-        sign_in_button = viewLoginAndRegister.findViewById(R.id.sign_in_button)
-        sign_in_coverImage = viewLoginAndRegister.findViewById(R.id.sign_in_coverImage)
+        signInButton = viewLoginAndRegister.findViewById(R.id.sign_in_button)
+        logoImage = viewLoginAndRegister.findViewById(R.id.sign_in_coverImage)
+        appNameText = viewLoginAndRegister.findViewById(R.id.auth_LBL_app_name)
+        loadingLayout =  viewLoginAndRegister.findViewById(R.id.auth_LAY_loading)
     }
 }
