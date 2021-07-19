@@ -1,5 +1,6 @@
 package com.idan_koren_israeli.heartfit.mvvm.view_model
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.idan_koren_israeli.heartfit.mvvm.repository.TopBarRepository
 
@@ -14,11 +15,16 @@ object TopBarViewModel : ViewModel() {
 
 
     fun calculateHoursFromSeconds(seconds : Int) : String{
-        val hours = seconds/360
+        val hours = seconds/3600
         val minutes = seconds/60
-        if (minutes < 10)
-            return "${hours}.0${minutes}"
-        return "${hours}.${minutes}"
+        return if (minutes < 10 && hours < 10)
+            "0${hours}:0${minutes}"
+        else if (minutes > 10 && hours < 10)
+            "0${hours}:${minutes}"
+        else if(minutes < 10 && hours > 10)
+            "${hours}:0${minutes}"
+        else
+            "${hours}:${minutes}"
     }
 
 }
