@@ -7,13 +7,13 @@
 
 
     <string-array name="sort_options">
-        <item>Time Performed</item>
-        <item>Weekly</item>
-        <item>Monthly</item>
-        <item>Total Duration</item>
-        <item>Hearts collected</item>
-        <item>Difficulty</item>
-        <item>Calories Burned</item>
+        <item>Sort by Time Performed</item>
+        <item>Sort by Duration</item>
+        <item>Sort by Hearts Collected</item>
+        <item>Sort by Difficulty</item>
+        <item>Sort by Calories Burned</item>
+        <item>Last Week</item>
+        <item>Last Month</item>
     </string-array>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -44,5 +44,6 @@
     <string name="app_secondary_title">Your equipment, your workouts</string>
     <string name="burned">burned</string>
     <string name="collected">collected</string>
+    <string name="viewing_options">Filter Options</string>
 
 </resources>

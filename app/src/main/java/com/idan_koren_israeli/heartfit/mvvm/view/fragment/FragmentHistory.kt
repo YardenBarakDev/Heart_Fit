@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,7 +33,7 @@ class FragmentHistory : Fragment() {
 
         findViews()
 
-        spinnerOnClick()
+        initSpinner()
         initRecycleView()
         observerList()
 
@@ -47,7 +48,9 @@ class FragmentHistory : Fragment() {
         fragmentHistory_RecyclerView.setHasFixedSize(true)
     }
 
-    private fun spinnerOnClick() {
+    private fun initSpinner() {
+        //fragmentHistory_Spinner.adapter = ArrayAdapter<String>(requireContext(), R.layout.text_spinner_options)
+
         fragmentHistory_Spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 historyViewModel.sortRuns(SortType.DATE)
@@ -56,22 +59,22 @@ class FragmentHistory : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 when (position) {
                     0 -> historyViewModel.sortRuns(SortType.DATE)
-                    1 -> historyViewModel.sortRuns(SortType.PAST_SEVEN_DAYS)
-                    2 -> historyViewModel.sortRuns(SortType.PAST_MONTH)
-                    3 -> historyViewModel.sortRuns(SortType.TOTAL_TIME)
-                    4 -> historyViewModel.sortRuns(SortType.MAX_HEARTS)
-                    5 -> historyViewModel.sortRuns(SortType.DIFFICULTY)
-                    6 -> historyViewModel.sortRuns(SortType.CALORIES_BURNED)
+                    1 -> historyViewModel.sortRuns(SortType.TOTAL_TIME)
+                    2 -> historyViewModel.sortRuns(SortType.MAX_HEARTS)
+                    3 -> historyViewModel.sortRuns(SortType.DIFFICULTY)
+                    4 -> historyViewModel.sortRuns(SortType.CALORIES_BURNED)
+                    5 -> historyViewModel.sortRuns(SortType.PAST_SEVEN_DAYS)
+                    6 -> historyViewModel.sortRuns(SortType.PAST_MONTH)
                 }
 
                 /*
-                        <item>Time Performed</item>
-                        <item>Weekly</item>
-                        <item>Monthly</item>
-                        <item>Total Duration</item>
-                        <item>Hearts collected</item>
-                        <item>Difficulty</item>
-                        <item>Calories Burned</item>
+                    <item>Sort by Time Performed</item>
+                    <item>Sort by Duration</item>
+                    <item>Sort by Hearts collected</item>
+                    <item>Sort by Difficulty</item>
+                    <item>Sort by Calories Burned</item>
+                    <item>Last Week</item>
+                    <item>Last Month</item>
                  */
             }
         }
