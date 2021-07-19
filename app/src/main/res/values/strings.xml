@@ -7,14 +7,13 @@
 
 
     <string-array name="sort_options">
-        <item>All Workouts</item>
+        <item>Time Performed</item>
         <item>Weekly</item>
         <item>Monthly</item>
-        <item>Date</item>
-        <item>Total time</item>
+        <item>Total Duration</item>
         <item>Hearts collected</item>
         <item>Difficulty</item>
-        <item>Calories burned</item>
+        <item>Calories Burned</item>
     </string-array>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -19,11 +19,11 @@ import com.idan_koren_israeli.heartfit.recycler.adapter.HistoryListAdapter
 
 class FragmentHistory : Fragment() {
 
-    private lateinit var historyListAdapter : HistoryListAdapter
+    private lateinit var historyListAdapter: HistoryListAdapter
     private var historyViewModel: HistoryViewModel = HistoryViewModel()
-    private var viewFragmentHistory : View? = null
-    private lateinit var fragmentHistory_Spinner : Spinner
-    private lateinit var fragmentHistory_RecyclerView : RecyclerView
+    private var viewFragmentHistory: View? = null
+    private lateinit var fragmentHistory_Spinner: Spinner
+    private lateinit var fragmentHistory_RecyclerView: RecyclerView
     private lateinit var workoutSummary: List<WorkoutSummary>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -48,13 +48,13 @@ class FragmentHistory : Fragment() {
     }
 
     private fun spinnerOnClick() {
-        fragmentHistory_Spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        fragmentHistory_Spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 historyViewModel.sortRuns(SortType.DATE)
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                when(position){
+                when (position) {
                     0 -> historyViewModel.sortRuns(SortType.DATE)
                     1 -> historyViewModel.sortRuns(SortType.PAST_SEVEN_DAYS)
                     2 -> historyViewModel.sortRuns(SortType.PAST_MONTH)
@@ -63,6 +63,16 @@ class FragmentHistory : Fragment() {
                     5 -> historyViewModel.sortRuns(SortType.DIFFICULTY)
                     6 -> historyViewModel.sortRuns(SortType.CALORIES_BURNED)
                 }
+
+                /*
+                        <item>Time Performed</item>
+                        <item>Weekly</item>
+                        <item>Monthly</item>
+                        <item>Total Duration</item>
+                        <item>Hearts collected</item>
+                        <item>Difficulty</item>
+                        <item>Calories Burned</item>
+                 */
             }
         }
     }
