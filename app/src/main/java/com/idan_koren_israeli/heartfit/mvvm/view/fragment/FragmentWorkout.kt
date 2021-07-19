@@ -70,7 +70,7 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
     private lateinit var equipmentText: TextView
     private var prepTimeSeconds: Int = 0
     private lateinit var mainHandler : Handler
-
+    private var fragmentWorkoutView : View? = null
 
 
     private var totalWorkoutTime: Int = 0
@@ -104,7 +104,7 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
                 //onStop()
                 //onDestroy()
 
-                findNavController().navigate(R.id.action_fragmentWorkout_to_fragmentHome)
+                findNavController().popBackStack()
                 outOfContext = true
 
             }
@@ -151,22 +151,16 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
     }
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        if(fragmentWorkoutView == null)
+            fragmentWorkoutView  = inflater.inflate(R.layout.fragment_workout, container, false)
 
-        val parent: View = inflater.inflate(R.layout.fragment_workout, container, false)
-        findViews(parent)
+        fragmentWorkoutView?.let { findViews(it) }
         initPreparation()
         initTimers()
         initProgress()
         initButtons()
-
-
-
-        return parent
+        return fragmentWorkoutView
     }
 
     private fun findViews(parent: View) {
