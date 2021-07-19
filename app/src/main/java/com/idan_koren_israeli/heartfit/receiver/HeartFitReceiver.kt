@@ -8,7 +8,7 @@ import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.idan_koren_israeli.heartfit.R
-import com.idan_koren_israeli.heartfit.db.sharedpreferences.MySharedPreferences
+import com.idan_koren_israeli.heartfit.component.MySharedPreferences
 import com.idan_koren_israeli.heartfit.mvvm.view.activity.MainActivity
 
 class HeartFitReceiver : BroadcastReceiver() {

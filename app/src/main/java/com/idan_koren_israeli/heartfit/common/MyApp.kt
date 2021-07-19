@@ -10,10 +10,10 @@ import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.idan_koren_israeli.heartfit.R
+import com.idan_koren_israeli.heartfit.component.MySharedPreferences
 import com.idan_koren_israeli.heartfit.db.firebase.database.DatabaseManager
 import com.idan_koren_israeli.heartfit.db.firebase.firestore.FirestoreManager
 import com.idan_koren_israeli.heartfit.db.room_db.HeartFitRoomDB
-import com.idan_koren_israeli.heartfit.db.sharedpreferences.MySharedPreferences
 import com.idan_koren_israeli.heartfit.mvvm.view.dialog.DialogWeightPicker
 import com.idan_koren_israeli.heartfit.mvvm.repository.Equipment
 import com.idankorenisraeli.mysettingsscreen.MySettingsScreen

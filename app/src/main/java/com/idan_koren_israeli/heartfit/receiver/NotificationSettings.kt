@@ -1,7 +1,7 @@
 package com.idan_koren_israeli.heartfit.receiver
 
 import android.content.Context
-import com.idan_koren_israeli.heartfit.db.sharedpreferences.MySharedPreferences
+import com.idan_koren_israeli.heartfit.component.MySharedPreferences
 import java.util.*
 
 class NotificationSettings {

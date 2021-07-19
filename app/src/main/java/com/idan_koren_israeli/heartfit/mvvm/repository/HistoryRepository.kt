@@ -15,7 +15,7 @@ class HistoryRepository : ViewModel() {
 
     companion object{
         val instance = HistoryRepository()
-        val uid = FirebaseAuth.getInstance().currentUser
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
     }
     private val exerciseSummaryDao = HeartFitRoomDB.getInstance().exerciseSummaryDao()
 
@@ -26,7 +26,6 @@ class HistoryRepository : ViewModel() {
         executor.execute {
             exerciseSummaryDao.insertAll(workOut)
             Log.i("pttt", "Inserting "  + workOut.heartsCollected)
-            // TODO Add workout to roomdb
         }
     }
     fun getAllExerciseSummarySortedByDate() : LiveData<List<WorkoutSummary>>{

@@ -49,7 +49,9 @@ class FragmentHistory : Fragment() {
 
     private fun spinnerOnClick() {
         fragmentHistory_Spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(p0: AdapterView<*>?) {}
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                historyViewModel.sortRuns(SortType.DATE)
+            }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 when(position){

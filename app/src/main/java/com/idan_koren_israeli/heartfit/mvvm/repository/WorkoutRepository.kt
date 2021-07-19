@@ -1,7 +1,8 @@
 package com.idan_koren_israeli.heartfit.mvvm.repository
 
+
 import com.idan_koren_israeli.heartfit.common.CommonUtils
-import com.idan_koren_israeli.heartfit.db.sharedpreferences.MySharedPreferences
+import com.idan_koren_israeli.heartfit.component.MySharedPreferences
 import com.idan_koren_israeli.heartfit.mvvm.model.WorkoutLevel
 import com.idan_koren_israeli.heartfit.mvvm.model.MuscleGroup
 import com.idan_koren_israeli.heartfit.mvvm.model.Workout

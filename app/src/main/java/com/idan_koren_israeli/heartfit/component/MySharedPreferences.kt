@@ -1,4 +1,4 @@
-package com.idan_koren_israeli.heartfit.db.sharedpreferences
+package com.idan_koren_israeli.heartfit.component
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -23,7 +23,7 @@ object MySharedPreferences {
 
     fun init(context : Context){
         sharedPref = context.getSharedPreferences(name, Context.MODE_PRIVATE)
-        this.context = context
+        MySharedPreferences.context = context
     }
 
 
