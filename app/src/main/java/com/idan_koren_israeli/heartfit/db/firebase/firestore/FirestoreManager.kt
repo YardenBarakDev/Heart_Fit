@@ -22,23 +22,19 @@ object FirestoreManager {
     fun initFirestore() {
         db = FirebaseFirestore.getInstance()
         exercisesRef = db.collection(KEY_EXERCISE)
+
     }
 
 
 
 
-    fun loadExercises() {
-        Log.i("pttt", "Loading Exercises")
-
-        val basicExercise = exercisesRef.whereEqualTo("name", "Bench press")
-
-        exercisesRef.get().addOnSuccessListener { it ->
-            val totalCount = it.size()
-            basicExercise.get().addOnSuccessListener { basiconly ->
-                val basicCount = basiconly.size()
-
-                Log.i("pttt", "Total : $totalCount | basic: $basicCount")
+    fun loadAllExercises(onLoaded: (result: List<Exercise>) -> Unit) {
+        exercisesRef.get().addOnSuccessListener { documents ->
+            val loadedExercises: MutableList<Exercise> = mutableListOf()
+            for (document in documents) {
+                loadedExercises.add(document.toObject())
             }
+            onLoaded.invoke(loadedExercises)
         }
 
     }
