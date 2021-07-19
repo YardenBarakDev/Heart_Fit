@@ -173,7 +173,7 @@
             android:text="@string/duration"
             android:textAllCaps="true"
             android:textColor="@android:color/darker_gray"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/workout_LBL_duration"
@@ -181,7 +181,7 @@
             android:layout_height="wrap_content"
             android:gravity="bottom|center"
             android:textAllCaps="true"
-            android:textSize="26sp" />
+            android:textSize="30sp" />
 
 
     </LinearLayout>
