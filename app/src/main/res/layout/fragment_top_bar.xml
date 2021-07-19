@@ -92,7 +92,7 @@
                     android:layout_marginTop="10dp"
                     android:includeFontPadding="false"
                     android:text="@string/_0_0"
-                    android:textSize="34sp"
+                    android:textSize="38sp"
                     />
 
                 <TextView
@@ -184,7 +184,7 @@
                 android:letterSpacing="-0.015"
                 android:lines="1"
                 android:padding="4dp"
-                android:text="@string/app_name"
+                android:text="@string/_0"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
 
