@@ -16,6 +16,7 @@ import com.idan_koren_israeli.heartfit.db.firebase.firestore.FirestoreManager
 import com.idan_koren_israeli.heartfit.mvvm.model.Exercise
 import com.idan_koren_israeli.heartfit.mvvm.repository.Equipment
 import com.idan_koren_israeli.heartfit.mvvm.model.Workout
+import org.jetbrains.anko.margin
 import java.util.concurrent.TimeUnit
 
 class WorkoutStartDialogManager(val activity: Activity) {
@@ -38,26 +39,23 @@ class WorkoutStartDialogManager(val activity: Activity) {
     private fun addEquipmentToLayout(allEquipment: Collection<Equipment?>) {
         for (equipment in allEquipment) {
             val equipmentHolder = LayoutInflater.from(activity)
-                .inflate(R.layout.holder_equipment_select, parentLayout, false)
+                .inflate(R.layout.holder_equipment_line, parentLayout, false)
+
+
+            val equipmentText : TextView = equipmentHolder.findViewById(R.id.equipment_line_LBL_text)
+            val equipmentImage : ImageView = equipmentHolder.findViewById(R.id.equipment_line_IMG_image)
+
+
+            equipmentText.text = equipment!!.displayName
+            equipmentImage.setImageDrawable(ContextCompat.getDrawable(activity, equipment.imageId))
 
 
             val layoutParams: ViewGroup.MarginLayoutParams =
-                ViewGroup.MarginLayoutParams(160, ViewGroup.LayoutParams.WRAP_CONTENT)
+                ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 
-            layoutParams.marginStart = 15
-            layoutParams.marginEnd = 15
+            layoutParams.setMargins(15,5,15,5)
 
             equipmentHolder.layoutParams = layoutParams
-
-
-
-
-
-            equipmentHolder.findViewById<TextView>(R.id.equipment_card_LBL_label).text =
-                equipment!!.displayName
-            val equipmentImage =
-                equipmentHolder.findViewById<ImageView>(R.id.equipment_card_IMG_image)
-            equipmentImage.setImageDrawable(ContextCompat.getDrawable(activity, equipment.imageId))
 
             parentLayout.addView(equipmentHolder)
         }
