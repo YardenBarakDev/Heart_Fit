@@ -44,17 +44,20 @@ class FragmentWorkoutFinished : Fragment() {
         }
 
 
-        //TODO save workout summary to ROOMSQL
-        // Id is currently 0, need to check for auto-generation
+        val heartsCollected = when(isRealDone()){
+            true-> workoutLog!!.workout!!.heartsValue
+            false -> 0
+        }
+
         val summary:WorkoutSummary = WorkoutSummary(id = 0, timestamp = System.currentTimeMillis(),
-            userId = DatabaseManager.currentUser.uid!!, heartsCollected = workoutLog!!.workout!!.heartsValue,
+            userId = DatabaseManager.currentUser.uid!!, heartsCollected = heartsCollected,
             caloriesBurned = workoutLog!!.caloriesBurned!!, totalDurationSeconds = workoutLog!!.totalDuration,
             difficulty = workoutLog!!.workout!!.workoutLevel.name, muscles = workoutLog!!.workout!!.muscle.joinToString(separator = ", "),
             name = workoutLog!!.workout!!.name!!)
 
         WorkoutFinishedViewModel.storeWorkoutInDB(summary)
 
-        if(isRealDone()){
+        if(heartsCollected!=0){
            DatabaseManager.currentUser.hearts = DatabaseManager.currentUser.hearts.plus(workoutLog!!.workout!!.heartsValue)
            DatabaseManager.storeCurrentUser()
         }

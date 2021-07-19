@@ -11,17 +11,17 @@ object WorkoutRepository {
 
 
     private fun getMyEquipment(): ArrayList<Equipment?> {
-        if(MySharedPreferences.getArrayList(CommonUtils.KEY_EQUIPMENT) == null)
+        if (MySharedPreferences.getArrayList(CommonUtils.KEY_EQUIPMENT) == null)
             return arrayListOf()
 
         return MySharedPreferences.getArrayList(CommonUtils.KEY_EQUIPMENT)!!
     }
 
 
-    private fun getAllWorkouts() : List<Workout> {
-        
+    private fun getAllWorkouts(): List<Workout> {
+
         val myEquipment = getMyEquipment()
-        
+
         return listOf(
             Workout(
                 "Legs " + WorkoutLevel.Basic.num,
@@ -274,7 +274,7 @@ object WorkoutRepository {
     }
 
 
-    fun getWorkoutsTree() : MutableList<ArrayList<Workout>>{
+    fun getWorkoutsTree(): MutableList<ArrayList<Workout>> {
 
         val allWorkouts = getAllWorkouts()
         return mutableListOf<ArrayList<Workout>>(
@@ -299,7 +299,6 @@ object WorkoutRepository {
         )
 
     }
-
 
 
 }
