@@ -184,11 +184,9 @@ class FragmentWorkout : Fragment(R.layout.fragment_workout), TextToSpeech.OnInit
         updateEquipmentText()
         updateAnimation()
 
-        Log.i("pttt", "NEXT EXERCISE: " + exercises[currentExercise].name +" STARTS")
 
         if (ttsEnabled){
             tts.speak(exercises[currentExercise].name, TextToSpeech.QUEUE_FLUSH, null, null)
-            Log.i("pttt", "Speaks ")
         }
 
         if (exercises[currentExercise].isBreak)
@@ -278,6 +276,8 @@ class FragmentWorkout : Fragment(R.layout.fragment_workout), TextToSpeech.OnInit
         }
         binding.workoutBTNNext.setOnClickListener {
             currentExercise++
+            if(!exercises[currentExercise].isBreak)
+                workoutLog.exercisesSkipped += 1
             startTimerForNextExercise()
         }
         binding.workoutBTNPrev.setOnClickListener {

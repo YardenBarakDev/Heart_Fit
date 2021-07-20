@@ -228,7 +228,7 @@ public class CircularTimerView extends View {
             textPaint.setTypeface(typefaceBold);
             canvas.drawText(firstLine, (getWidth() - textPaint.measureText(firstLine)) / 2.0f, (getWidth() - textHeight) / 2.0f + 65, textPaint);
             textPaint.setTypeface(typefaceRegular);
-            canvas.drawText(secondLine, (getWidth() - textPaint.measureText(secondLine)) / 2.0f, (getWidth() - textHeight) / 2.0f + 155, textPaint);
+            canvas.drawText(secondLine, (getWidth() - textPaint.measureText(secondLine)) / 2.0f, (getWidth() - textHeight) / 2.0f + 160, textPaint);
         }
 
 

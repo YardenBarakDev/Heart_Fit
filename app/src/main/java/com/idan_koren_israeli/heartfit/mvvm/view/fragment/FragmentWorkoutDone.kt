@@ -1,6 +1,7 @@
 package com.idan_koren_israeli.heartfit.mvvm.view.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -31,6 +32,10 @@ class FragmentWorkoutFinished : Fragment(R.layout.fragment_workout_done) {
     private lateinit var heartsText:TextView
     private lateinit var exercisesRecycler:RecyclerView
     private lateinit var doneActionButton:FloatingActionButton
+
+    companion object{
+        private const val MAX_EXERCISES_SKIPS : Int = 3
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +69,8 @@ class FragmentWorkoutFinished : Fragment(R.layout.fragment_workout_done) {
     // Checks if workout was long enough to be considered as done
     // because user can skip exercises
     private fun isRealDone(): Boolean {
-        return (workoutLog!!.exercisesDone.size + 3 >= workoutLog!!.totalExercisesCount)
+        Log.i("pttt", "Skipped: ${workoutLog!!.exercisesSkipped} Exercises"  )
+        return workoutLog!!.exercisesSkipped <= MAX_EXERCISES_SKIPS
     }
 
     override fun onCreateView(

@@ -73,11 +73,11 @@ class FragmentHome : Fragment(R.layout.fragment_home) {
 
 
     private fun showLoading() {
-        binding.homeRYCWorkouts.visibility = View.VISIBLE
+        binding.homeLAYLoading.root.visibility = View.VISIBLE
     }
 
     private fun hideLoading() {
-        binding.homeRYCWorkouts.visibility = View.GONE
+        binding.homeLAYLoading.root.visibility = View.GONE
     }
 
 
