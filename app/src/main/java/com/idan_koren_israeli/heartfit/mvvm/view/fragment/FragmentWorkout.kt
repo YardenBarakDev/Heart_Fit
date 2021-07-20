@@ -275,9 +275,11 @@ class FragmentWorkout : Fragment(R.layout.fragment_workout), TextToSpeech.OnInit
             togglePauseResume()
         }
         binding.workoutBTNNext.setOnClickListener {
-            currentExercise++
-            if(!exercises[currentExercise].isBreak)
+            if(!exercises[currentExercise].isBreak){
                 workoutLog.exercisesSkipped += 1
+                Log.i("pttt", "SKIPPED")
+            }
+            currentExercise++
             startTimerForNextExercise()
         }
         binding.workoutBTNPrev.setOnClickListener {
