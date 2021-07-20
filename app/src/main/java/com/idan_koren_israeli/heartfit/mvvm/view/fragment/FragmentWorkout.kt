@@ -69,7 +69,7 @@ class FragmentWorkout : Fragment(R.layout.fragment_workout), TextToSpeech.OnInit
 
     private fun onBackPressed() {
         // Work your magic! Show dialog etc.
-        var outOfContext = false
+        var navigatorStackPop = false
 
         pause()
         MaterialAlertDialogBuilder(requireContext())
@@ -82,13 +82,13 @@ class FragmentWorkout : Fragment(R.layout.fragment_workout), TextToSpeech.OnInit
                 //onDestroy()
 
                 findNavController().popBackStack()
-                outOfContext = true
+                navigatorStackPop = true
 
             }
 
             .setNegativeButton(R.string.workout_exit_negative, null)
             .setOnDismissListener {
-                if(!outOfContext) resume() }
+                if(!navigatorStackPop) resume() }
             .show()
 
     }
@@ -277,7 +277,6 @@ class FragmentWorkout : Fragment(R.layout.fragment_workout), TextToSpeech.OnInit
         binding.workoutBTNNext.setOnClickListener {
             if(!exercises[currentExercise].isBreak){
                 workoutLog.exercisesSkipped += 1
-                Log.i("pttt", "SKIPPED")
             }
             currentExercise++
             startTimerForNextExercise()

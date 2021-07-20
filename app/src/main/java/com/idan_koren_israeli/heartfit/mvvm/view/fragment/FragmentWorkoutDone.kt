@@ -87,7 +87,9 @@ class FragmentWorkoutFinished : Fragment(R.layout.fragment_workout_done) {
 
     private fun initDoneButton(){
         doneActionButton.setOnClickListener {
-            findNavController().navigate(R.id.action_fragmentWorkoutFinished_to_fragmentHome)
+            //findNavController().navigate(R.id.action_fragmentWorkoutFinished_to_fragmentHome)
+            findNavController().popBackStack()
+            findNavController().popBackStack()
 
         }
     }

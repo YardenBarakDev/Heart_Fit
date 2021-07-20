@@ -44,7 +44,9 @@
         tools:layout="@layout/fragment_workout" >
         <action
             android:id="@+id/action_fragmentWorkout_to_fragmentWorkoutFinished"
-            app:destination="@id/fragmentWorkoutFinished" />
+            app:destination="@id/fragmentWorkoutFinished"
+            app:popUpTo="@id/fragmentHome"
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_fragmentWorkout_to_fragmentHome"
             app:destination="@id/fragmentHome" />
