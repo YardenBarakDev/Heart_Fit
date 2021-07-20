@@ -16,7 +16,7 @@ class HeartFitReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
 
         if (context != null){
-            updateStrike(context)
+            updateStrike()
 
             //notification message
             val content = getMessageContent()
@@ -39,9 +39,9 @@ class HeartFitReceiver : BroadcastReceiver() {
         }
     }
 
-    private fun updateStrike(context: Context) {
+    private fun updateStrike() {
         val notificationSettings = NotificationSettings()
-        notificationSettings.updateReceiverStrike(context)
+        notificationSettings.updateReceiverStrike()
     }
 
     private fun getMessageContent(): String {

@@ -41,7 +41,7 @@ class NotificationSettings {
         }
     }
 
-    fun updateReceiverStrike(context: Context){
+    fun updateReceiverStrike(){
         val oneDayInMS= 86400000L
         val currentDayInMS = Calendar.getInstance().timeInMillis
         val lastWorkoutTime = MySharedPreferences.getLatestTimeStamp()

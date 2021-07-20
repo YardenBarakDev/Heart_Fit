@@ -1,52 +1,34 @@
 package com.idan_koren_israeli.heartfit.mvvm.view.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.common.CommonUtils
 import com.idan_koren_israeli.heartfit.component.WorkoutGenerator
+import com.idan_koren_israeli.heartfit.databinding.FragmentHomeBinding
 import com.idan_koren_israeli.heartfit.db.firebase.database.DatabaseManager
 import com.idan_koren_israeli.heartfit.mvvm.repository.WorkoutRepository
 import com.idan_koren_israeli.heartfit.mvvm.view.dialog.WorkoutStartDialogManager
 import com.idan_koren_israeli.heartfit.recycler.adapter.WorkoutSelectAdapter
 
-class FragmentHome : Fragment() {
+class FragmentHome : Fragment(R.layout.fragment_home) {
 
-    private lateinit var workoutsRecycler: RecyclerView
+    private lateinit var binding : FragmentHomeBinding
     private lateinit var workoutsAdapter: WorkoutSelectAdapter
-    private lateinit var viewFragmentHome: View
     private lateinit var topBar: FragmentTopBar
-    private lateinit var loadingScreen: ViewGroup
 
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentHomeBinding.bind(view)
+        initTopBarFragment()
+    }
     private fun initTopBarFragment() {
         topBar = FragmentTopBar()
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.home_FRAG_top_bar, topBar).commitAllowingStateLoss()
     }
-
-    private fun findViews() {
-        workoutsRecycler = viewFragmentHome.findViewById(R.id.home_RYC_workouts)
-        loadingScreen = viewFragmentHome.findViewById(R.id.home_LAY_loading)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        viewFragmentHome = inflater.inflate(R.layout.fragment_home, container, false)
-        findViews()
-        initTopBarFragment()
-        return viewFragmentHome
-    }
-
 
     private fun initRecycler() {
 
@@ -77,11 +59,11 @@ class FragmentHome : Fragment() {
             }
         }
 
-        workoutsRecycler.adapter = workoutsAdapter
+        binding.homeRYCWorkouts.adapter = workoutsAdapter
 
         val layoutManager = GridLayoutManager(requireContext(), 1)
 
-        workoutsRecycler.layoutManager = layoutManager
+        binding.homeRYCWorkouts.layoutManager = layoutManager
     }
 
     override fun onResume() {
@@ -91,11 +73,11 @@ class FragmentHome : Fragment() {
 
 
     private fun showLoading() {
-        loadingScreen.visibility = View.VISIBLE
+        binding.homeRYCWorkouts.visibility = View.VISIBLE
     }
 
     private fun hideLoading() {
-        loadingScreen.visibility = View.GONE
+        binding.homeRYCWorkouts.visibility = View.GONE
     }
 
 

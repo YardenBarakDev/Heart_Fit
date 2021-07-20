@@ -5,12 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.speech.tts.TextToSpeech
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -20,11 +15,10 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hamzaahmedkhan.circulartimerview.CircularTimerListener
-import com.hamzaahmedkhan.circulartimerview.CircularTimerView
 import com.hamzaahmedkhan.circulartimerview.TimeFormatEnum
 import com.idan_koren_israeli.heartfit.R
+import com.idan_koren_israeli.heartfit.databinding.FragmentWorkoutBinding
 import com.idan_koren_israeli.heartfit.mvvm.model.*
-import com.idankorenisraeli.customprogressbar.CustomProgressBar
 import com.idankorenisraeli.mysettingsscreen.MySettingsScreen
 import com.idankorenisraeli.mysettingsscreen.tile_data.view.SeekbarTileData
 import com.idankorenisraeli.mysettingsscreen.tile_data.view.ToggleTileData
@@ -32,12 +26,10 @@ import java.io.Serializable
 import java.util.*
 import kotlin.math.ceil
 
-
 /**
  *  This fragment will be shown when the user is doing the workout itself
  *  A timer will be shown on screen
  */
-
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val WORKOUT_KEY = "workout"
@@ -51,36 +43,21 @@ private const val ANIMATION_RESOURCE_NAME_PREFIX = "anim_exercise_"
  * Use the [FragmentWorkout.newInstance] factory method to
  * create an instance of this fragment.
  */
-class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
+class FragmentWorkout : Fragment(R.layout.fragment_workout), TextToSpeech.OnInitListener {
+
+    private lateinit var binding : FragmentWorkoutBinding
     private lateinit var workout: Workout
     private lateinit var user: User
     private lateinit var exercises: ArrayList<Exercise>
 
-
-    private lateinit var workoutProgress: CustomProgressBar
-    private lateinit var animationImage: ImageView
-    private lateinit var nextExerciseText: TextView
-    private lateinit var nextExerciseTitle: TextView
-    private lateinit var timerView: CircularTimerView
-    private lateinit var pauseResumeButton: ImageButton
-    private lateinit var nextButton: ImageButton
-    private lateinit var prevButton: ImageButton
-    private lateinit var heartsCount: TextView
-    private lateinit var durationTimerText: TextView
-    private lateinit var equipmentText: TextView
     private var prepTimeSeconds: Int = 0
     private lateinit var mainHandler : Handler
-    private var fragmentWorkoutView : View? = null
-
 
     private var totalWorkoutTime: Int = 0
     private var currentExercise: Int = 0
-
     private lateinit var tts: TextToSpeech
     private var ttsEnabled: Boolean = false
-
     private var paused: Boolean = false
-
     private lateinit var workoutLog: WorkoutLog
 
     private val backPressedDispatcher = object : OnBackPressedCallback(true) {
@@ -136,8 +113,11 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
+        binding = FragmentWorkoutBinding.bind(view)
+        initPreparation()
+        initTimers()
+        initProgress()
+        initButtons()
         (requireActivity() as AppCompatActivity).apply {
             // Redirect system "Back" press to our dispatcher
             onBackPressedDispatcher.addCallback(viewLifecycleOwner, backPressedDispatcher)
@@ -148,34 +128,6 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
     override fun onDestroyView() {
         backPressedDispatcher.remove()
         super.onDestroyView()
-    }
-
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        if(fragmentWorkoutView == null)
-            fragmentWorkoutView  = inflater.inflate(R.layout.fragment_workout, container, false)
-
-        fragmentWorkoutView?.let { findViews(it) }
-        initPreparation()
-        initTimers()
-        initProgress()
-        initButtons()
-        return fragmentWorkoutView
-    }
-
-    private fun findViews(parent: View) {
-        timerView = parent.findViewById(R.id.workout_CTV_timer)
-        pauseResumeButton = parent.findViewById(R.id.workout_BTN_pause_resume)
-        nextButton = parent.findViewById(R.id.workout_BTN_next)
-        prevButton = parent.findViewById(R.id.workout_BTN_prev)
-        nextExerciseText = parent.findViewById(R.id.workout_LBL_next_exercise)
-        nextExerciseTitle = parent.findViewById(R.id.workout_LBL_next_title)
-        workoutProgress = parent.findViewById(R.id.workout_PRG_progress_bar)
-        heartsCount = parent.findViewById(R.id.workout_LBL_heart_count)
-        durationTimerText = parent.findViewById(R.id.workout_LBL_duration)
-        animationImage = parent.findViewById(R.id.workout_IMG_animation)
-        equipmentText = parent.findViewById(R.id.workout_LBL_equipment)
-
     }
 
     private fun initTimers() {
@@ -194,21 +146,21 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
         })
 
 
-        timerView.typefaceBold = resources.getFont(R.font.saira_condensed_bold)
-        timerView.typefaceRegular = resources.getFont(R.font.saira_condensed_regular)
+        binding.workoutCTVTimer.typefaceBold = resources.getFont(R.font.saira_condensed_bold)
+        binding.workoutCTVTimer.typefaceRegular = resources.getFont(R.font.saira_condensed_regular)
     }
 
     private fun stopHandler(){
-        mainHandler.removeMessages(0);
+        mainHandler.removeMessages(0)
     }
 
 
     private fun initProgress() {
         totalWorkoutTime = exercises.fold(0, { acc, exercise -> acc + exercise.timeInSeconds!! })
-        workoutProgress.value = 0f
+        binding.workoutPRGProgressBar.value = 0f
 
-        workoutProgress.textTitle = capitalizeWords(workout.name!!)
-        heartsCount.text = workout.heartsValue.toString()
+        binding.workoutPRGProgressBar.textTitle = capitalizeWords(workout.name!!)
+        binding.workoutLBLHeartCount.text = workout.heartsValue.toString()
     }
 
     private fun initPreparation() {
@@ -240,12 +192,12 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
         }
 
         if (exercises[currentExercise].isBreak)
-            timerView.setProgressColor(ContextCompat.getColor(requireContext(), R.color.color_break))
+            binding.workoutCTVTimer.setProgressColor(ContextCompat.getColor(requireContext(), R.color.color_break))
         else
-            timerView.setProgressColor(ContextCompat.getColor(requireContext(), R.color.progress_bar))
+            binding.workoutCTVTimer.setProgressColor(ContextCompat.getColor(requireContext(), R.color.progress_bar))
 
 
-        timerView.setCircularTimerListener(object : CircularTimerListener {
+        binding.workoutCTVTimer.setCircularTimerListener(object : CircularTimerListener {
             override fun updateDataOnTick(remainingTimeInMs: Long): String {
                 return generateTimeTextFromSeconds((remainingTimeInMs / 1000f).toInt())
             }
@@ -263,8 +215,8 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
             }
         }, exercises[currentExercise].timeInSeconds!!.toLong(), TimeFormatEnum.SECONDS, 30)
 
-        timerView.startTimer()
-        timerView.prefix = capitalizeWords(exercises[currentExercise].name!!)
+        binding.workoutCTVTimer.startTimer()
+        binding.workoutCTVTimer.prefix = capitalizeWords(exercises[currentExercise].name!!)
 
     }
 
@@ -272,7 +224,7 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
 
         val equipmentList = exercises[currentExercise].equipment
         if (equipmentList == null || equipmentList.isEmpty()) {
-            equipmentText.text = ""
+            binding.workoutLBLEquipment.text = ""
             return
         }
 
@@ -282,7 +234,7 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
             builder.append(eq.displayName + ", ")
         }
 
-        equipmentText.text = builder.removeSuffix(", ")
+        binding.workoutLBLEquipment.text = builder.removeSuffix(", ")
 
 
     }
@@ -302,13 +254,13 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
     }
 
     private fun updateProgressBar() {
-        workoutProgress.value = calculateProgressBarValue()
+        binding.workoutPRGProgressBar.value = calculateProgressBarValue()
     }
 
 
     private fun updateAnimation() {
         if (exercises[currentExercise].animationId == null) {
-            Glide.with(this).clear(animationImage)
+            Glide.with(this).clear(binding.workoutIMGAnimation)
             return
         }
 
@@ -317,18 +269,18 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
             "raw", context?.packageName
         )
 
-        Glide.with(this).asGif().load(id).into(animationImage)
+        Glide.with(this).asGif().load(id).into(binding.workoutIMGAnimation)
     }
 
     private fun initButtons() {
-        pauseResumeButton.setOnClickListener {
+        binding.workoutBTNPauseResume.setOnClickListener {
             togglePauseResume()
         }
-        nextButton.setOnClickListener {
+        binding.workoutBTNNext.setOnClickListener {
             currentExercise++
             startTimerForNextExercise()
         }
-        prevButton.setOnClickListener {
+        binding.workoutBTNPrev.setOnClickListener {
             currentExercise--
             startTimerForNextExercise()
         }
@@ -336,25 +288,25 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
 
     private fun updateNextPrevButtonsVisibility() {
         if (currentExercise == 0)
-            prevButton.visibility = View.INVISIBLE
+            binding.workoutBTNPrev.visibility = View.INVISIBLE
         else
-            prevButton.visibility = View.VISIBLE
+            binding.workoutBTNPrev.visibility = View.VISIBLE
 
         if (currentExercise == exercises.size - 1)
-            nextButton.visibility = View.INVISIBLE
+            binding.workoutBTNNext.visibility = View.INVISIBLE
         else
-            nextButton.visibility = View.VISIBLE
+            binding.workoutBTNNext.visibility = View.VISIBLE
 
     }
 
     private fun updateNextUpText() {
         if (currentExercise == exercises.size - 1) {
-            nextExerciseText.visibility = View.INVISIBLE
-            nextExerciseTitle.visibility = View.INVISIBLE
+            binding.workoutLBLNextExercise.visibility = View.INVISIBLE
+            binding.workoutLBLNextTitle.visibility = View.INVISIBLE
         } else {
-            nextExerciseTitle.visibility = View.VISIBLE
-            nextExerciseText.visibility = View.VISIBLE
-            nextExerciseText.text = capitalizeWords(exercises[currentExercise + 1].name!!)
+            binding.workoutLBLNextTitle.visibility = View.VISIBLE
+            binding.workoutLBLNextExercise.visibility = View.VISIBLE
+            binding.workoutLBLNextExercise.text = capitalizeWords(exercises[currentExercise + 1].name!!)
         }
 
 
@@ -372,7 +324,7 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
 
 
     private fun calculateProgressBarValue(): Float {
-        var timePastExercises: Int = 0
+        var timePastExercises = 0
         exercises.forEachIndexed lit@{ index, exercise ->
             if (index > currentExercise) return@lit
             timePastExercises += exercise.timeInSeconds!!
@@ -403,7 +355,7 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
     }
 
     private fun updateDurationTimer(seconds: Int) {
-        durationTimerText.text =
+        binding.workoutLBLDuration.text =
             String.format(
                 "%02d:%02d:%02d", seconds / 3600,
                 (seconds % 3600) / 60, (seconds % 60)
@@ -419,15 +371,15 @@ class FragmentWorkout : Fragment(), TextToSpeech.OnInitListener {
 
     private fun pause() {
         paused = true
-        timerView.pause()
-        pauseResumeButton.setImageResource(R.drawable.ic_baseline_play_circle_filled_24)
+        binding.workoutCTVTimer.pause()
+        binding.workoutBTNPauseResume.setImageResource(R.drawable.ic_baseline_play_circle_filled_24)
     }
 
 
     private fun resume() {
         paused = false
-        timerView.resume()
-        pauseResumeButton.setImageResource(R.drawable.ic_baseline_pause_circle_filled_24)
+        binding.workoutCTVTimer.resume()
+        binding.workoutBTNPauseResume.setImageResource(R.drawable.ic_baseline_pause_circle_filled_24)
     }
 
     override fun onPause() {

@@ -1,7 +1,6 @@
 package com.idan_koren_israeli.heartfit.mvvm.view.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,26 +9,21 @@ import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Database
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.firebase.auth.FirebaseAuth
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.common.CommonUtils
 import com.idan_koren_israeli.heartfit.db.firebase.database.DatabaseManager
 import com.idan_koren_israeli.heartfit.db.room_db.WorkoutSummary
-import com.idan_koren_israeli.heartfit.db.room_db.WorkoutSummaryDao
 import com.idan_koren_israeli.heartfit.mvvm.model.WorkoutLog
-import com.idan_koren_israeli.heartfit.mvvm.view_model.HistoryViewModel
 import com.idan_koren_israeli.heartfit.mvvm.view_model.WorkoutFinishedViewModel
+import com.idan_koren_israeli.heartfit.receiver.NotificationSettings
 import com.idan_koren_israeli.heartfit.recycler.adapter.ExercisesDoneAdapter
-
 
 private const val KEY_WORKOUT_LOG = "workout_log"
 
-class FragmentWorkoutFinished : Fragment() {
+class FragmentWorkoutFinished : Fragment(R.layout.fragment_workout_done) {
 
     private var workoutLog: WorkoutLog? = null
-
     private lateinit var titleText:TextView
     private lateinit var caloriesText:TextView
     private lateinit var durationText:TextView
@@ -50,7 +44,7 @@ class FragmentWorkoutFinished : Fragment() {
             false -> 0
         }
 
-        val summary:WorkoutSummary = WorkoutSummary(id = 0, timestamp = System.currentTimeMillis(),
+        val summary = WorkoutSummary(id = 0, timestamp = System.currentTimeMillis(),
             userId = DatabaseManager.currentUser.uid!!, heartsCollected = heartsCollected,
             caloriesBurned = workoutLog!!.caloriesBurned!!, totalDurationSeconds = workoutLog!!.totalDuration,
             difficulty = workoutLog!!.workout!!.workoutLevel.name, muscles = workoutLog!!.workout!!.muscle.joinToString(separator = ", "),
@@ -59,8 +53,10 @@ class FragmentWorkoutFinished : Fragment() {
         WorkoutFinishedViewModel.storeWorkoutInDB(summary)
 
         if(heartsCollected!=0){
-           DatabaseManager.currentUser.hearts = DatabaseManager.currentUser.hearts.plus(workoutLog!!.workout!!.heartsValue)
-           DatabaseManager.storeCurrentUser()
+            DatabaseManager.currentUser.hearts = DatabaseManager.currentUser.hearts.plus(workoutLog!!.workout!!.heartsValue)
+            val notificationSettings = NotificationSettings()
+            notificationSettings.updateStrike(requireContext())
+            DatabaseManager.storeCurrentUser()
         }
 
     }
@@ -106,7 +102,7 @@ class FragmentWorkoutFinished : Fragment() {
         titleText.text = workoutLog!!.workout!!.name
         caloriesText.text = workoutLog!!.caloriesBurned.toString()
         durationText.text = String.format("%02d:%02d:%02d", seconds / 3600,
-            (seconds % 3600) / 60, (seconds % 60));
+            (seconds % 3600) / 60, (seconds % 60))
         exercisesCountText.text = workoutLog!!.exercisesDone.size.toString()
 
         if(isRealDone())
