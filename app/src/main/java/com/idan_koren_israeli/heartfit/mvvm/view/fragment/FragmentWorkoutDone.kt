@@ -20,10 +20,8 @@ import com.idan_koren_israeli.heartfit.mvvm.view_model.WorkoutFinishedViewModel
 import com.idan_koren_israeli.heartfit.receiver.NotificationSettings
 import com.idan_koren_israeli.heartfit.recycler.adapter.ExercisesDoneAdapter
 
-private const val KEY_WORKOUT_LOG = "workout_log"
 
-class FragmentWorkoutFinished : Fragment(R.layout.fragment_workout_done) {
-
+class FragmentWorkoutDone : Fragment(R.layout.fragment_workout_done) {
     private var workoutLog: WorkoutLog? = null
     private lateinit var titleText:TextView
     private lateinit var caloriesText:TextView
@@ -35,6 +33,7 @@ class FragmentWorkoutFinished : Fragment(R.layout.fragment_workout_done) {
 
     companion object{
         private const val MAX_EXERCISES_SKIPS : Int = 3
+        private const val KEY_WORKOUT_LOG = "workout_log"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

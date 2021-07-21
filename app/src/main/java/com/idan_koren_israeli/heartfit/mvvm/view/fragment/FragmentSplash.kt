@@ -12,14 +12,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.idan_koren_israeli.heartfit.R
 
-private const val ARG_ICON_ID = "icon_id"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [FragmentSplash.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FragmentSplash : Fragment() {
+    private val ARG_ICON_ID = "icon_id"
 
     private var iconId: Int? = null
     private var onAnimationFinish : (()->Unit)? = null

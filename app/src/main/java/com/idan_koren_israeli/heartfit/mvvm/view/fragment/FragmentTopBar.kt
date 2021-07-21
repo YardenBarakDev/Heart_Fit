@@ -1,6 +1,7 @@
 package com.idan_koren_israeli.heartfit.mvvm.view.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.navigation.fragment.findNavController
@@ -9,37 +10,44 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.databinding.FragmentTopBarBinding
+import com.idan_koren_israeli.heartfit.db.firebase.database.DatabaseManager
 import com.idan_koren_israeli.heartfit.mvvm.view_model.TopBarViewModel
 
 class FragmentTopBar : Fragment(R.layout.fragment_top_bar) {
 
     private lateinit var binding : FragmentTopBarBinding
-    private val topBarViewModel = TopBarViewModel
+    private val topBarViewModel = TopBarViewModel(DatabaseManager.currentUser.uid!!)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentTopBarBinding.bind(view)
         setClickListeners()
-        setObservers()
+        setData()
 
     }
-    private fun setObservers() {
-        topBarViewModel.allHeartFromLastSevenDays.observe(viewLifecycleOwner, {
-            if (it != null)
-               binding.topBarLBLHeartCount.text = it.toString()
-        })
+    private fun setData() {
+        binding.topBarLBLHeartCount.text = DatabaseManager.currentUser.hearts.toString()
+
+
         topBarViewModel.totalCaloriesBurnedFromLastSevenDays.observe(viewLifecycleOwner, {
-            if (it != null)
-               binding.topBarLBLCalories.text = it.toString()
+            if (it != null){
+                binding.topBarLBLCalories.text = it.toString()
+                Log.i("pttt", "CALORIES: " + it)
+            }
+
         })
         topBarViewModel.totalTimeFromLastSevenDays.observe(viewLifecycleOwner, {
             if (it != null){
                 binding.topBarLBLHours.text = topBarViewModel.calculateHoursFromSeconds(it)
+                Log.i("pttt", "SECONDS: " + it);
             }
         })
         topBarViewModel.totalWorkoutsFromPastSevenDays.observe(viewLifecycleOwner,{
-            if (it != null)
+            if (it != null) {
+
                 binding.topBarLBLWorkouts.text = it.toString()
+                Log.i("pttt", "WORKOUTS: " + it);
+            }
         })
 
     }

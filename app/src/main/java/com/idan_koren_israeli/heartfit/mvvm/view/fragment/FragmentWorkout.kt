@@ -31,12 +31,6 @@ import kotlin.math.ceil
  *  A timer will be shown on screen
  */
 
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val WORKOUT_KEY = "workout"
-private const val EXERCISES_KEY = "exercises"
-private const val USER_KEY = "user"
-
-private const val ANIMATION_RESOURCE_NAME_PREFIX = "anim_exercise_"
 
 /**
  * A simple [Fragment] subclass.
@@ -44,6 +38,13 @@ private const val ANIMATION_RESOURCE_NAME_PREFIX = "anim_exercise_"
  * create an instance of this fragment.
  */
 class FragmentWorkout : Fragment(R.layout.fragment_workout), TextToSpeech.OnInitListener {
+
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private val WORKOUT_KEY = "workout"
+    private val EXERCISES_KEY = "exercises"
+    private val USER_KEY = "user"
+    private val ANIMATION_RESOURCE_NAME_PREFIX = "anim_exercise_"
+
 
     private lateinit var binding : FragmentWorkoutBinding
     private lateinit var workout: Workout

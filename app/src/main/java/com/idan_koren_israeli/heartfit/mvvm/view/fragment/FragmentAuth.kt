@@ -137,6 +137,7 @@ class FragmentAuth : Fragment() {
 
     private fun onAuthSuccess(fbUser: FirebaseUser){
         DatabaseManager.loadCurrentUser(fbUser){ _, firstTime ->
+
             if(firstTime)
                 findNavController().navigate(R.id.action_fragmentAuth_to_fragmentEquipmentSelect)
             else
