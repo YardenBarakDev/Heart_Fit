@@ -19,7 +19,7 @@ import com.idan_koren_israeli.heartfit.mvvm.model.Workout
 import org.jetbrains.anko.margin
 import java.util.concurrent.TimeUnit
 
-class WorkoutStartDialogManager(val activity: Activity) {
+class WorkoutStartDialog(val activity: Activity) {
     private lateinit var materialAlertDialogBuilder: MaterialAlertDialogBuilder
     private lateinit var parentLayout: ViewGroup
     private lateinit var dialogLayout: ViewGroup

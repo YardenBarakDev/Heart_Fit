@@ -1,6 +1,7 @@
 package com.idan_koren_israeli.heartfit.mvvm.view.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -9,8 +10,12 @@ import com.idan_koren_israeli.heartfit.common.CommonUtils
 import com.idan_koren_israeli.heartfit.component.WorkoutGenerator
 import com.idan_koren_israeli.heartfit.databinding.FragmentHomeBinding
 import com.idan_koren_israeli.heartfit.db.firebase.database.DatabaseManager
+import com.idan_koren_israeli.heartfit.db.room_db.WorkoutSummary
+import com.idan_koren_israeli.heartfit.mvvm.model.MuscleGroup
+import com.idan_koren_israeli.heartfit.mvvm.model.WorkoutLevel
 import com.idan_koren_israeli.heartfit.mvvm.repository.WorkoutRepository
-import com.idan_koren_israeli.heartfit.mvvm.view.dialog.WorkoutStartDialogManager
+import com.idan_koren_israeli.heartfit.mvvm.view.dialog.WorkoutStartDialog
+import com.idan_koren_israeli.heartfit.mvvm.view_model.WorkoutFinishedViewModel
 import com.idan_koren_israeli.heartfit.recycler.adapter.WorkoutSelectAdapter
 
 class FragmentHome : Fragment(R.layout.fragment_home) {
@@ -47,7 +52,7 @@ class FragmentHome : Fragment(R.layout.fragment_home) {
 
                 WorkoutGenerator.generateWorkout(workout) { exercises ->
 
-                    val dialogManager = WorkoutStartDialogManager(requireActivity())
+                    val dialogManager = WorkoutStartDialog(requireActivity())
 
                     dialogManager.create()
                     dialogManager.inflate()
@@ -69,6 +74,24 @@ class FragmentHome : Fragment(R.layout.fragment_home) {
     override fun onResume() {
         super.onResume()
         initRecycler()
+
+        //storeExampleWorkout()
+
+    }
+
+
+    // For debugging usage
+    private fun storeExampleWorkout(){
+
+        Log.i("pttt", "Storing Workout ")
+        val summary = WorkoutSummary(id = 0, timestamp = 1626700945000,
+            userId = DatabaseManager.currentUser.uid!!, heartsCollected = 5,
+            caloriesBurned = 84, totalDurationSeconds = 512,
+            difficulty = WorkoutLevel.Basic.name, muscles = listOf(MuscleGroup.LEGS).joinToString(separator = ", "),
+            name = "Legs 1")
+
+        WorkoutFinishedViewModel.storeWorkoutInDB(summary)
+
     }
 
 

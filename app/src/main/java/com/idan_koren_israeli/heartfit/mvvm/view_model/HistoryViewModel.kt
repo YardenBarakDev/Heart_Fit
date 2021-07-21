@@ -71,4 +71,8 @@ class HistoryViewModel : ViewModel() {
     }.also {
         this.sortType = sortType
     }
+
+    fun deleteWorkoutSummaryFromDB(workoutSummary: WorkoutSummary){
+        historyRepository.deleteWorkoutSummary(workoutSummary)
+    }
 }

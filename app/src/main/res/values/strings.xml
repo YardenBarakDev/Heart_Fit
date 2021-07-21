@@ -46,5 +46,9 @@
     <string name="collected">collected</string>
     <string name="viewing_options">Filter Options</string>
     <string name="change_later">You can change it later in Settings</string>
+    <string name="workout_delete_negative">cancel</string>
+    <string name="workout_delete_positive">delete</string>
+    <string name="workout_delete_message">Are you sure you want to delete this workout summary log?</string>
+    <string name="workout_delete_title">Delete workout</string>
 
 </resources>

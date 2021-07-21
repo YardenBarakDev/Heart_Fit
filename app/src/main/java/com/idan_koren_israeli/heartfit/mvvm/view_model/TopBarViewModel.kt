@@ -19,16 +19,8 @@ class TopBarViewModel(val uid: String) : ViewModel() {
 
 
     fun calculateHoursFromSeconds(seconds: Int): String {
-        val hours = seconds / 3600
-        val minutes = seconds / 60
-        return if (minutes < 10 && hours < 10)
-            "0${hours}:0${minutes}"
-        else if (minutes > 10 && hours < 10)
-            "0${hours}:${minutes}"
-        else if (minutes < 10 && hours > 10)
-            "${hours}:0${minutes}"
-        else
-            "${hours}:${minutes}"
+        return String.format("%02d:%02d", seconds / 3600,
+            (seconds % 3600) / 60)
     }
 
     fun attachId(newUid: String) {

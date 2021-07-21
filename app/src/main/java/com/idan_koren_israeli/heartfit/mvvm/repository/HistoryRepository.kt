@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.idan_koren_israeli.heartfit.db.room_db.HeartFitRoomDB
 import com.idan_koren_israeli.heartfit.db.room_db.WorkoutSummary
+import com.idan_koren_israeli.heartfit.mvvm.model.WorkoutLog
 import org.jetbrains.anko.doAsync
 import java.util.*
 import java.util.concurrent.Executor
@@ -26,11 +27,21 @@ class HistoryRepository : ViewModel() {
         val executor: Executor = Executors.newSingleThreadExecutor()
         executor.execute {
             exerciseSummaryDao.insertAll(workOut)
-            Log.i("pttt", "Inserting "  + workOut.heartsCollected)
         }
     }
     fun getAllExerciseSummarySortedByDate() : LiveData<List<WorkoutSummary>>{
+
+
+
         return exerciseSummaryDao.getAllRunsSortedByDate(uid.toString())
+
+    }
+
+    fun deleteWorkoutSummary(workoutSummary: WorkoutSummary){
+        val executor: Executor = Executors.newSingleThreadExecutor()
+        executor.execute {
+            exerciseSummaryDao.delete(workoutSummary)
+        }
     }
 
     fun getAllExerciseSummarySortedByCaloriesBurned() : LiveData<List<WorkoutSummary>>{

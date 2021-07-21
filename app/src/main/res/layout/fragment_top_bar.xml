@@ -180,10 +180,10 @@
                 android:autoSizeMaxTextSize="24sp"
                 android:autoSizeMinTextSize="18sp"
                 android:autoSizeTextType="uniform"
-                android:gravity="center"
+                android:gravity="center|top"
                 android:letterSpacing="-0.015"
                 android:lines="1"
-                android:padding="4dp"
+                android:padding="6dp"
                 android:text="@string/_0"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />

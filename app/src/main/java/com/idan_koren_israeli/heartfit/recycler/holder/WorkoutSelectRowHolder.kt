@@ -1,27 +1,15 @@
 package com.idan_koren_israeli.heartfit.recycler.holder
 
-import android.app.Activity
-import android.graphics.Color
-import android.graphics.drawable.DrawableContainer.DrawableContainerState
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
-import android.graphics.drawable.StateListDrawable
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.idan_koren_israeli.heartfit.R
-import com.idan_koren_israeli.heartfit.common.CommonUtils
-import com.idan_koren_israeli.heartfit.component.WorkoutGenerator
-import com.idan_koren_israeli.heartfit.db.firebase.database.DatabaseManager
-import com.idan_koren_israeli.heartfit.db.firebase.firestore.FirestoreManager
 import com.idan_koren_israeli.heartfit.mvvm.model.*
-import com.idan_koren_israeli.heartfit.mvvm.view.dialog.WorkoutStartDialogManager
 
 
 class WorkoutSelectRowHolder(

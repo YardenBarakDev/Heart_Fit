@@ -56,6 +56,7 @@ class FragmentWorkoutDone : Fragment(R.layout.fragment_workout_done) {
 
         WorkoutFinishedViewModel.storeWorkoutInDB(summary)
 
+
         if(heartsCollected!=0){
             DatabaseManager.currentUser.hearts = DatabaseManager.currentUser.hearts.plus(workoutLog!!.workout!!.heartsValue)
             val notificationSettings = NotificationSettings()

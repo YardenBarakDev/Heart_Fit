@@ -32,21 +32,18 @@ class FragmentTopBar : Fragment(R.layout.fragment_top_bar) {
         topBarViewModel.totalCaloriesBurnedFromLastSevenDays.observe(viewLifecycleOwner, {
             if (it != null){
                 binding.topBarLBLCalories.text = it.toString()
-                Log.i("pttt", "CALORIES: " + it)
             }
 
         })
         topBarViewModel.totalTimeFromLastSevenDays.observe(viewLifecycleOwner, {
             if (it != null){
                 binding.topBarLBLHours.text = topBarViewModel.calculateHoursFromSeconds(it)
-                Log.i("pttt", "SECONDS: " + it);
             }
         })
         topBarViewModel.totalWorkoutsFromPastSevenDays.observe(viewLifecycleOwner,{
             if (it != null) {
 
                 binding.topBarLBLWorkouts.text = it.toString()
-                Log.i("pttt", "WORKOUTS: " + it);
             }
         })
 

@@ -6,12 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.idan_koren_israeli.heartfit.R
 import com.idan_koren_israeli.heartfit.db.room_db.WorkoutSummary
+import com.idan_koren_israeli.heartfit.mvvm.model.Workout
 import java.text.SimpleDateFormat
 import java.util.*
 
-class HistoryListAdapter(private var historyList : List<WorkoutSummary>) : RecyclerView.Adapter<HistoryListAdapter.HistoryListHolder>() {
+class HistoryListAdapter(private var historyList : List<WorkoutSummary>,  private val onWorkoutLongClick: (summary: WorkoutSummary) -> Unit) : RecyclerView.Adapter<HistoryListAdapter.HistoryListHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryListHolder {
@@ -22,17 +24,22 @@ class HistoryListAdapter(private var historyList : List<WorkoutSummary>) : Recyc
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: HistoryListHolder, position: Int) {
-        val exerciseSummary = historyList[position]
+        val workoutSummary = historyList[position]
 
 
 
-        holder.historyList_LBL_heartsCollected.text = exerciseSummary.heartsCollected.toString()
-        holder.historyList_LBL_caloriesBurned.text = exerciseSummary.caloriesBurned.toString()
-        holder.historyList_LBL_caloriesBurned.text = exerciseSummary.caloriesBurned.toString()
-        holder.historyList_LBL_timestamp.text = convertLongToTime(exerciseSummary.timestamp)
-        holder.historyList_LBL_totalTime.text = formatSecondsToTime(exerciseSummary.totalDurationSeconds)
-        holder.historyList_LBL_difficulty_muscles.text = exerciseSummary.difficulty
-        holder.historyList_LBL_name.text = exerciseSummary.name
+
+        holder.textHeartsCollected.text = workoutSummary.heartsCollected.toString()
+        holder.textCaloriesBurned.text = workoutSummary.caloriesBurned.toString()
+        holder.textCaloriesBurned.text = workoutSummary.caloriesBurned.toString()
+        holder.textTimestamp.text = convertLongToTime(workoutSummary.timestamp)
+        holder.textTotalTime.text = formatSecondsToTime(workoutSummary.totalDurationSeconds)
+        holder.textDifficulty.text = workoutSummary.difficulty.substring(0, minOf(6, workoutSummary.difficulty.length))
+        holder.textName.text = workoutSummary.name
+        holder.layoutParent.setOnLongClickListener {
+            onWorkoutLongClick.invoke(workoutSummary)
+            true
+        }
     }
 
     private fun convertLongToTime(time: Long): String {
@@ -56,12 +63,13 @@ class HistoryListAdapter(private var historyList : List<WorkoutSummary>) : Recyc
         (seconds % 3600) / 60, (seconds % 60));
 
     class HistoryListHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
-        val historyList_LBL_heartsCollected : TextView = itemView.findViewById(R.id.historyList_LBL_heartsCollected)
-        val historyList_LBL_caloriesBurned : TextView = itemView.findViewById(R.id.historyList_LBL_caloriesBurned)
-        val historyList_LBL_totalTime : TextView = itemView.findViewById(R.id.historyList_LBL_totalTime)
-        val historyList_LBL_difficulty_muscles : TextView = itemView.findViewById(R.id.historyList_LBL_difficulty_muscles)
-        val historyList_LBL_timestamp : TextView = itemView.findViewById(R.id.historyList_LBL_timestamp)
-        val historyList_LBL_name: TextView = itemView.findViewById(R.id.historyList_LBL_name)
+        val textHeartsCollected : TextView = itemView.findViewById(R.id.historyList_LBL_heartsCollected)
+        val textCaloriesBurned : TextView = itemView.findViewById(R.id.historyList_LBL_caloriesBurned)
+        val textTotalTime : TextView = itemView.findViewById(R.id.historyList_LBL_totalTime)
+        val textDifficulty : TextView = itemView.findViewById(R.id.historyList_LBL_difficulty_muscles)
+        val textTimestamp : TextView = itemView.findViewById(R.id.historyList_LBL_timestamp)
+        val textName: TextView = itemView.findViewById(R.id.historyList_LBL_name)
+        val layoutParent: ViewGroup = itemView.findViewById(R.id.historyList_LAY_parent)
     }
 
 

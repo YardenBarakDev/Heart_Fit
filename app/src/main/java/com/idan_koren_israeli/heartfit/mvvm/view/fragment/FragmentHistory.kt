@@ -1,11 +1,14 @@
 package com.idan_koren_israeli.heartfit.mvvm.view.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.AdapterView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.idan_koren_israeli.heartfit.R
+import com.idan_koren_israeli.heartfit.common.CommonUtils
 import com.idan_koren_israeli.heartfit.databinding.FragmentHistoryBinding
 import com.idan_koren_israeli.heartfit.db.room_db.WorkoutSummary
 import com.idan_koren_israeli.heartfit.mvvm.view_model.HistoryViewModel
@@ -29,7 +32,20 @@ class FragmentHistory : Fragment(R.layout.fragment_history) {
 
     private fun initRecycleView() {
         workoutSummary = mutableListOf()
-        historyListAdapter = HistoryListAdapter(workoutSummary)
+        historyListAdapter = HistoryListAdapter(workoutSummary){
+
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Delete Workout " + it.name)
+                .setMessage(R.string.workout_delete_message)
+                .setPositiveButton(R.string.workout_delete_positive) { _, _ ->
+                    historyViewModel.deleteWorkoutSummaryFromDB(it)
+                    CommonUtils.getInstance().showToast("Workout " + it.name + " was deleted successfully." )
+                }
+                .setNegativeButton(R.string.workout_delete_negative, null)
+                .setOnDismissListener {
+                }
+                .show()
+        }
         binding.fragmentHistoryRecyclerView.adapter = historyListAdapter
         binding.fragmentHistoryRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.fragmentHistoryRecyclerView.setHasFixedSize(true)
