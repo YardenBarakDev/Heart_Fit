@@ -1,5 +1,5 @@
 # Heart-Fit
-Android Seminar Final Project  
+Android Seminar Final Project - made by Yarden Barak and Idan Koren-Israeli (https://github.com/Idan503)
 Your own workout tracker and planner,  
 workouts with selected equipment are auto-generated from server.
 
